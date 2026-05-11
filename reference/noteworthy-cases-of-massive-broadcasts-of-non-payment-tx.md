@@ -1,0 +1,31 @@
+# Other examples of spam in Bitcoin
+
+Source: https://wtfhappenedinfeb2023.com/noteworthy-cases-of-massive-broadcasts-of-non-payment-tx
+
+## Noteworthy cases of massive broadcasts of non-payment TXs
+
+BitDNS
+
+In September 2010, a proposal was made on the BitcoinTalk forums about a DNS protocol that would rely on Bitcoin. A quick description of this project is provided here from the [bitcoin.it wiki](https://en.bitcoin.it/wiki/BitDNS):
+
+*Bitdns was a project with the goal to extend Bitcoin's technology to a domain name service, expanding the software to support transactions for registering, updating, and transferring domains. The project eventually became an altchain with its own altcoin, known as*[*Namecoin*](https://www.namecoin.org/)*.*
+
+Counterparty
+
+See [The OP_Return Wars of 2014 – Dapps Vs Bitcoin Transactions and Developers Battle Over Bitcoin Block Chain](https://blog.bitmex.com/dapps-or-only-bitcoin-transactions-the-2014-debate/).
+
+SatoshiDice
+
+[Do you think SatoshiDice is blockchain spam? Drop their TX's - Solution inside](https://bitcointalk.org/index.php?topic=150405.0). SatoshiDice spam in mempools was the primary concern. Unlike other types of spam, SatoshiDice didn't append arbitrary data to transactions recorded in the main chain.
+
+Omni
+
+[Dominating OP Returns: The Impact of Omni and Veriblock on Bitcoin.](https://www.researchgate.net/publication/346962427_Dominating_OP_Returns_The_Impact_of_Omni_and_Veriblock_on_Bitcoin)
+
+Veriblock
+
+[Ibid.](https://www.researchgate.net/publication/346962427_Dominating_OP_Returns_The_Impact_of_Omni_and_Veriblock_on_Bitcoin)
+
+## Media
+
+- [Image](https://res2.weblium.site/res/6627b42175a2700010093916/662d0023aa0848000e8ac750_optimized_1540)
