@@ -1,0 +1,8 @@
+name = "wtf-happened-in-feb-2023"
+compatibility_date = "2026-05-11"
+
+[observability]
+enabled = true
+
+[assets]
+directory = "./dist"
