@@ -1,6 +1,20 @@
 ---
 import { extractResourceItems, type RouteContent } from "@/lib/content";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Check,
+  CheckCircle2,
+  Copy,
+  Crosshair,
+  ExternalLink,
+  GitBranch,
+  Info,
+  Layers,
+  Link as LinkIcon,
+  Server,
+  Terminal,
+} from "lucide-react";
 
 type Props = {
   content: RouteContent;
@@ -195,6 +209,128 @@ const characteristicsSections =
   content.id === "characteristics" && contentSections[0]
     ? buildCharacteristicsSections(contentSections[0].html)
     : [];
+const nodeRunnerDocument = actionRoleDocuments.find((document) =>
+  document.path.endsWith("/as-a-noderunner.md"),
+);
+const nodeRunnerSection = nodeRunnerDocument?.sections[0];
+const actionRoleDocumentsAfterNodeRunner = actionRoleDocuments.filter(
+  (document) => document !== nodeRunnerDocument,
+);
+const nodeRunnerTutorials = [
+  {
+    id: "apt-on-debian-gnu-linux",
+    title: "APT on Debian GNU/Linux",
+    summary: "These steps work on Debian GNU/Linux",
+    source: "https://apt.orangepill.ovh",
+    steps: [
+      {
+        label: "Add the Knots APT signing key",
+        code: "wget --quiet -O - https://apt.orangepill.ovh/gpg-pubkey.asc | sudo tee /etc/apt/keyrings/leohaf.asc",
+      },
+      {
+        label: "Add the Knots repository",
+        code: 'echo "deb [signed-by=/etc/apt/keyrings/leohaf.asc arch=$(dpkg --print-architecture)] https://apt.orangepill.ovh bookworm main" | sudo tee /etc/apt/sources.list.d/bitcoin-knots.list',
+      },
+      {
+        label: "Update apt and install Bitcoin Knots",
+        code: "sudo apt update\nsudo apt install bitcoin-knots",
+      },
+    ],
+  },
+  {
+    id: "ubuntu",
+    title: "Ubuntu",
+    summary: "Use the Bitcoin Knots PPA",
+    source: "https://launchpad.net/~luke-jr/+archive/ubuntu/bitcoinknots",
+    commands: [
+      "sudo add-apt-repository ppa:luke-jr/bitcoinknots",
+      "sudo apt update",
+      "sudo apt install bitcoind",
+    ],
+  },
+  {
+    id: "start9",
+    title: "Start9",
+    summary: "Sideload the package, configure Bitcoin Knots, then start",
+    source:
+      "https://github.com/Retropex/ordisrespector-startos/releases/tag/v26.1.knots20240513",
+    commands: ["Download .s9pk package", "Configure Bitcoin Knots"],
+  },
+  {
+    id: "mynode",
+    title: "MyNode",
+    summary: "Install the custom Bitcoin version from Settings",
+    source:
+      "https://github.com/mynodebtc/mynode/blob/264aa430b20c0b430d4349f0dc62666ff50adeed/CHANGELOG#L3",
+    commands: ["Settings -> Custom Bitcoin Version", "Install"],
+  },
+  {
+    id: "homebrew",
+    title: "Homebrew",
+    summary: "Compile and install Bitcoin Knots with Homebrew",
+    source: "https://github.com/retropex/homebrew-knots",
+    commands: ["brew tap retropex/knots", "brew install knots"],
+  },
+  {
+    id: "nixpkgs",
+    title: "Nixpkgs",
+    summary: "Install Bitcoin Knots with Nix package manager",
+    source:
+      "https://search.nixos.org/packages?channel=24.05&show=bitcoind-knots&from=0&size=50&sort=relevance&type=packages&query=bitcoin+knots",
+    commands: ["nix-shell -p bitcoind-knots"],
+  },
+  {
+    id: "nodl",
+    title: "nodl",
+    summary: "Install Knots over SSH, then restart",
+    source: "http://docs.nodl.it/guides/ssh.html",
+    commands: [
+      "sudo add-apt-repository ppa:luke-jr/bitcoinknots",
+      "sudo apt update",
+      "sudo apt install bitcoind",
+    ],
+  },
+  {
+    id: "diy-node",
+    title: "DIY node",
+    summary: "Use a DIY guide for Core-to-Knots migration",
+    source:
+      "https://jesterhodl.com/raspibolt-replacing-bitcoin-core-with-knots/",
+    commands: ["RaspiBolt guide", "MicroBolt guide"],
+  },
+  {
+    id: "umbrel-app-store-edition",
+    title: "Umbrel App Store edition",
+    summary: "Install like any other app",
+    source: "https://docs.mempool.guide/page/migrationumbrel.html",
+    commands: ["Install Bitcoin Knots", "Optional migration guide"],
+  },
+  {
+    id: "umbrel-community-edition",
+    title: "Umbrel Community edition",
+    summary: "Add the community app store, then install for your platform",
+    source: "https://github.com/Retropex/Bitcoin-store",
+    commands: ["https://github.com/Retropex/Bitcoin-store.git"],
+  },
+  {
+    id: "umbrel-manual-migration",
+    title: "Umbrel manual migration",
+    summary: "Move chain data before replacing the old node",
+    source: "https://github.com/Retropex/Bitcoin-store",
+    commands: [
+      "sudo docker stop $(sudo docker ps -q)",
+      "sudo ~/umbrel/scripts/repo add https://github.com/Retropex/Bitcoin-store.git",
+      "sudo shutdown -r now",
+    ],
+  },
+  {
+    id: "manual-linux-x86-64-migration-from-core-to-bitcoin-knots",
+    title: "Manual Linux x86-64 migration",
+    summary: "Replace binaries, update bitcoin.conf, then start",
+    source: "http://bitcoinknots.org",
+    commands: ["datacarrier=0"],
+  },
+];
 
 function buildCharacteristicsSections(html: string) {
   const orderedList = html.match(/<ol>[\s\S]*?<\/ol>/);
@@ -299,11 +435,21 @@ function buildCharacteristicsSections(html: string) {
                       `source-model-${visual.tone}`,
                     ]}
                   >
-                    <span>{index + 1}</span>
+                    <span class="source-model-index">{index + 1}</span>
+                    <span class="source-model-icon" aria-hidden="true">
+                      {index === 0 ? (
+                        <Layers size={31} strokeWidth={2.1} />
+                      ) : (
+                        <Crosshair size={31} strokeWidth={2.1} />
+                      )}
+                    </span>
                     <div>
                       <p>{visual.title}</p>
                       <small>{visual.body}</small>
                     </div>
+                    <span class="source-model-check" aria-hidden="true">
+                      <Check size={20} strokeWidth={3} />
+                    </span>
                   </article>
                 ))}
               </div>
@@ -496,7 +642,227 @@ function buildCharacteristicsSections(html: string) {
                 })}
               </nav>
               <div class="source-action-stack">
-                {actionRoleDocuments.map((document) => {
+                {nodeRunnerDocument && nodeRunnerSection ? (
+                  <section class="source-node-runner" id={nodeRunnerSection.id}>
+                    <div class="source-node-runner-heading">
+                      <p class="source-action-eyebrow">As a node runner</p>
+                      <div>
+                        <h2 class="source-document-title">
+                          {nodeRunnerDocument.title}
+                        </h2>
+                        <a
+                          aria-label="Link to node runner section"
+                          class="source-node-anchor"
+                          href={`#${nodeRunnerSection.id}`}
+                        >
+                          <LinkIcon size={18} strokeWidth={2} />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="source-node-intro-grid">
+                      <section class="source-node-policy-panel">
+                        <p>Policy choices you can apply today</p>
+                        <ul>
+                          <li>
+                            <CheckCircle2 size={18} strokeWidth={2.2} />
+                            <span>
+                              Run <strong>Bitcoin Knots</strong> so your node
+                              can use stricter relay policy
+                            </span>
+                          </li>
+                          <li>
+                            <CheckCircle2 size={18} strokeWidth={2.2} />
+                            <span>
+                              Run a <strong>BIP-110 node</strong> if you want
+                              consensus-level reduced-data enforcement
+                            </span>
+                          </li>
+                          <li>
+                            <CheckCircle2 size={18} strokeWidth={2.2} />
+                            <span>
+                              Set <code>-permitbaremultisig=0</code> and{" "}
+                              <code>-datacarrier=0</code>
+                            </span>
+                          </li>
+                        </ul>
+                      </section>
+
+                      <section class="source-node-note-panel">
+                        <p>
+                          <Info size={17} strokeWidth={2.2} />
+                          Raspberry Pi / Umbrel users
+                        </p>
+                        <div>
+                          <p>
+                            A node matters when it broadcasts transactions or
+                            verifies chain or transaction state. Even if your
+                            device is small, your node still shapes what you
+                            accept and relay.
+                          </p>
+                          <p>
+                            Keeping full nodes easy and affordable helps keep
+                            Bitcoin decentralized and permissionless.
+                          </p>
+                        </div>
+                      </section>
+                    </div>
+
+                    <div class="source-node-runbook">
+                      <aside
+                        class="source-node-tutorial-nav"
+                        aria-label="Node runner tutorials"
+                      >
+                        <p>Tutorials</p>
+                        <div>
+                          {nodeRunnerTutorials.map((tutorial, index) => (
+                            <a
+                              class:list={[index === 0 ? "is-active" : ""]}
+                              href={`#node-runner-${tutorial.id}`}
+                            >
+                              <span>{String(index + 1).padStart(2, "0")}</span>
+                              {tutorial.title}
+                            </a>
+                          ))}
+                        </div>
+                      </aside>
+
+                      <div class="source-node-tutorials">
+                        <div class="source-node-runbook-title">
+                          <Terminal
+                            aria-hidden="true"
+                            size={25}
+                            strokeWidth={2}
+                          />
+                          <h3>Install and run Knots</h3>
+                        </div>
+
+                        <section
+                          class="source-node-tutorial source-node-tutorial-selected"
+                          id={`node-runner-${nodeRunnerTutorials[0].id}`}
+                        >
+                          <div class="source-node-tutorial-header">
+                            <div>
+                              <p>
+                                <span>01</span>
+                                {nodeRunnerTutorials[0].title}
+                              </p>
+                              <small>{nodeRunnerTutorials[0].summary}</small>
+                            </div>
+                            <a
+                              href={nodeRunnerTutorials[0].source}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              Source
+                              <ExternalLink size={15} strokeWidth={2} />
+                            </a>
+                          </div>
+
+                          <ol class="source-node-steps">
+                            {nodeRunnerTutorials[0].steps?.map(
+                              (step, index) => (
+                                <li>
+                                  <p>{step.label}</p>
+                                  <div class="source-node-code">
+                                    <div class="source-node-pre">
+                                      <code>{step.code}</code>
+                                    </div>
+                                    <button
+                                      aria-label={`Copy command ${index + 1}`}
+                                      data-copy-code={step.code}
+                                      type="button"
+                                    >
+                                      <Copy size={16} strokeWidth={2} />
+                                    </button>
+                                  </div>
+                                </li>
+                              ),
+                            )}
+                          </ol>
+                        </section>
+
+                        <div class="source-node-tutorial-list">
+                          {nodeRunnerTutorials
+                            .slice(1)
+                            .map((tutorial, index) => (
+                              <section
+                                class="source-node-tutorial-row"
+                                id={`node-runner-${tutorial.id}`}
+                              >
+                                <div>
+                                  <span>
+                                    {String(index + 2).padStart(2, "0")}
+                                  </span>
+                                  <h4>{tutorial.title}</h4>
+                                </div>
+                                <p>{tutorial.summary}</p>
+                                <div class="source-node-command-list">
+                                  {tutorial.commands?.map((command) => (
+                                    <code>{command}</code>
+                                  ))}
+                                </div>
+                                <a
+                                  aria-label={`${tutorial.title} source`}
+                                  href={tutorial.source}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  Source
+                                  <ExternalLink size={15} strokeWidth={2} />
+                                </a>
+                                <a
+                                  aria-label={`Jump to ${tutorial.title}`}
+                                  href={`#node-runner-${tutorial.id}`}
+                                >
+                                  <ArrowDown size={16} strokeWidth={2} />
+                                </a>
+                              </section>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <section class="source-node-detail-panel">
+                      <div>
+                        <p class="source-action-eyebrow">Need more detail?</p>
+                        <p>
+                          See the Bitcoin Knots documentation and migration
+                          guides for advanced configuration, datadir migration,
+                          and validation steps.
+                        </p>
+                      </div>
+                      <div>
+                        <a
+                          href="https://bitcoinknots.org"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          Bitcoin Knots site
+                          <ExternalLink size={15} strokeWidth={2} />
+                        </a>
+                        <a
+                          href="https://docs.mempool.guide/page/migrationumbrel.html"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          Migration guides
+                          <ExternalLink size={15} strokeWidth={2} />
+                        </a>
+                        <a
+                          href="https://github.com/bitcoinknots/bitcoin"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          Knots GitHub
+                          <ExternalLink size={15} strokeWidth={2} />
+                        </a>
+                      </div>
+                    </section>
+                  </section>
+                ) : null}
+
+                {actionRoleDocumentsAfterNodeRunner.map((document) => {
                   const firstSection = document.sections[0];
 
                   return (
@@ -734,4 +1100,51 @@ function buildCharacteristicsSections(html: string) {
       }
     </div>
   </section>
+
+  {
+    content.id === "actions" ? (
+      <footer class="source-actions-footer">
+        <div>
+          <a class="source-actions-footer-brand" href="/">
+            <span aria-hidden="true">₿</span>
+            <span>
+              <strong>WTF Happened in Feb 2023?</strong>
+              <small>Blockspace pressure observatory</small>
+            </span>
+          </a>
+          <nav aria-label="Footer">
+            <a href="/stats-about-spam/">Impact</a>
+            <a href="/common-narratives-around-spam/">Narratives</a>
+            <a href="/what-you-can-do-about-it/">Actions</a>
+            <a href="/resources/">Resources</a>
+            <a
+              aria-label="Project repository"
+              href="https://github.com/praveenperera/wtf2023"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <GitBranch size={18} strokeWidth={2} />
+            </a>
+          </nav>
+        </div>
+        <p>
+          <Server size={15} strokeWidth={2} />
+          Content updated May 12, 2026.
+        </p>
+      </footer>
+    ) : null
+  }
 </main>
+
+<script is:inline>
+  document.querySelectorAll("[data-copy-code]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const code = button.getAttribute("data-copy-code");
+      if (!code) return;
+
+      await navigator.clipboard.writeText(code);
+      button.setAttribute("data-copied", "true");
+      window.setTimeout(() => button.removeAttribute("data-copied"), 1400);
+    });
+  });
+</script>

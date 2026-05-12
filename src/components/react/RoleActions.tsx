@@ -33,6 +33,9 @@ export default function RoleActions({ roles }: { roles: Role[] }) {
     developer: Code2,
     pleb: User,
   } as const;
+  const sectionIconClass = "size-7 shrink-0 text-accent";
+  const sectionLabelClass =
+    "font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-dim whitespace-nowrap";
 
   return (
     <Tabs.Root
@@ -86,14 +89,12 @@ export default function RoleActions({ roles }: { roles: Role[] }) {
                       return (
                         <Icon
                           aria-hidden="true"
-                          className="size-7 shrink-0 text-utxo"
+                          className={sectionIconClass}
                           strokeWidth={1.7}
                         />
                       );
                     })()}
-                    <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-utxo whitespace-nowrap">
-                      Summary
-                    </p>
+                    <p className={sectionLabelClass}>Summary</p>
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold leading-tight text-foreground">
@@ -112,19 +113,17 @@ export default function RoleActions({ roles }: { roles: Role[] }) {
                   <div className="flex items-center gap-4 border-border xl:border-r xl:pr-6">
                     <ArrowRight
                       aria-hidden="true"
-                      className="size-7 text-utxo"
+                      className={sectionIconClass}
                       strokeWidth={1.7}
                     />
-                    <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-utxo whitespace-nowrap">
-                      Full instructions
-                    </p>
+                    <p className={sectionLabelClass}>Full instructions</p>
                   </div>
                   <p className="max-w-3xl text-base leading-7 text-muted">
                     Open the complete role guide and source-backed context.
                   </p>
                   <ArrowRight
                     aria-hidden="true"
-                    className="hidden size-5 self-center justify-self-end text-utxo lg:block"
+                    className="hidden size-5 self-center justify-self-end text-accent lg:block"
                     strokeWidth={1.8}
                   />
                 </a>
@@ -133,12 +132,10 @@ export default function RoleActions({ roles }: { roles: Role[] }) {
                   <div className="flex items-center gap-4 border-border xl:border-r xl:pr-6">
                     <CheckCircle2
                       aria-hidden="true"
-                      className="size-7 text-utxo"
+                      className={sectionIconClass}
                       strokeWidth={1.7}
                     />
-                    <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-utxo whitespace-nowrap">
-                      Next steps
-                    </p>
+                    <p className={sectionLabelClass}>Next steps</p>
                   </div>
                   <ul className="grid max-w-4xl gap-3">
                     {role.actions.map((action) => {
@@ -179,12 +176,10 @@ export default function RoleActions({ roles }: { roles: Role[] }) {
                     <div className="flex items-center gap-4 border-border xl:border-r xl:pr-6">
                       <Copy
                         aria-hidden="true"
-                        className="size-7 text-utxo"
+                        className={sectionIconClass}
                         strokeWidth={1.7}
                       />
-                      <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-utxo whitespace-nowrap">
-                        Policy snippet
-                      </p>
+                      <p className={sectionLabelClass}>Policy snippet</p>
                     </div>
                     <pre className="min-w-0 overflow-x-auto rounded-md border border-border bg-background p-4 text-sm leading-7 text-foreground shadow-sm">
                       <code>{role.code}</code>
