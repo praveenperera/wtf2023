@@ -1,0 +1,24 @@
+---
+import SourcePage from "@/components/SourcePage.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getRouteContent } from "@/lib/content";
+import { navRoutes } from "@/lib/routes";
+
+export function getStaticPaths() {
+  return navRoutes.map((route) => ({
+    params: { slug: route.route.replace(/^\/|\/$/g, "") },
+    props: { route },
+  }));
+}
+
+const content = getRouteContent(Astro.props.route);
+---
+
+<BaseLayout
+  title={Astro.props.route.title}
+  description={Astro.props.route.metaDescription}
+  ogImage={Astro.props.route.ogImage}
+  ogImageAlt={Astro.props.route.ogImageAlt}
+>
+  <SourcePage content={content} />
+</BaseLayout>

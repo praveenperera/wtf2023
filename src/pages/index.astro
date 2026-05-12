@@ -1,0 +1,608 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlockspacePressureMap from "@/components/react/BlockspacePressureMap";
+import ChartPanel from "@/components/react/ChartPanel";
+import GaugeMeter from "@/components/react/GaugeMeter";
+import NarrativeIndex from "@/components/react/NarrativeIndex";
+import RoleActions from "@/components/react/RoleActions";
+import { extractPlainText, readSourceDocument } from "@/lib/content";
+import { navRoutes, siteRoutes } from "@/lib/routes";
+import { ChevronRight } from "lucide-react";
+import impactSeries from "@/data/generated/impact-series.json";
+import feeRates from "@/data/generated/mempool-fee-rates.json";
+import pressureMap from "@/data/generated/blockspace-pressure-map.json";
+import utxoSet from "@/data/generated/utxo-set.json";
+
+const fastAnswers = [
+  {
+    title: "Non-payment data crowded blockspace",
+    body: "The February 2023 wave tied together inscriptions, bare multisig, OP_RETURN, and other non-payment uses",
+  },
+  {
+    title: "Payments still paid most fees",
+    body: "Payment users were forced to bid harder even while spam used a large blockspace share",
+  },
+  {
+    title: "Node resource pressure rose",
+    body: "UTXO growth and heavier block data increase the long-term cost of running validating infrastructure",
+  },
+  {
+    title: "Policy choices mattered",
+    body: "Relay defaults, mining templates, and direct-to-miner channels shape what gets forwarded and mined",
+  },
+];
+
+const narratives = [
+  "mempool-policy-is-censorship",
+  "a-valid-transaction-is-a-valid-transaction",
+  "the-fees-were-going-to-be-high-anyways",
+  "satoshi-inscribed-on-chain",
+  "bitcoin-can-thrive-even-if-miners-are-high-time-preference-greedy-actors",
+  "there-s-nothing-you-can-do-about-it",
+].map((slug) => {
+  const doc = readSourceDocument(
+    `reference/common-narratives-around-spam/${slug}.md`,
+  );
+  return {
+    title: doc.title,
+    summary: extractPlainText(doc.body, 220),
+    href: "/common-narratives-around-spam/",
+  };
+});
+
+const roles = [
+  {
+    id: "node-runner",
+    label: "Node runner",
+    summary:
+      "Run policy that filters the transaction types you do not want to relay",
+    actions: [
+      "Use Bitcoin Knots",
+      {
+        label: "Run a BIP-110 node",
+        href: "https://bip110.org/",
+        note: "Use the BIP-110 install guide when you want consensus-level reduced-data enforcement",
+      },
+      "Set bare multisig and data carrier filters where supported",
+    ],
+    code: "permitbaremultisig=0\ndatacarrier=0",
+    href: "/what-you-can-do-about-it/",
+  },
+  {
+    id: "miner",
+    label: "Miner",
+    summary:
+      "Choose block templates aligned with monetary use instead of arbitrary data storage",
+    actions: [
+      {
+        label: "Rent hash rate and mine with an anti-spam template",
+        href: "https://rentsomehash.com/",
+        note: "Use rented hash rate to participate directly instead of waiting for existing pools to change",
+      },
+      "Point hash rate at pools that offer anti-spam templates",
+      "Review direct submission policy",
+    ],
+    href: "/what-you-can-do-about-it/",
+  },
+  {
+    id: "developer",
+    label: "Developer",
+    summary:
+      "Support better defaults, documentation, and implementation choices",
+    actions: [
+      "Review policy PRs",
+      "Support Knots or patched clients",
+      "Encourage clear relay defaults",
+    ],
+    href: "/what-you-can-do-about-it/",
+  },
+  {
+    id: "pleb",
+    label: "Pleb",
+    summary:
+      "Use source-backed arguments in public discussions and keep the evidence trail visible",
+    actions: [
+      "Share relevant rebuttals",
+      "Ask concrete policy questions",
+      "Bookmark source pages",
+    ],
+    href: "/what-you-can-do-about-it/",
+  },
+];
+
+const blockspaceEventRows = impactSeries.rows.filter(
+  (row) => row.date >= "2023-02-04" && row.date <= "2023-02-20",
+);
+
+const feeRatePressureRows = feeRates.rows.filter(
+  (row) => row.date >= "2022-11-01" && row.date <= "2024-06-30",
+);
+
+const chartPanels = [
+  {
+    title: "Fee-rate pressure",
+    subtitle: "Mined block fee-rate percentiles, November 2022 to June 2024",
+    interpretation:
+      "When demand for blockspace jumps, payment users must clear a higher fee market to get confirmed",
+    source: feeRates.source,
+    snapshotDate: feeRates.fetchedAt,
+    href: "/stats-about-spam/",
+    rows: feeRatePressureRows,
+    xKey: "date",
+    type: "line",
+    series: [
+      { key: "median", label: "Median", color: "var(--payment)" },
+      { key: "p75", label: "75th percentile", color: "var(--accent)" },
+      { key: "p90", label: "90th percentile", color: "var(--risk)" },
+    ],
+  },
+  {
+    title: "Blockspace split",
+    subtitle: "Sampled block weight by classified use",
+    interpretation:
+      "Sampled blocks show when observable non-payment data began taking a larger share of mined block weight",
+    source: impactSeries.source,
+    snapshotDate: impactSeries.fetchedAt,
+    href: "/stats-about-spam/",
+    rows: impactSeries.rows,
+    xKey: "date",
+    type: "area",
+    series: [
+      { key: "payments", label: "Payments", color: "var(--payment)" },
+      { key: "nonPayments", label: "Non-payments", color: "var(--accent)" },
+    ],
+  },
+  {
+    title: "Fees by use",
+    subtitle: "Sampled block fee share by classified use",
+    interpretation:
+      "Payments still paid most fees while non-payments occupied a large share of blockspace",
+    source: impactSeries.source,
+    snapshotDate: impactSeries.fetchedAt,
+    href: "/stats-about-spam/",
+    rows: impactSeries.rows,
+    xKey: "date",
+    type: "line",
+    series: [
+      { key: "paymentFees", label: "Payment fees", color: "var(--payment)" },
+      {
+        key: "nonPaymentFees",
+        label: "Non-payment fees",
+        color: "var(--accent)",
+      },
+    ],
+  },
+  {
+    title: "UTXO set pressure",
+    subtitle: "Statoshi UTXO database size and output count",
+    interpretation:
+      "A larger UTXO set makes validation infrastructure more expensive to run and keep synchronized",
+    source: utxoSet.source,
+    snapshotDate: utxoSet.fetchedAt,
+    href: "/stats-about-spam/",
+    rows: utxoSet.rows,
+    xKey: "date",
+    type: "line",
+    series: [
+      { key: "dbSizeGb", label: "DB size GB", color: "var(--utxo)" },
+      { key: "txOutputsMillions", label: "Outputs M", color: "var(--accent)" },
+    ],
+  },
+] as const;
+
+const heroUsesImpactSeries = impactSeries.rows.length > 0;
+const peakNonPaymentRow = heroUsesImpactSeries
+  ? impactSeries.rows.reduce((peak, row) =>
+      row.nonPayments > peak.nonPayments ? row : peak,
+    )
+  : null;
+const peakNonPaymentValue = peakNonPaymentRow?.nonPayments ?? 0;
+const peakNonPaymentDate = peakNonPaymentRow?.date ?? "Unavailable";
+const impactSnapshotDate = new Intl.DateTimeFormat("en", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+}).format(new Date(impactSeries.fetchedAt));
+const blockspaceSplitPanel = {
+  ...chartPanels[1],
+  rows:
+    blockspaceEventRows.length > 0 ? blockspaceEventRows : chartPanels[1].rows,
+};
+
+const operationsMetrics = [
+  {
+    label: "Peak non-payment share",
+    value: `${peakNonPaymentValue.toFixed(1)}%`,
+    detail: peakNonPaymentDate,
+    tone: "text-accent",
+  },
+  {
+    label: "Payments at peak",
+    value: peakNonPaymentRow
+      ? `${peakNonPaymentRow.payments.toFixed(1)}%`
+      : "n/a",
+    detail: "sampled share",
+    tone: "text-payment",
+  },
+  {
+    label: "Non-payment fees",
+    value: peakNonPaymentRow
+      ? `${peakNonPaymentRow.nonPaymentFees.toFixed(1)}%`
+      : "n/a",
+    detail: "at peak share",
+    tone: "text-risk",
+  },
+] as const;
+
+const duneEvidencePanels = [
+  {
+    title: "Blockspace split",
+    label: "Sampled source unavailable locally",
+    value: "~50%",
+    body: "Non-payment transactions occupied about half of available blockspace soon after the February 2023 wave began, excluding bare multisig data storage from that chart",
+  },
+  {
+    title: "Fees by use",
+    label: "Fee pressure",
+    value: "payments paid most fees",
+    body: "Non-payment transactions displaced payment transactions even though payment users still paid the majority of fees in each block",
+  },
+] as const;
+
+const homeRoute = siteRoutes.find((route) => route.id === "home");
+
+if (!homeRoute) {
+  throw new Error("Missing home route metadata");
+}
+---
+
+<BaseLayout
+  title={homeRoute.title}
+  description={homeRoute.metaDescription}
+  ogImage={homeRoute.ogImage}
+  ogImageAlt={homeRoute.ogImageAlt}
+>
+  <main>
+    <section class="operations-hero" aria-labelledby="operations-title">
+      <div class="mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
+        <div class="operations-grid">
+          <div class="operations-narrative">
+            <h1 id="operations-title" class="operations-title">
+              WTF Happened in Feb 2023?
+            </h1>
+            <p class="operations-subtitle">
+              Bitcoin is money, not a message board.
+            </p>
+            <p class="operations-copy">
+              Starting in early February 2023, an unprecedented wave of spam and
+              scam activity flooded the Bitcoin mempool. Non-payment
+              transactions competed for limited block space, driving fees up and
+              crowding out real payments.
+            </p>
+            <p class="operations-copy">
+              This site is a forensic analysis of that event, its impact, and
+              what we can do to keep Bitcoin for payments.
+            </p>
+            <p class="operations-event-label">
+              <span aria-hidden="true">▣</span>
+              Event window: Feb 1 - Mar 15, 2023
+            </p>
+          </div>
+
+          <div class="operations-console">
+            <div class="operations-chart-shell">
+              {
+                heroUsesImpactSeries ? (
+                  <ChartPanel
+                    client:only="react"
+                    {...blockspaceSplitPanel}
+                    annotation={{
+                      x: "2023-02-14",
+                      label: "Peak sampled share",
+                    }}
+                    frame={false}
+                    percentAxis
+                    type="stackedArea"
+                    variant="operations"
+                  />
+                ) : (
+                  <ChartPanel
+                    client:only="react"
+                    {...chartPanels[0]}
+                    frame={false}
+                    variant="operations"
+                  />
+                )
+              }
+            </div>
+            <aside class="operations-rail" aria-label="Key sampled metrics">
+              <GaugeMeter
+                client:only="react"
+                detail={`Peak sampled share on ${peakNonPaymentDate}`}
+                label="Blockspace occupancy"
+                max={100}
+                source={impactSeries.source}
+                value={peakNonPaymentValue}
+              />
+              {
+                operationsMetrics.map((metric) => (
+                  <div class="operations-metric-row">
+                    <p>
+                      <span>{metric.label}</span>
+                      <small>{metric.detail}</small>
+                    </p>
+                    <strong class={metric.tone}>{metric.value}</strong>
+                  </div>
+                ))
+              }
+            </aside>
+            <div class="operations-console-footer">
+              <p>
+                Source: {
+                  heroUsesImpactSeries ? impactSeries.source : feeRates.source
+                } · Snapshot: {
+                  heroUsesImpactSeries ? impactSnapshotDate : feeRates.fetchedAt
+                }
+              </p>
+              <a href="/stats-about-spam/">
+                Open impact data
+                <ChevronRight aria-hidden="true" className="size-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="operations-tldr" aria-label="Fast answers">
+      <div class="mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
+        <div class="operations-tldr-grid">
+          {
+            fastAnswers.map((answer, index) => (
+              <article class="operations-tldr-card">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h2>{answer.title}</h2>
+                  <p>{answer.body}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <BlockspacePressureMap client:load data={pressureMap} />
+
+    <section class="section-band" id="impact" aria-labelledby="impact-title">
+      <div class="mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid items-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:gap-5"
+        >
+          <div class="md:col-span-2 lg:col-span-1">
+            <p class="section-label">Impact</p>
+            <h2
+              id="impact-title"
+              class="mt-3 text-3xl font-semibold leading-tight md:text-5xl"
+            >
+              Four ways to read the pressure
+            </h2>
+            <p class="mt-4 text-base leading-7 text-muted">
+              These panels separate observable fee pressure, sampled
+              payment-versus-data use, and Statoshi resource pressure without
+              filling gaps with fake precision.
+            </p>
+          </div>
+          <div class="md:col-span-2 lg:col-span-2">
+            <ChartPanel client:only="react" {...chartPanels[0]} />
+          </div>
+          {
+            impactSeries.rows.length > 0 ? (
+              <>
+                <ChartPanel client:only="react" {...blockspaceSplitPanel} />
+                <ChartPanel client:only="react" {...chartPanels[2]} />
+              </>
+            ) : (
+              <>
+                {duneEvidencePanels.map((panel) => (
+                  <article class="data-panel flex min-h-80 flex-col justify-between p-5">
+                    <div>
+                      <div class="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 class="text-base font-semibold text-foreground">
+                            {panel.title}
+                          </h3>
+                          <p class="mt-1 text-sm text-muted">{panel.label}</p>
+                        </div>
+                        <a
+                          class="inline-flex items-center gap-2 text-xs font-semibold text-accent no-underline hover:text-accent-strong"
+                          href="/stats-about-spam/"
+                        >
+                          Details
+                          <ChevronRight
+                            aria-hidden="true"
+                            className="size-3.5"
+                          />
+                        </a>
+                      </div>
+                      <p class="mt-8 font-mono text-4xl font-semibold leading-none text-accent">
+                        {panel.value}
+                      </p>
+                      <p class="mt-5 max-w-xl text-sm font-medium leading-6 text-foreground">
+                        {panel.body}
+                      </p>
+                    </div>
+                    <p class="mt-6 border-t border-border pt-4 text-xs leading-5 text-dim">
+                      Chart snapshot unavailable; this fallback keeps the
+                      source-backed claim visible without invented precision.
+                    </p>
+                  </article>
+                ))}
+              </>
+            )
+          }
+          <ChartPanel client:only="react" {...chartPanels[3]} />
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band" id="characteristics">
+      <div
+        class="mx-auto grid max-w-[94rem] gap-8 px-4 sm:px-6 lg:grid-cols-[0.38fr_1fr] lg:px-8"
+      >
+        <div class="section-rail">
+          <p class="section-label">Characteristics</p>
+          <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-5xl">
+            A practical recognition model
+          </h2>
+          <p class="mt-4 text-base leading-7 text-muted">
+            This model avoids relying only on subjective intent and focuses on
+            observable network effects.
+          </p>
+        </div>
+        <div class="overflow-hidden border-y border-border">
+          <article
+            class="grid gap-5 border-b border-border py-7 md:grid-cols-[5rem_5rem_minmax(0,1fr)_8rem] md:items-center"
+          >
+            <span class="font-mono text-3xl font-semibold text-accent">01</span>
+            <span
+              class="grid size-14 place-items-center rounded-md border border-accent/50 font-mono text-xl text-accent"
+              aria-hidden="true"
+            >
+              ⎇
+            </span>
+            <div>
+              <h3 class="text-xl font-semibold text-foreground">
+                Wasteful shared-resource use
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-muted">
+                Large or repeated non-payment data consumes blockspace,
+                bandwidth, storage, and UTXO set resources that every validating
+                user helps carry.
+              </p>
+            </div>
+            <p
+              class="font-mono text-xs font-medium uppercase leading-5 tracking-[0.18em] text-utxo"
+            >
+              Resource pressure
+            </p>
+          </article>
+          <article
+            class="grid gap-5 py-7 md:grid-cols-[5rem_5rem_minmax(0,1fr)_8rem] md:items-center"
+          >
+            <span class="font-mono text-3xl font-semibold text-accent">02</span>
+            <span
+              class="grid size-14 place-items-center rounded-md border border-accent/50 font-mono text-xl text-accent"
+              aria-hidden="true"
+            >
+              &#123;&#125;
+            </span>
+            <div>
+              <h3 class="text-xl font-semibold text-foreground">
+                Misuse of Bitcoin functions
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-muted">
+                OP_FALSE OP_IF witness data, bare multisig, and other paths are
+                used to store arbitrary state on-chain.
+              </p>
+            </div>
+            <p
+              class="font-mono text-xs font-medium uppercase leading-5 tracking-[0.18em] text-utxo"
+            >
+              Use of functions
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band" id="narratives">
+      <div
+        class="mx-auto grid max-w-[94rem] gap-8 px-4 sm:px-6 lg:grid-cols-[0.38fr_1fr] lg:px-8"
+      >
+        <div class="section-rail">
+          <p class="section-label">Narratives</p>
+          <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-5xl">
+            Rebuttals with receipts
+          </h2>
+          <p class="mt-4 text-base leading-7 text-muted">
+            Each entry opens to a compact summary and links into the canonical
+            narratives route.
+          </p>
+        </div>
+        <NarrativeIndex client:load narratives={narratives} />
+      </div>
+    </section>
+
+    <section class="section-band" id="actions">
+      <div class="mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
+        <div
+          class="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end"
+        >
+          <div>
+            <p class="section-label">Actions</p>
+            <h2
+              class="mt-3 max-w-4xl text-3xl font-semibold leading-tight md:text-5xl"
+            >
+              Choose the lever you actually have
+            </h2>
+            <p class="mt-4 max-w-3xl text-base leading-7 text-muted">
+              Action paths are grouped by role so visitors can move from
+              diagnosis to a concrete next step.
+            </p>
+          </div>
+          <div class="data-panel hidden p-4 lg:block">
+            <p class="text-sm font-semibold text-foreground">
+              Role-based playbook
+            </p>
+            <p class="mt-2 text-sm leading-6 text-muted">
+              Pick your role to see the steps that fit your leverage.
+            </p>
+          </div>
+        </div>
+        <RoleActions client:load roles={roles} />
+      </div>
+    </section>
+
+    <section class="section-band" id="history">
+      <div
+        class="mx-auto grid max-w-[94rem] gap-8 px-4 sm:px-6 lg:grid-cols-[0.38fr_1fr] lg:px-8"
+      >
+        <div class="section-rail">
+          <p class="section-label">Keep exploring</p>
+          <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-5xl">
+            Go deeper with source
+          </h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          {
+            navRoutes.slice(4).map((route) => (
+              <a
+                class="data-panel group flex min-h-72 flex-col p-5 no-underline transition hover:border-accent/45"
+                href={route.route}
+              >
+                <span class="font-mono text-xs uppercase tracking-[0.18em] text-accent">
+                  {route.label}
+                </span>
+                <h2 class="mt-3 text-xl font-semibold text-foreground">
+                  {route.summary}
+                </h2>
+                <span class="mt-5 block h-px bg-accent/70" />
+                <p class="mt-5 text-sm leading-6 text-muted">
+                  {route.takeaway}
+                </p>
+                <span class="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-accent">
+                  Open
+                  <ChevronRight
+                    aria-hidden="true"
+                    className="size-4 transition group-hover:translate-x-0.5"
+                  />
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

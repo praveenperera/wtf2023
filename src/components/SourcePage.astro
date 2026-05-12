@@ -1,0 +1,737 @@
+---
+import { extractResourceItems, type RouteContent } from "@/lib/content";
+import { ArrowUpRight } from "lucide-react";
+
+type Props = {
+  content: RouteContent;
+};
+
+const { content } = Astro.props;
+const isResources = content.id === "resources";
+const resourceItems = isResources
+  ? extractResourceItems(content.documents[0])
+  : [];
+const groupedResources = Object.entries(
+  resourceItems.reduce<Record<string, typeof resourceItems>>((groups, item) => {
+    groups[item.group] = [...(groups[item.group] ?? []), item];
+    return groups;
+  }, {}),
+);
+const mediaItems = isResources
+  ? content.documents.flatMap((document) => document.media)
+  : [];
+const sectionDocuments =
+  content.id === "narratives" ? content.documents.slice(1) : content.documents;
+const contentSections = sectionDocuments.flatMap((document) =>
+  document.sections.map((section) => ({
+    ...section,
+    documentTitle: document.title,
+  })),
+);
+const actionOverviewDocument =
+  content.id === "actions" ? content.documents[0] : undefined;
+const actionRoleDocuments =
+  content.id === "actions" ? content.documents.slice(1) : [];
+const hasSectionNav = contentSections.length > 2;
+const sectionCount = contentSections.length;
+const showSourceRailStats = sectionCount > 1 || content.documents.length > 1;
+const hasUsefulAside =
+  isResources ||
+  (content.id !== "actions" && (hasSectionNav || showSourceRailStats));
+const routeClass = `source-page-${content.id}`;
+const sourceVisualsByRoute: Partial<
+  Record<
+    RouteContent["id"],
+    Array<{
+      label: string;
+      title: string;
+      body: string;
+      value: string;
+      tone: "accent" | "payment" | "utxo" | "risk" | "purple";
+    }>
+  >
+> = {
+  impact: [
+    {
+      label: "Blockspace",
+      title: "Payments and non-payments compete in one block auction",
+      body: "Use the committed chart panels and pressure map on the overview for source-backed values",
+      value: "shared market",
+      tone: "accent",
+    },
+    {
+      label: "Fees",
+      title: "Payment users still had to clear higher fee pressure",
+      body: "The local snapshots keep the data visible without embedding copied screenshots",
+      value: "local data",
+      tone: "payment",
+    },
+    {
+      label: "Nodes",
+      title: "Long-lived outputs raise validation and storage costs",
+      body: "UTXO pressure is represented with generated series data instead of copied screenshots",
+      value: "UTXO set",
+      tone: "utxo",
+    },
+  ],
+  characteristics: [
+    {
+      label: "Resource use",
+      title: "Wasteful shared-resource demand",
+      body: "Consumes scarce shared blockspace with little or no corresponding payment value",
+      value: "signal 1",
+      tone: "accent",
+    },
+    {
+      label: "Function fit",
+      title: "Misuse of Bitcoin's functions",
+      body: "Uses neutral transaction features in service of a malicious or harmful objective",
+      value: "signal 2",
+      tone: "payment",
+    },
+  ],
+  narratives: [
+    {
+      label: "Policy",
+      title: "Relay policy is local behavior, not a consensus rule",
+      body: "Narrative cards compare claims using source text rather than linked screenshots",
+      value: "local choice",
+      tone: "utxo",
+    },
+    {
+      label: "Validity",
+      title: "A transaction can be valid and still be filtered by a node",
+      body: "The page keeps the distinction visible through structured rebuttal sections",
+      value: "two layers",
+      tone: "accent",
+    },
+    {
+      label: "Incentives",
+      title: "Miner incentives do not remove user policy choices",
+      body: "The implementation favors explicit argument maps over decorative media links",
+      value: "tradeoff",
+      tone: "purple",
+    },
+  ],
+  actions: [
+    {
+      label: "Node runners",
+      title: "Choose relay policy and software defaults intentionally",
+      body: "Role cards keep commands and choices on-page without external media wrappers",
+      value: "filter",
+      tone: "utxo",
+    },
+    {
+      label: "Miners",
+      title: "Select templates and submission paths that match your policy",
+      body: "The page uses direct actions instead of linked screenshots of the old site",
+      value: "template",
+      tone: "accent",
+    },
+    {
+      label: "Developers",
+      title: "Improve defaults, docs, and review paths where policy lives",
+      body: "Implementation details remain text-native so they can be searched and copied",
+      value: "defaults",
+      tone: "payment",
+    },
+  ],
+  core: [
+    {
+      label: "PR 29187",
+      title:
+        "The dispute centered on whether existing limits covered new data paths",
+      body: "A compact issue map replaces copied media links while preserving the page context",
+      value: "policy gap",
+      tone: "risk",
+    },
+    {
+      label: "Docs",
+      title: "Documentation changes can redefine how a limit is understood",
+      body: "The page keeps the claim trail in article sections rather than screenshot links",
+      value: "meaning",
+      tone: "accent",
+    },
+    {
+      label: "Review",
+      title: "The review question is about defaults, limits, and user cost",
+      body: "First-party panels summarize the same relationship without old media links",
+      value: "cost",
+      tone: "utxo",
+    },
+  ],
+  history: [
+    {
+      label: "Relay",
+      title: "Free relay has repeatedly created room for non-payment pressure",
+      body: "Timeline context is represented in structured text instead of copied images",
+      value: "recurring",
+      tone: "accent",
+    },
+    {
+      label: "Private paths",
+      title: "Direct-to-miner submission changes what public relay can observe",
+      body: "The page keeps the channel distinction visible without external media links",
+      value: "out of band",
+      tone: "purple",
+    },
+    {
+      label: "Earlier cases",
+      title:
+        "Older abuse cases help separate consensus bugs from policy pressure",
+      body: "The history page stays self-contained with first-party explanation panels",
+      value: "precedent",
+      tone: "risk",
+    },
+  ],
+};
+const sourceVisuals = sourceVisualsByRoute[content.id] ?? [];
+const historyTimelineDates: Record<string, string> = {
+  "Free relays > Whitelists > Free relays": "Early Bitcoin relay policy",
+  "The rise of out-of-band transactions": "February 22, 2024",
+  "Noteworthy cases of massive broadcasts of non-payment TXs": "2010-2019",
+};
+const characteristicsSections =
+  content.id === "characteristics" && contentSections[0]
+    ? buildCharacteristicsSections(contentSections[0].html)
+    : [];
+
+function buildCharacteristicsSections(html: string) {
+  const orderedList = html.match(/<ol>[\s\S]*?<\/ol>/);
+  const orderedListStart = orderedList?.index;
+  if (!orderedList || orderedListStart === undefined) return [];
+
+  const intro = html.slice(0, orderedListStart).trim();
+  const signalList = orderedList[0].replace(
+    "<ol>",
+    '<ol class="source-inline-signals">',
+  );
+  const afterList = html.slice(orderedListStart + orderedList[0].length).trim();
+  const blocks =
+    afterList.match(
+      /(?:<p>[\s\S]*?<\/p>|<blockquote>[\s\S]*?<\/blockquote>)/g,
+    ) ?? [];
+
+  if (!intro || blocks.length < 7) return [];
+
+  return [
+    {
+      title: "Recognition vs subjectivity",
+      label: "Framing",
+      bodyHtml: `${intro}${signalList}`,
+      evidenceHtml:
+        "<blockquote><p>spam can also be recognized by anyone, even intellectually honest spammers</p></blockquote><p>Recognition test</p>",
+      tone: "accent",
+    },
+    {
+      title: "Wastefulness of shared resources",
+      label: "Signal 1",
+      bodyHtml: blocks[0],
+      evidenceHtml: blocks.slice(1, 3).join(""),
+      tone: "payment",
+    },
+    {
+      title: "Misuse of Bitcoin's functions",
+      label: "Signal 2",
+      bodyHtml: blocks[3],
+      evidenceHtml: blocks.slice(4, 6).join(""),
+      tone: "utxo",
+    },
+    {
+      title: "Boundary cases",
+      label: "Non-spam use",
+      bodyHtml: blocks[6],
+      evidenceHtml:
+        "<blockquote><p>it uses shared resources efficiently and does not misuse Bitcoin's functions</p></blockquote><p>Boundary test</p>",
+      tone: "accent",
+    },
+  ];
+}
+---
+
+<main class:list={["source-page", routeClass]}>
+  <section class="source-masthead border-b border-border py-10 md:py-16">
+    <div
+      class="mx-auto grid max-w-[94rem] gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(20rem,0.8fr)] lg:px-8"
+    >
+      <div class="source-masthead-title">
+        <p class="source-kicker">{content.label}</p>
+        <h1 class="source-title">{content.documents[0].title}</h1>
+        {
+          content.id === "characteristics" ? (
+            <div class="source-title-copy">
+              <p class="source-takeaway-text">{content.takeaway}</p>
+              <p>{content.summary}</p>
+            </div>
+          ) : null
+        }
+      </div>
+      <div class="source-takeaway self-end">
+        {
+          content.id === "impact" && sourceVisuals.length ? (
+            <section class="source-hero-panel source-glance-panel">
+              <h2>At a glance</h2>
+              <div>
+                {sourceVisuals.map((visual) => (
+                  <p
+                    class:list={[
+                      "source-glance-row",
+                      `source-glance-${visual.tone}`,
+                    ]}
+                  >
+                    <span>{visual.value}</span>
+                    {visual.title}
+                  </p>
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+        {
+          content.id === "characteristics" && sourceVisuals.length ? (
+            <section class="source-hero-panel source-model-panel">
+              <h2>Two-part recognition model</h2>
+              <div class="source-model-list">
+                {sourceVisuals.map((visual, index) => (
+                  <article
+                    class:list={[
+                      "source-model-row",
+                      `source-model-${visual.tone}`,
+                    ]}
+                  >
+                    <span>{index + 1}</span>
+                    <div>
+                      <p>{visual.title}</p>
+                      <small>{visual.body}</small>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p class="source-model-result">
+                <span>Both present</span>
+                The activity is spam
+              </p>
+            </section>
+          ) : null
+        }
+        {
+          content.id !== "characteristics" ? (
+            <>
+              <div>
+                <p class="source-takeaway-label">Takeaway</p>
+                <p class="source-takeaway-text">{content.takeaway}</p>
+              </div>
+              <div class="source-summary">
+                <p class="source-takeaway-label">Summary</p>
+                <p>{content.summary}</p>
+              </div>
+            </>
+          ) : null
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-16">
+    <div
+      class:list={[
+        "source-body-grid mx-auto grid max-w-[94rem] gap-10 px-4 sm:px-6 lg:px-8",
+        hasUsefulAside ? "source-body-grid-aside" : "",
+      ]}
+    >
+      {
+        isResources ? (
+          <article class="source-library min-w-0">
+            <div class="source-library-header">
+              <div>
+                <h2>Resource library</h2>
+                <p>
+                  Articles, podcasts, papers, and clips grouped by how someone
+                  would actually use them.
+                </p>
+              </div>
+              <span class="source-count">
+                {resourceItems.length + mediaItems.length} items
+              </span>
+            </div>
+
+            <div class="source-shelves">
+              {groupedResources.map(([group, items]) => (
+                <section
+                  class="source-shelf"
+                  id={group.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}
+                >
+                  <div class="source-shelf-heading">
+                    <h3>{group}</h3>
+                    <span>{items.length} links</span>
+                  </div>
+                  <div class="source-link-list">
+                    {items.map((item) => (
+                      <a class="source-link-row" href={item.href}>
+                        <span
+                          class:list={[
+                            "source-type",
+                            `source-type-${item.type}`,
+                          ]}
+                        >
+                          {item.type}
+                        </span>
+                        <span class="source-link-copy">
+                          <span>{item.title}</span>
+                          {item.note ? <span>{item.note}</span> : null}
+                        </span>
+                        <span class="source-link-arrow" aria-hidden="true">
+                          <ArrowUpRight size={16} strokeWidth={2} />
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              ))}
+
+              {mediaItems.length ? (
+                <section class="source-shelf" id="media">
+                  <div class="source-shelf-heading">
+                    <h3>Media</h3>
+                    <span>{mediaItems.length} links</span>
+                  </div>
+                  <div class="source-link-list">
+                    {mediaItems.map((item) => (
+                      <a class="source-link-row" href={item.href}>
+                        <span class="source-type source-type-video">media</span>
+                        <span class="source-link-copy">
+                          <span>{item.text}</span>
+                        </span>
+                        <span class="source-link-arrow" aria-hidden="true">
+                          <ArrowUpRight size={16} strokeWidth={2} />
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
+            </div>
+          </article>
+        ) : content.id === "narratives" ? (
+          <article class="article-source min-w-0">
+            <div class="source-narrative-grid">
+              {sectionDocuments.map((document, documentIndex) => {
+                const firstSection = document.sections[0];
+                const panelClasses = [
+                  "source-document-panel",
+                  documentIndex === 0 ? "source-document-featured" : "",
+                ];
+
+                return firstSection ? (
+                  <a class:list={panelClasses} href={`#${firstSection.id}`}>
+                    <h2 class="source-document-title">{document.title}</h2>
+                  </a>
+                ) : (
+                  <section class:list={panelClasses}>
+                    <h2 class="source-document-title">{document.title}</h2>
+                  </section>
+                );
+              })}
+            </div>
+            <div class="source-section-stack source-detail-stack">
+              {contentSections.map((section, index) => (
+                <section class="source-section" id={section.id}>
+                  <div class="source-section-meta">
+                    <span>{content.label}</span>
+                    <span>{section.documentTitle}</span>
+                  </div>
+                  <h2 class="source-section-title">
+                    {index + 1}. {section.title}
+                  </h2>
+                  <div
+                    class="prose-source prose-article mt-5"
+                    set:html={section.html}
+                  />
+                </section>
+              ))}
+            </div>
+            {sourceVisuals.length ? (
+              <section
+                class="source-context-visuals"
+                aria-label={`${content.label} context`}
+              >
+                {sourceVisuals.map((visual) => (
+                  <div
+                    class:list={[
+                      "source-context-card",
+                      `source-context-${visual.tone}`,
+                    ]}
+                  >
+                    <p>{visual.label}</p>
+                    <strong>{visual.value}</strong>
+                    <h3>{visual.title}</h3>
+                    <span>{visual.body}</span>
+                  </div>
+                ))}
+              </section>
+            ) : null}
+          </article>
+        ) : content.id === "actions" ? (
+          <article class="article-source min-w-0">
+            <div class="source-action-board">
+              {actionOverviewDocument ? (
+                <section class="source-action-overview">
+                  <p class="source-action-eyebrow">Action playbook</p>
+                  <h2 class="source-document-title">
+                    {actionOverviewDocument.title}
+                  </h2>
+                  <p>{content.summary}</p>
+                </section>
+              ) : null}
+              <nav class="source-role-jump-list" aria-label="Action roles">
+                {actionRoleDocuments.map((document, index) => {
+                  const firstSection = document.sections[0];
+
+                  return firstSection ? (
+                    <a href={`#${firstSection.id}`}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      {firstSection.title}
+                    </a>
+                  ) : null;
+                })}
+              </nav>
+              <div class="source-action-stack">
+                {actionRoleDocuments.map((document) => {
+                  const firstSection = document.sections[0];
+
+                  return (
+                    <section class="source-action-card" id={firstSection?.id}>
+                      <h2 class="source-document-title">{document.title}</h2>
+                      <div class="source-role-sections">
+                        {document.sections.map((section) => (
+                          <section>
+                            <h3>{section.title}</h3>
+                            <div
+                              class="prose-source prose-article"
+                              set:html={section.html}
+                            />
+                          </section>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
+              </div>
+            </div>
+            {sourceVisuals.length ? (
+              <section
+                class="source-context-visuals"
+                aria-label={`${content.label} context`}
+              >
+                {sourceVisuals.map((visual) => (
+                  <div
+                    class:list={[
+                      "source-context-card",
+                      `source-context-${visual.tone}`,
+                    ]}
+                  >
+                    <p>{visual.label}</p>
+                    <strong>{visual.value}</strong>
+                    <h3>{visual.title}</h3>
+                    <span>{visual.body}</span>
+                  </div>
+                ))}
+              </section>
+            ) : null}
+          </article>
+        ) : content.id === "characteristics" &&
+          characteristicsSections.length ? (
+          <article class="article-source source-characteristics-body min-w-0">
+            <div class="source-characteristics-grid">
+              {characteristicsSections.map((section, index) => (
+                <section
+                  class:list={[
+                    "source-characteristics-row",
+                    `source-characteristics-${section.tone}`,
+                  ]}
+                >
+                  <div class="source-characteristics-main">
+                    <div class="source-section-meta">
+                      <span>{section.label}</span>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                    </div>
+                    <h2>{section.title}</h2>
+                    <div
+                      class="prose-source prose-article"
+                      set:html={section.bodyHtml}
+                    />
+                  </div>
+                  <aside
+                    class="source-characteristics-evidence"
+                    set:html={section.evidenceHtml}
+                  />
+                </section>
+              ))}
+            </div>
+          </article>
+        ) : (
+          <article class="article-source min-w-0">
+            {sourceVisuals.length &&
+            ["impact", "core", "history"].includes(content.id) ? (
+              <section
+                class="source-context-visuals source-context-priority"
+                aria-label={`${content.label} context`}
+              >
+                {sourceVisuals.map((visual) => (
+                  <div
+                    class:list={[
+                      "source-context-card",
+                      `source-context-${visual.tone}`,
+                    ]}
+                  >
+                    <p>{visual.label}</p>
+                    <strong>{visual.value}</strong>
+                    <h3>{visual.title}</h3>
+                    <span>{visual.body}</span>
+                  </div>
+                ))}
+              </section>
+            ) : null}
+            <div class="source-section-stack">
+              {contentSections.map((section, index) => (
+                <section
+                  class:list={[
+                    "source-section",
+                    index === 0 ? "source-section-featured" : "",
+                  ]}
+                  id={section.id}
+                >
+                  {content.id !== "characteristics" ? (
+                    <>
+                      <div class="source-section-meta">
+                        <span>{content.label}</span>
+                        {content.documents.length > 1 ? (
+                          <span>{section.documentTitle}</span>
+                        ) : null}
+                      </div>
+                      <h2 class="source-section-title">
+                        {content.id === "history" ? (
+                          <span class="source-timeline-title">
+                            <span class="source-timeline-date">
+                              {historyTimelineDates[section.title] ??
+                                "Historical context"}
+                            </span>
+                            <span>{section.title}</span>
+                          </span>
+                        ) : (
+                          `${index + 1}. ${section.title}`
+                        )}
+                      </h2>
+                    </>
+                  ) : null}
+                  <div
+                    class="prose-source prose-article mt-5"
+                    set:html={section.html}
+                  />
+                </section>
+              ))}
+            </div>
+            {sourceVisuals.length ? (
+              <section
+                class:list={[
+                  "source-context-visuals",
+                  ["impact", "core", "history"].includes(content.id)
+                    ? "source-context-secondary"
+                    : "",
+                ]}
+                aria-label={`${content.label} context`}
+              >
+                {sourceVisuals.map((visual) => (
+                  <div
+                    class:list={[
+                      "source-context-card",
+                      `source-context-${visual.tone}`,
+                    ]}
+                  >
+                    <p>{visual.label}</p>
+                    <strong>{visual.value}</strong>
+                    <h3>{visual.title}</h3>
+                    <span>{visual.body}</span>
+                  </div>
+                ))}
+              </section>
+            ) : null}
+          </article>
+        )
+      }
+
+      {
+        hasUsefulAside ? (
+          <aside class="source-aside space-y-4 lg:sticky lg:top-24 lg:self-start">
+            {isResources ? (
+              <nav class="source-rail" aria-label="Resource index">
+                <h2>Resource index</h2>
+                <div class="mt-3 grid gap-1">
+                  {groupedResources.map(([group]) => (
+                    <a
+                      href={`#${group.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}
+                    >
+                      <span>•</span>
+                      {group}
+                    </a>
+                  ))}
+                  {mediaItems.length ? (
+                    <a href="#media">
+                      <span>•</span>
+                      Media
+                    </a>
+                  ) : null}
+                </div>
+              </nav>
+            ) : hasSectionNav ? (
+              <nav class="source-rail" aria-label="Page sections">
+                <h2>On this page</h2>
+                <div class="mt-3 grid gap-1">
+                  {contentSections.slice(0, 12).map((section, index) => (
+                    <a href={`#${section.id}`}>
+                      <span>{index + 1}.</span>
+                      {section.title}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+            ) : (
+              <div class="source-rail">
+                <h2>{content.label}</h2>
+                <p>{content.summary}</p>
+                <dl class="source-rail-stats">
+                  <div>
+                    <dt>Sections</dt>
+                    <dd>{sectionCount}</dd>
+                  </div>
+                  <div>
+                    <dt>Documents</dt>
+                    <dd>{content.documents.length}</dd>
+                  </div>
+                </dl>
+              </div>
+            )}
+            {isResources ? (
+              <section class="source-rail">
+                <h2>Types</h2>
+                <div class="source-type-list">
+                  {["article", "video", "audio", "paper", "thread", "site"].map(
+                    (type) => (
+                      <span class:list={["source-type", `source-type-${type}`]}>
+                        {type}
+                      </span>
+                    ),
+                  )}
+                </div>
+                <p>
+                  External links open in place. Use your judgment and verify
+                  critical information.
+                </p>
+              </section>
+            ) : null}
+          </aside>
+        ) : null
+      }
+    </div>
+  </section>
+</main>

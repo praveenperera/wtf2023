@@ -1,0 +1,65 @@
+---
+import { navRoutes, primaryNavRoutes } from "@/lib/routes";
+import MobileNav from "@/components/react/MobileNav";
+import ThemeToggle from "@/components/react/ThemeToggle";
+
+const mobileRoutes = navRoutes.map(({ label, route, summary }) => ({
+  label,
+  route,
+  summary,
+}));
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl"
+>
+  <div
+    class="mx-auto flex max-w-[94rem] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8"
+  >
+    <a
+      class="flex min-w-0 flex-1 items-center gap-3 no-underline lg:flex-none"
+      href="/"
+    >
+      <span
+        class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-accent/45 bg-accent text-sm font-semibold text-background"
+      >
+        ₿
+      </span>
+      <span class="min-w-0">
+        <span
+          class="block truncate text-sm font-semibold leading-tight text-foreground"
+        >
+          WTF Happened in Feb 2023?
+        </span>
+        <span class="block truncate text-xs text-muted"
+          >Blockspace pressure observatory</span
+        >
+      </span>
+    </a>
+
+    <nav
+      class="hidden flex-1 items-center justify-center gap-1 lg:flex"
+      aria-label="Primary"
+    >
+      {
+        primaryNavRoutes.map((route) => (
+          <a
+            class:list={[
+              "site-nav-link rounded-md px-3 py-2 text-xs font-medium text-muted no-underline transition hover:bg-surface-2 hover:text-foreground",
+              currentPath === route.route ? "site-nav-link-active" : "",
+            ]}
+            href={route.route}
+          >
+            {route.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle client:load />
+      <MobileNav routes={mobileRoutes} client:load />
+    </div>
+  </div>
+</header>

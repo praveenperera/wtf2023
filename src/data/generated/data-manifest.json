@@ -1,0 +1,46 @@
+{
+  "source": "local refresh manifest",
+  "sourceUrl": "scripts/fetch-data.ts",
+  "fetchedAt": "2026-05-11T18:51:06.691Z",
+  "range": "mixed",
+  "columns": ["file", "status", "notes"],
+  "rows": [
+    {
+      "file": "mempool-fee-rates.json",
+      "status": "fresh",
+      "notes": [
+        "Values are fee-rate percentiles from mined blocks, not a transaction-by-category split"
+      ]
+    },
+    {
+      "file": "utxo-set.json",
+      "status": "fresh",
+      "notes": [
+        "Fetched from Statoshi Graphite render endpoint with insecure TLS because the certificate chain fails validation in this environment"
+      ]
+    },
+    {
+      "file": "impact-series.json",
+      "status": "fresh",
+      "notes": [
+        "DUNE_API_KEY is not set, so this snapshot classifies sampled Bitcoin blocks from Blockchain.com raw block transactions",
+        "Non-payment classification includes OP_RETURN outputs, bare multisig outputs, and ordinal inscription witness envelopes",
+        "Sample heights use weekly pre-wave baselines, denser 500-block samples during the February onset, and two post-onset checks",
+        "Shares are percentages of non-coinbase transaction weight and transaction fees in each sampled block"
+      ]
+    },
+    {
+      "file": "blockspace-pressure-map.json",
+      "status": "source-text-approximation",
+      "notes": [
+        "This is an explanatory map using approximate ranges, not a measured category split",
+        "Direct-to-miner submission is represented as a path rather than a percentage"
+      ]
+    }
+  ],
+  "notes": [
+    "Normal builds use committed JSON snapshots only",
+    "Dune snapshots use DUNE_API_KEY when available; otherwise sampled Blockchain.com block classification is used",
+    "Statoshi currently requires insecure TLS from this environment; committed snapshots are the build source"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "wtf-happened-in-feb-2023",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "prettier --write .",
+    "check": "astro check",
+    "lint": "astro check",
+    "data:fetch": "tsx scripts/fetch-data.ts",
+    "data:test": "tsx scripts/test-data.ts",
+    "qa:links": "tsx scripts/check-links.ts",
+    "qa:og": "tsx scripts/check-og-tags.ts",
+    "qa:screenshots": "tsx scripts/capture-screenshots.ts"
+  },
+  "dependencies": {
+    "@astrojs/react": "4.4.2",
+    "@base-ui/react": "1.4.1",
+    "@tailwindcss/vite": "4.1.17",
+    "astro": "5.18.1",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "1.14.0",
+    "marked": "18.0.3",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "recharts": "3.8.1",
+    "tailwind-merge": "3.6.0",
+    "tailwindcss": "4.1.17",
+    "vite": "6.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "@types/node": "25.6.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "playwright": "1.59.1",
+    "prettier": "3.8.3",
+    "prettier-plugin-astro": "0.14.1",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "source": "Dune BTC spam analysis link",
+  "sourceUrl": "https://dune.com/piratebiscuit/btc-spam-analysis",
+  "fetchedAt": "2026-05-11T18:51:06.691Z",
+  "range": "February 2023 wave onward",
+  "columns": ["label", "kind", "share", "note"],
+  "categories": [
+    {
+      "label": "Payments",
+      "kind": "payments",
+      "share": 50,
+      "note": "Payment transactions still compete for confirmation against non-payment data"
+    },
+    {
+      "label": "Inscriptions",
+      "kind": "inscriptions",
+      "share": 34,
+      "note": "Large witness data consumes blockspace and affects fee pressure"
+    },
+    {
+      "label": "Bare multisig",
+      "kind": "bareMultisig",
+      "share": 10,
+      "note": "UTXO-heavy data creates long-lived validation and storage costs"
+    },
+    {
+      "label": "OP_RETURN",
+      "kind": "opReturn",
+      "share": 3,
+      "note": "Small data-carrier outputs still compete for scarce blockspace"
+    },
+    {
+      "label": "Other",
+      "kind": "other",
+      "share": 3,
+      "note": "Remainder bucket for non-payment and unknown transaction categories"
+    },
+    {
+      "label": "Direct-to-miner submissions",
+      "kind": "other",
+      "note": "A bypass lane that can avoid ordinary peer relay policy"
+    }
+  ],
+  "notes": [
+    "This is an explanatory map using approximate ranges, not a measured category split",
+    "Direct-to-miner submission is represented as a path rather than a percentage"
+  ]
+}
