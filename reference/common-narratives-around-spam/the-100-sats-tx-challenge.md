@@ -2,11 +2,9 @@
 
 Source: https://wtfhappenedinfeb2023.com/common-narratives-around-spam/the-100-sats-tx-challenge
 
-Common narratives around spam
-
 ## The 100 sats TX challenge
 
-[Francis Pouliot](https://twitter.com/francispouliot) proposed a simple challenge to prove that **some things can be done and that one of those things is simply introducing filters**. In a tweet, he challenged someone claiming that*"spam filters don't work",*meaning that mempool policies don't work - see [Mempool policy is censorship](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/mempool-policy-is-censorship), **to send 100 sats to a specific address**.
+[Francis Pouliot](https://twitter.com/francispouliot) proposed a simple challenge to prove that **some things can be done and that one of those things is simply introducing filters**. In a tweet, he challenged someone claiming that *"spam filters don't work",* meaning that mempool policies don't work - see [Mempool policy is censorship](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/mempool-policy-is-censorship), **to send 100 sats to a specific address**.
 
 *Please send 100 sats to this address*
 
@@ -21,8 +19,3 @@ One of the participants to the conversation who accepted to take on the challeng
 The transaction will eventually make it through, but it required colluding with a miner that's willing to take it Out of Band, outside of the mempool, and that strongly limited the reach of the transaction since only a single pool is working on it which relegates it to the next block found by that pool. Currently, spam is mined by all miners which makes it present in blocks.
 
 Miners can try to put whatever they want in blocks, the only workaround nodes have against that is to reject a valid block (meaning that it has a valid Proof-of-Work that answers the Difficulty condition) that contains some transactions or data proposed by a miner.
-
-## Media
-
-- [Image](https://res2.weblium.site/res/6627b42175a2700010093916/6649ed6d24f30d07ba18b0d9_optimized_602_e720x221-59x18)
-- [Image](https://res2.weblium.site/res/6627b42175a2700010093916/6649ee58a3998e710e3fec64_optimized)

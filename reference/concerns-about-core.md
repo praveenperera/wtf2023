@@ -1,4 +1,4 @@
-# WTF Happened in Feb 2023 | Concerns about Core (*)
+# Concerns about Core
 
 Source: https://wtfhappenedinfeb2023.com/concerns-about-core
 
@@ -16,23 +16,21 @@ Proof is in GitHub repository.
 
 - [AJ Towns censoring on delving Bitcoin to cover Bitcoin backdoors?](https://x.com/MartyBent/status/1762564282514899372)
 
-● [“Dear Bitcoin community, there is something very fishy happening in the Bitcoin Core development process right now…”](https://x.com/__overflow_/status/1762551300829393321)
+- [“Dear Bitcoin community, there is something very fishy happening in the Bitcoin Core development process right now…”](https://x.com/__overflow_/status/1762551300829393321)
 
-[● I already had no doubt about Core's malice, but here is another confirmation.](https://x.com/leo_haf/status/1762535069778837834)
+- [I already had no doubt about Core's malice, but here is another confirmation.](https://x.com/leo_haf/status/1762535069778837834)
 
 As a reminder:
 
--They have stopped protecting Bitcoin from spam
+- They have stopped protecting Bitcoin from spam
 
--They keep secret groups
+- They keep secret groups
 
--They ignore the comments of the contributors
+- They ignore the comments of the contributors
 
--They are having fun with the situation
+- They are having fun with the situation
 
-● [Economic illiteracy amongst devs](https://x.com/achow101/status/1762897085479690378)
-
-CC
+- [Economic illiteracy amongst devs](https://x.com/achow101/status/1762897085479690378)
 
 ## Media
 
@@ -41,7 +39,6 @@ CC
 - [Video](https://youtu.be/iK5eny26vVk?si=1QcPZ3GG34uwZxis)
 - [Video](https://youtu.be/zXccoOlmtMY?si=Kvhe9S6RxDnmcyL4)
 - [Video](https://youtu.be/ZwSN5lKeNEY?si=gmScDF6-0zco5ktR)
-- [Video](https://youtu.be/P8RB7V-o33w?si=pqvfa1Vxd1IoUtxT)
 - [Video](https://youtu.be/HzTNk_0MC24?si=NgGgZ2bEgd4Tu27q)
 - [Video](https://youtu.be/wdGQ2T7J7XI?si=n85juuahEVj8rGQx)
 - [Video](https://youtu.be/aH5gVEpVZAg?si=PrlCEfWZ2FCm6rA3)
