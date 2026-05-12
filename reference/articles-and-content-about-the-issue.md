@@ -38,7 +38,7 @@ Other references
 
 - [Bitcoin Improvement Proposal 110 (BIP-110 a.k.a. BIP-444): Reduced Data Temporary Softfork](https://bip110.org/) (Dathon Ohm)
 
-- [https://thebitcoinportal.com/onchain/spam-analysis/overview](https://thebitcoinportal.com/onchain/spam-analysis/overview)
+- [Bitcoin Spam Analysis Overview](https://thebitcoinportal.com/onchain/spam-analysis/overview)
 
 Acknowledgements and contact info
 
