@@ -22,7 +22,8 @@ const routes = [
 
 await mkdir(outDir, { recursive: true });
 
-const browser = await chromium.launch();
+const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
+const browser = await chromium.launch(executablePath ? { executablePath } : {});
 const errors: string[] = [];
 
 for (const viewport of viewports) {
@@ -32,12 +33,21 @@ for (const viewport of viewports) {
   });
   const page = await context.newPage();
   page.on("console", (message) => {
-    if (message.type() === "error")
+    if (
+      message.type() === "error" &&
+      !message.text().includes("Failed to load resource")
+    ) {
       errors.push(`${viewport.name}: ${message.text()}`);
+    }
   });
   page.on("pageerror", (error) =>
     errors.push(`${viewport.name}: ${error.message}`),
   );
+  page.on("response", (response) => {
+    if (response.status() >= 400 && !response.url().endsWith("/favicon.ico")) {
+      errors.push(`${viewport.name}: ${response.status()} ${response.url()}`);
+    }
+  });
 
   await page.goto(baseUrl, { waitUntil: "networkidle" });
   await assertHomepage(page);
@@ -95,12 +105,12 @@ console.log(`saved screenshots to ${outDir}`);
 async function assertHomepage(page: Page) {
   for (const text of [
     "WTF Happened in Feb 2023?",
-    "Bitcoin spam became a resource-pressure problem",
+    "Bitcoin is money, not a message board",
     "Non-payment data crowded blockspace",
     "Fee-rate pressure",
     "Blockspace pressure map",
-    "Observed blockspace split",
-    "Snapshot:",
+    "Snapshot now",
+    "Feb 2023 was the ignition",
   ]) {
     await page
       .getByText(text, { exact: false })

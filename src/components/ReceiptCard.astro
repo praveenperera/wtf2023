@@ -1,0 +1,45 @@
+---
+import { ArrowUpRight } from "lucide-react";
+import type { NarrativeReceipt } from "@/data/narrative-receipts";
+
+type Props = {
+  receipt: NarrativeReceipt;
+};
+
+const { receipt } = Astro.props;
+---
+
+<article class="receipt-card">
+  <div class="receipt-card-top">
+    <p>Claim</p>
+    <h2>{receipt.claim}</h2>
+  </div>
+  <p class="receipt-rebuttal">{receipt.rebuttal}</p>
+  <div class="receipt-source">
+    <p>Receipt</p>
+    <strong>{receipt.receipt.evidenceSummary}</strong>
+    <dl>
+      <div>
+        <dt>Source</dt>
+        <dd>
+          <a href={receipt.receipt.sourceUrl} rel="noreferrer" target="_blank">
+            {receipt.receipt.sourceTitle}
+          </a>
+        </dd>
+      </div>
+      <div>
+        <dt>Publication date</dt>
+        <dd>{receipt.receipt.publicationDate}</dd>
+      </div>
+      <div>
+        <dt>Measured</dt>
+        <dd>{receipt.receipt.measuredRange}</dd>
+      </div>
+    </dl>
+    <p>{receipt.receipt.caveat}</p>
+  </div>
+  <a class="receipt-card-link" href={receipt.href}>
+    Open rebuttal
+    <ArrowUpRight aria-hidden="true" size={15} strokeWidth={2.2} />
+  </a>
+</article>

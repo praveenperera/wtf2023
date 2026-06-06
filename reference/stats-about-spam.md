@@ -4,6 +4,13 @@ Source: https://wtfhappenedinfeb2023.com/stats-about-spam
 
 ## The impact of spam
 
+The current verified snapshot separates two kinds of evidence:
+
+- The February 2023 sampled series shows the onset: non-payment data moved from negligible levels into a material share of blockspace within days.
+- Later external reports show the continuing damage: non-financial blockspace share, chain data growth, low-value UTXOs, Taproot UTXO composition, and inscription-related UTXO attribution.
+
+For this page, "dust-like" means under 1000 sats, matching the Mempool Research UTXO Set Report. "Non-financial" and "inscription-related" are source-defined classifications. Aggregate UTXO database growth is not attribution by itself; attribution comes from source analysis that identifies inscription-related UTXOs.
+
 Mempool.space's transactions by fee rate since 2020
 
 *A clear increase in transactions entering mempool.space can be seen starting February 2023. Until today, such increases are usually only experienced by the network during the so-called "bull runs", making this one a noticeable anomaly.*

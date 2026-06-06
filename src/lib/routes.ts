@@ -81,6 +81,8 @@ export const siteRoutes: SiteRoute[] = [
       "reference/common-narratives-around-spam/satoshi-inscribed-on-chain.md",
       "reference/common-narratives-around-spam/bitcoin-can-thrive-even-if-miners-are-high-time-preference-greedy-actors.md",
       "reference/common-narratives-around-spam/high-fees-will-solve-spam.md",
+      "reference/common-narratives-around-spam/it-is-just-art.md",
+      "reference/common-narratives-around-spam/op-return-harm-reduction-solved-it.md",
       "reference/common-narratives-around-spam/making-transactions-more-efficient-on-l1-will-solve-spam.md",
       "reference/common-narratives-around-spam/the-100-sats-tx-challenge.md",
       "reference/common-narratives-around-spam/there-s-nothing-you-can-do-about-it.md",
@@ -119,21 +121,21 @@ export const siteRoutes: SiteRoute[] = [
   },
   {
     id: "core",
-    label: "Core devs",
-    title: "Core devs | WTF Happened in Feb 2023?",
+    label: "Core concerns",
+    title: "Core concerns | WTF Happened in Feb 2023?",
     route: "/core-devs/",
     sourcePaths: [
       "reference/pr-29187-trying-to-fix-datacarriersize.md",
       "reference/fixing-a-bug-through-documentation-change.md",
       "reference/concerns-about-core.md",
     ],
-    summary: "PR 29187 and the documentation-change dispute",
+    summary: "Source-backed issue map for defaults, process, and policy",
     metaDescription:
       "Follow the PR 29187 dispute over data-carrier limits, relay defaults, documentation changes, and who bears the cost of arbitrary data.",
     ogImage: "/og/core-devs.png",
     ogImageAlt: "Core dev dispute over data-carrier limits and relay policy",
     takeaway:
-      "The response centered on whether existing policy limits should apply to newer data paths",
+      "The defensible concern is about defaults, review power, moderation, funding, and whose costs are considered",
     order: 5,
   },
   {

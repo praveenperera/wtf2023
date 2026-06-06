@@ -1,0 +1,222 @@
+---
+import { ArrowUpRight, Database, Gauge, HardDrive, Layers } from "lucide-react";
+import snapshot from "@/data/generated/current-damage-snapshot.json";
+
+type SnapshotRow = (typeof snapshot.rows)[number];
+
+type Props = {
+  variant?: "home" | "impact";
+};
+
+const { variant = "home" } = Astro.props;
+const rows = snapshot.rows.filter((row) => variant === "impact" || row.home);
+
+const requiredFields = [
+  "id",
+  "label",
+  "value",
+  "detail",
+  "source",
+  "sourceUrl",
+  "methodology",
+  "classificationDefinition",
+  "caveat",
+  "status",
+] as const;
+
+for (const row of rows) {
+  const missing = requiredFields.filter((field) => !row[field]);
+  if (missing.length > 0) {
+    throw new Error(
+      `current damage snapshot row ${row.id} is missing ${missing.join(", ")}`,
+    );
+  }
+}
+
+const iconById: Record<string, typeof Gauge> = {
+  "recent-non-monetary-blockspace": Gauge,
+  "permanent-chain-data": HardDrive,
+  "utxo-set-growth": Database,
+  "dust-like-utxos": Layers,
+  "taproot-dust-utxos": Layers,
+  "inscription-related-utxos": Database,
+};
+
+function measuredLabel(row: SnapshotRow) {
+  if (row.blockHeight && row.measuredAt) {
+    return `Block ${row.blockHeight}, ${row.measuredAt}`;
+  }
+
+  if (row.rangeStart && row.rangeEnd) {
+    return `${row.rangeStart} to ${row.rangeEnd}`;
+  }
+
+  if (row.rangeEnd) {
+    return `Last 90 days ending ${row.rangeEnd}`;
+  }
+
+  return row.measuredAt ?? "Mixed";
+}
+
+function sourceDateLabel(row: SnapshotRow) {
+  return row.publicationDate
+    ? `Published ${row.publicationDate}`
+    : `Fetched ${snapshot.fetchedAt.slice(0, 10)}`;
+}
+---
+
+<section
+  class:list={[
+    "current-snapshot",
+    variant === "impact" ? "current-snapshot-impact" : "",
+  ]}
+  aria-labelledby={`${variant}-current-snapshot-title`}
+>
+  <div class="mx-auto max-w-[94rem] px-4 sm:px-6 lg:px-8">
+    <div class="current-snapshot-header">
+      <div>
+        <p class="section-label">Snapshot now</p>
+        <h2 id={`${variant}-current-snapshot-title`}>
+          Feb 2023 was the ignition. The damage is still visible.
+        </h2>
+      </div>
+      <div>
+        <p>
+          The event window stays Feb 2023. Current data shows why it still
+          matters: arbitrary data continues to compete with payments, and node
+          operators carry the permanent cost.
+        </p>
+        <p class="current-snapshot-date">
+          Snapshot date: {snapshot.curatedAt.slice(0, 10)}
+        </p>
+      </div>
+    </div>
+
+    <div class="current-snapshot-grid">
+      {
+        rows.map((row) => {
+          const Icon = iconById[row.id] ?? Gauge;
+
+          return (
+            <article
+              class:list={[
+                "current-snapshot-card",
+                `current-snapshot-card-${row.tone}`,
+              ]}
+            >
+              <div class="current-snapshot-card-top">
+                <p>
+                  <Icon aria-hidden="true" size={17} strokeWidth={2.2} />
+                  {row.label}
+                </p>
+                <strong>{row.value}</strong>
+              </div>
+              <p class="current-snapshot-detail">{row.detail}</p>
+              <dl class="current-snapshot-meta">
+                <div>
+                  <dt>Measured</dt>
+                  <dd>{measuredLabel(row)}</dd>
+                </div>
+                <div>
+                  <dt>Source date</dt>
+                  <dd>{sourceDateLabel(row)}</dd>
+                </div>
+              </dl>
+              <div class="current-snapshot-claim-types">
+                <p>
+                  <span>Classification</span>
+                  {row.classificationDefinition}
+                </p>
+                {variant === "impact" ? (
+                  <p>
+                    <span>Methodology</span>
+                    {row.methodology}
+                  </p>
+                ) : null}
+              </div>
+              <p class="current-snapshot-caveat">{row.caveat}</p>
+              <a href={row.sourceUrl} rel="noreferrer" target="_blank">
+                {row.source}
+                <ArrowUpRight aria-hidden="true" size={14} strokeWidth={2.2} />
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    {
+      variant === "impact" ? (
+        <div class="current-snapshot-support">
+          <section>
+            <div class="current-snapshot-support-heading">
+              <h3>UTXO type mix</h3>
+              <p>
+                Snapshot block: {snapshot.utxoBreakdown.blockHeight},{" "}
+                {snapshot.utxoBreakdown.measuredAt}; report published:{" "}
+                {snapshot.utxoBreakdown.publicationDate}
+              </p>
+            </div>
+            <div class="current-snapshot-stat-strip">
+              {snapshot.utxoBreakdown.scriptTypes.map((item) => (
+                <article>
+                  <strong>{item.value}</strong>
+                  <p>{item.label}</p>
+                  <span>{item.detail}</span>
+                </article>
+              ))}
+            </div>
+          </section>
+          <section>
+            <div class="current-snapshot-support-heading">
+              <h3>Sub-1000 sat pressure</h3>
+              <p>{snapshot.utxoBreakdown.caveat}</p>
+            </div>
+            <div class="current-snapshot-stat-strip">
+              {snapshot.utxoBreakdown.dustStats.map((item) => (
+                <article>
+                  <strong>{item.value}</strong>
+                  <p>{item.label}</p>
+                  <span>{item.detail}</span>
+                </article>
+              ))}
+            </div>
+          </section>
+          <section class="current-snapshot-methodology-strip">
+            <h3>Source methodology</h3>
+            <p>
+              The February charts use committed sampled local series. The
+              snapshot cards use later external reports and the committed
+              Statoshi UTXO series. Aggregate UTXO database growth is an
+              aggregate trend; inscription-related UTXO share is attribution
+              evidence.
+            </p>
+            <p>
+              {snapshot.chainGrowth.label}: {snapshot.chainGrowth.value}.{" "}
+              {snapshot.chainGrowth.detail}. Source:{" "}
+              <a
+                href={snapshot.chainGrowth.sourceUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {snapshot.chainGrowth.source}
+              </a>
+              .
+            </p>
+          </section>
+        </div>
+      ) : null
+    }
+
+    <div class="current-snapshot-footer">
+      <p>
+        Non-action was not neutral. It moved the cost to payment users and node
+        runners.
+      </p>
+      <a href="/stats-about-spam/">
+        Open the current damage data
+        <ArrowUpRight aria-hidden="true" size={15} strokeWidth={2.2} />
+      </a>
+    </div>
+  </div>
+</section>

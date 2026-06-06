@@ -8,5 +8,7 @@ Source: https://wtfhappenedinfeb2023.com/common-narratives-around-spam
 - [A valid transaction is a valid transaction](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/a-valid-transaction-is-a-valid-transaction)
 - [The fees were going to be high anyways](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/the-fees-were-going-to-be-high-anyways)
 - [Satoshi inscribed on-chain so I should be able to do it too](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/satoshi-inscribed-on-chain)
+- [It is just art](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/it-is-just-art)
+- [OP_RETURN harm reduction solved it](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/op-return-harm-reduction-solved-it)
 - [Bitcoin can thrive even if miners are high-time preference greedy actors](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/bitcoin-can-thrive-even-if-miners-are-high-time-preference-greedy-actors)
 - [There's nothing you can do about it](https://wtfhappenedinfeb2023.com/common-narratives-around-spam/there-s-nothing-you-can-do-about-it)

@@ -1,0 +1,191 @@
+{
+  "source": "curated source-backed current damage snapshot",
+  "sourceUrl": "https://wtfhappenedinfeb2023.com/stats-about-spam/",
+  "fetchedAt": "2026-06-06T00:00:00.000Z",
+  "curatedAt": "2026-06-06T00:00:00.000Z",
+  "range": "mixed",
+  "columns": [
+    "id",
+    "label",
+    "value",
+    "detail",
+    "source",
+    "sourceUrl",
+    "publicationDate",
+    "measuredAt",
+    "rangeStart",
+    "rangeEnd",
+    "blockHeight",
+    "methodology",
+    "classificationDefinition",
+    "caveat",
+    "status"
+  ],
+  "rows": [
+    {
+      "id": "recent-non-monetary-blockspace",
+      "label": "Recent blockspace",
+      "value": "36%",
+      "detail": "non-financial blockspace over the last 90 days",
+      "source": "Bitcoin Block Space Weekly Issue #3",
+      "sourceUrl": "https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam",
+      "publicationDate": "2025-12-22",
+      "measuredAt": null,
+      "rangeStart": null,
+      "rangeEnd": "2025-12-22",
+      "blockHeight": null,
+      "methodology": "Source classification of financial and non-financial blockspace",
+      "classificationDefinition": "Non-financial per source methodology",
+      "caveat": "Use 40% only after a newer source verifies it",
+      "status": "verified",
+      "tone": "accent",
+      "home": true
+    },
+    {
+      "id": "permanent-chain-data",
+      "label": "Permanent chain data",
+      "value": "76 GB+",
+      "detail": "non-financial data added over 3.5 years",
+      "source": "Bitcoin Block Space Weekly Issue #3",
+      "sourceUrl": "https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam",
+      "publicationDate": "2025-12-22",
+      "measuredAt": null,
+      "rangeStart": "2022-07-01",
+      "rangeEnd": "2025-12-22",
+      "blockHeight": null,
+      "methodology": "Source blockchain analytics pipeline classifying financial, Ordinals, OP_RETURN, and other data",
+      "classificationDefinition": "Non-financial per source methodology",
+      "caveat": "Do not publish 90 GB until a newer source verifies it",
+      "status": "verified",
+      "tone": "risk",
+      "home": true
+    },
+    {
+      "id": "utxo-set-growth",
+      "label": "UTXO set growth",
+      "value": "4.7 GB -> 10.6 GB",
+      "detail": "Jan 2023 to May 2026 Statoshi snapshot",
+      "source": "Local committed Statoshi UTXO set snapshot",
+      "sourceUrl": "https://statoshi.info:3000/d/000000009/unspent-transaction-output-set",
+      "publicationDate": null,
+      "measuredAt": null,
+      "rangeStart": "2023-01-01",
+      "rangeEnd": "2026-05-04",
+      "blockHeight": null,
+      "methodology": "Committed Statoshi UTXO database size series",
+      "classificationDefinition": "Aggregate UTXO database size, not attribution by itself",
+      "caveat": "Attribute spam-related share using inscription-related UTXO data, not this trend alone",
+      "status": "verified",
+      "tone": "utxo",
+      "home": true
+    },
+    {
+      "id": "dust-like-utxos",
+      "label": "Dust-like UTXOs",
+      "value": "49.1%",
+      "detail": "of all UTXOs are under 1000 sats",
+      "source": "Mempool Research UTXO Set Report",
+      "sourceUrl": "https://research.mempool.space/utxo-set-report/",
+      "publicationDate": "2025-05-18",
+      "measuredAt": "2025-04-14",
+      "rangeStart": null,
+      "rangeEnd": null,
+      "blockHeight": 892385,
+      "methodology": "UTXO set dump grouped by output value",
+      "classificationDefinition": "Dust-like means under 1000 sats for this section",
+      "caveat": "The report notes the analysis will be updated for false identification of scripts under 37 bytes as P2MS outputs",
+      "status": "verified",
+      "tone": "payment",
+      "home": true
+    },
+    {
+      "id": "taproot-dust-utxos",
+      "label": "Taproot UTXOs",
+      "value": "86%",
+      "detail": "of Taproot UTXOs are under 1000 sats",
+      "source": "Mempool Research UTXO Set Report",
+      "sourceUrl": "https://research.mempool.space/utxo-set-report/",
+      "publicationDate": "2025-05-18",
+      "measuredAt": "2025-04-14",
+      "rangeStart": null,
+      "rangeEnd": null,
+      "blockHeight": 892385,
+      "methodology": "UTXO set dump filtered to p2tr outputs and grouped by output value",
+      "classificationDefinition": "p2tr is Pay to Taproot; dust-like means under 1000 sats",
+      "caveat": "Use 86% in detail if headline rounds to about 90%",
+      "status": "verified",
+      "tone": "purple",
+      "home": true
+    },
+    {
+      "id": "inscription-related-utxos",
+      "label": "Inscription-related UTXOs",
+      "value": "29.6%",
+      "detail": "of all UTXOs are inscription-related by source definition",
+      "source": "Mempool Research UTXO Set Report",
+      "sourceUrl": "https://research.mempool.space/utxo-set-report/",
+      "publicationDate": "2025-05-18",
+      "measuredAt": "2025-04-14",
+      "rangeStart": null,
+      "rangeEnd": null,
+      "blockHeight": 892385,
+      "methodology": "UTXOs created in transactions whose inputs contain witness OP_FALSE OP_IF",
+      "classificationDefinition": "Inscription-related UTXOs per Mempool Research methodology",
+      "caveat": "This is attribution evidence for UTXO-set impact; keep separate from aggregate UTXO database growth",
+      "status": "verified",
+      "tone": "accent",
+      "home": false
+    }
+  ],
+  "utxoBreakdown": {
+    "scriptTypes": [
+      {
+        "label": "p2tr",
+        "value": "34.2%",
+        "detail": "largest UTXO type by count"
+      },
+      { "label": "p2pkh", "value": "28.8%", "detail": "legacy address type" },
+      { "label": "p2wpkh", "value": "26.5%", "detail": "SegWit address type" },
+      { "label": "p2sh", "value": "7.9%", "detail": "script hash outputs" }
+    ],
+    "dustStats": [
+      {
+        "label": "Under 1000 sats",
+        "value": "49.1%",
+        "detail": "of all UTXOs"
+      },
+      {
+        "label": "Sub-1000 p2tr share",
+        "value": "61.4%",
+        "detail": "of under-1000 sat UTXOs are p2tr"
+      },
+      {
+        "label": "Taproot under 1000 sats",
+        "value": "86%",
+        "detail": "of p2tr UTXOs"
+      }
+    ],
+    "source": "Mempool Research UTXO Set Report",
+    "sourceUrl": "https://research.mempool.space/utxo-set-report/",
+    "publicationDate": "2025-05-18",
+    "measuredAt": "2025-04-14",
+    "blockHeight": 892385,
+    "caveat": "Dust-like means under 1000 sats in this site section"
+  },
+  "chainGrowth": {
+    "label": "Chain growth acceleration",
+    "value": "1.11 MB -> 1.69 MB",
+    "detail": "average block size before block 770,000 versus after block 770,000",
+    "source": "Mempool Research Block Size Report",
+    "sourceUrl": "https://research.mempool.space/block-size-report/",
+    "publicationDate": "2025-02-04",
+    "methodology": "Pre-770,000 SegWit-to-770,000 average versus post-770,000-to-present average",
+    "caveat": "The report attributes the shift to sustained backlog plus inscriptions"
+  },
+  "notes": [
+    "Use 40% and 90 GB only after a newer source verifies them",
+    "Different sources classify non-financial activity differently",
+    "Local generated data is a committed snapshot and may lag live sources",
+    "Aggregate UTXO growth is not the same claim as inscription-related UTXO attribution"
+  ]
+}
