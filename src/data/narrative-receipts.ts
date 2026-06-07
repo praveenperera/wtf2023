@@ -21,13 +21,13 @@ export const narrativeReceipts = [
       "Filters, miner policy, software defaults, and user migration all change incentives. Non-action is a choice.",
     href: "#there-s-nothing-you-can-do-about-it",
     receipt: {
-      sourceTitle: "Bitcoin Block Space Weekly Issue #3",
+      sourceTitle: "Bitcoin Block Space Weekly Issue #26",
       sourceUrl:
-        "https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam",
-      publicationDate: "2025-12-22",
-      measuredRange: "last 90 days ending 2025-12-22",
+        "https://blockspaceweekly.substack.com/p/issue-26-block-space-health-structurally",
+      publicationDate: "2026-05-26",
+      measuredRange: "last 90 days ending 2026-05-26",
       evidenceSummary:
-        "Renaud Cuny reported 36% non-financial blockspace over the last 90 days and noted filters can change mining behavior.",
+        "Renaud Cuny reported 46% non-financial blockspace over the last 90 days, up from 37% six months earlier.",
       caveat:
         "Classification is source-defined and should not be mixed with other spam definitions without saying so.",
     },
@@ -43,9 +43,9 @@ export const narrativeReceipts = [
       sourceUrl:
         "https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam",
       publicationDate: "2025-12-22",
-      measuredRange: "3.5 years ending 2025-12-22",
+      measuredRange: "~4 years ending 2026-06-07",
       evidenceSummary:
-        "The report attributes 76 GB of added chain data to non-financial transactions while estimating about 1% miner revenue contribution.",
+        "The report attributes 76 GB+ of added chain data to non-financial transactions while estimating about 1% miner revenue contribution.",
       caveat:
         "Miner revenue and blockspace share come from the same source methodology, not independent audits.",
     },
@@ -95,9 +95,9 @@ export const narrativeReceipts = [
       sourceUrl:
         "https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam",
       publicationDate: "2025-12-22",
-      measuredRange: "3.5 years ending 2025-12-22",
+      measuredRange: "~4 years ending 2026-06-07",
       evidenceSummary:
-        "The report states that non-financial data added 76 GB to the blockchain over 3.5 years.",
+        "The report states that non-financial data added 76 GB+ to the blockchain over ~4 years.",
       caveat:
         "This receipt supports storage impact; scam-market claims need separate sources.",
     },
