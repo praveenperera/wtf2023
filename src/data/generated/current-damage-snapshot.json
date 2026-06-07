@@ -18,7 +18,6 @@
     "blockHeight",
     "methodology",
     "classificationDefinition",
-    "caveat",
     "status"
   ],
   "rows": [
@@ -36,7 +35,6 @@
       "blockHeight": null,
       "methodology": "Source classification of financial and non-financial blockspace",
       "classificationDefinition": "Non-financial per source methodology",
-      "caveat": "Rounded current claims should cite the live Bitcoin Portal or a newer dated source",
       "status": "verified",
       "tone": "accent",
       "home": true
@@ -55,7 +53,6 @@
       "blockHeight": null,
       "methodology": "Source blockchain analytics pipeline classifying financial, Ordinals, OP_RETURN, and other data",
       "classificationDefinition": "Non-financial per source methodology",
-      "caveat": "This is a lower-bound-style headline from the dated source, not a live chain-size measurement",
       "status": "verified",
       "tone": "risk",
       "home": true
@@ -74,7 +71,6 @@
       "blockHeight": null,
       "methodology": "Committed Statoshi UTXO database size series",
       "classificationDefinition": "Aggregate UTXO database size, not attribution by itself",
-      "caveat": "Attribute spam-related share using inscription-related UTXO data, not this trend alone",
       "status": "verified",
       "tone": "utxo",
       "home": true
@@ -93,7 +89,6 @@
       "blockHeight": 892385,
       "methodology": "UTXO set dump grouped by output value",
       "classificationDefinition": "Dust-like means under 1000 sats for this section",
-      "caveat": "The report notes the analysis will be updated for false identification of scripts under 37 bytes as P2MS outputs",
       "status": "verified",
       "tone": "payment",
       "home": true
@@ -112,7 +107,6 @@
       "blockHeight": 892385,
       "methodology": "UTXO set dump filtered to p2tr outputs and grouped by output value",
       "classificationDefinition": "p2tr is Pay to Taproot; dust-like means under 1000 sats",
-      "caveat": "This card keeps the report value exact instead of rounding it to about 90%",
       "status": "verified",
       "tone": "purple",
       "home": true
@@ -131,7 +125,6 @@
       "blockHeight": 892385,
       "methodology": "UTXOs created in transactions whose inputs contain witness OP_FALSE OP_IF",
       "classificationDefinition": "Inscription-related UTXOs per Mempool Research methodology",
-      "caveat": "This is attribution evidence for UTXO-set impact; keep separate from aggregate UTXO database growth",
       "status": "verified",
       "tone": "accent",
       "home": false
@@ -169,8 +162,7 @@
     "sourceUrl": "https://research.mempool.space/utxo-set-report/",
     "publicationDate": "2025-05-18",
     "measuredAt": "2025-04-14",
-    "blockHeight": 892385,
-    "caveat": "Dust-like means under 1000 sats in this site section"
+    "blockHeight": 892385
   },
   "chainGrowth": {
     "label": "Chain growth acceleration",
@@ -179,11 +171,10 @@
     "source": "Mempool Research Block Size Report",
     "sourceUrl": "https://research.mempool.space/block-size-report/",
     "publicationDate": "2025-02-04",
-    "methodology": "Pre-770,000 SegWit-to-770,000 average versus post-770,000-to-present average",
-    "caveat": "The report attributes the shift to sustained backlog plus inscriptions"
+    "methodology": "Pre-770,000 SegWit-to-770,000 average versus post-770,000-to-present average"
   },
   "notes": [
-    "Use 40% and 90 GB only after a newer source verifies them",
+    "Rounded live-current claims require a dated source",
     "Different sources classify non-financial activity differently",
     "Local generated data is a committed snapshot and may lag live sources",
     "Aggregate UTXO growth is not the same claim as inscription-related UTXO attribution"
