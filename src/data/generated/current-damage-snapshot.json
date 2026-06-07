@@ -36,7 +36,7 @@
       "blockHeight": null,
       "methodology": "Source classification of financial and non-financial blockspace",
       "classificationDefinition": "Non-financial per source methodology",
-      "caveat": "Use 40% only after a newer source verifies it",
+      "caveat": "Rounded current claims should cite the live Bitcoin Portal or a newer dated source",
       "status": "verified",
       "tone": "accent",
       "home": true
@@ -55,7 +55,7 @@
       "blockHeight": null,
       "methodology": "Source blockchain analytics pipeline classifying financial, Ordinals, OP_RETURN, and other data",
       "classificationDefinition": "Non-financial per source methodology",
-      "caveat": "Do not publish 90 GB until a newer source verifies it",
+      "caveat": "This is a lower-bound-style headline from the dated source, not a live chain-size measurement",
       "status": "verified",
       "tone": "risk",
       "home": true
@@ -112,7 +112,7 @@
       "blockHeight": 892385,
       "methodology": "UTXO set dump filtered to p2tr outputs and grouped by output value",
       "classificationDefinition": "p2tr is Pay to Taproot; dust-like means under 1000 sats",
-      "caveat": "Use 86% in detail if headline rounds to about 90%",
+      "caveat": "This card keeps the report value exact instead of rounding it to about 90%",
       "status": "verified",
       "tone": "purple",
       "home": true
