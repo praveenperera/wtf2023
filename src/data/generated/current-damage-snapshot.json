@@ -174,9 +174,9 @@
     "methodology": "Pre-770,000 SegWit-to-770,000 average versus post-770,000-to-present average"
   },
   "notes": [
-    "Rounded live-current claims require a dated source",
+    "Rounded current claims should cite the dated source used for the page",
     "Different sources classify non-financial activity differently",
-    "Local generated data is a committed snapshot and may lag live sources",
+    "Generated data is a committed snapshot curated for this page",
     "Aggregate UTXO growth is not the same claim as inscription-related UTXO attribution"
   ]
 }

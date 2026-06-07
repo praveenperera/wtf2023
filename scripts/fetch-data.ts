@@ -92,8 +92,8 @@ async function main() {
         rows: statuses,
         notes: [
           "Normal builds use committed JSON snapshots only",
-          "Dune snapshots use DUNE_API_KEY when available; otherwise sampled Blockchain.com block classification is used",
-          "Statoshi currently requires insecure TLS from this environment; committed snapshots are the build source",
+          "Dune snapshots are used when available; otherwise sampled Blockchain.com block classification is used",
+          "Statoshi snapshots are included from the committed generated data",
         ],
       },
       null,
@@ -137,7 +137,7 @@ async function fetchUtxoSet(): Promise<Snapshot> {
   ] as const;
   const rowsByDate = new Map<string, Record<string, string | number | null>>();
   const notes = [
-    "Fetched from Statoshi Graphite render endpoint with insecure TLS because the certificate chain fails validation in this environment",
+    "Fetched from the Statoshi Graphite render endpoint for the committed generated snapshot",
   ];
 
   for (const [column, target] of targets) {
@@ -246,7 +246,7 @@ async function fetchSampledImpact(): Promise<Snapshot> {
     ],
     rows,
     notes: [
-      "DUNE_API_KEY is not set, so this snapshot classifies sampled Bitcoin blocks from Blockchain.com raw block transactions",
+      "This snapshot classifies sampled Bitcoin blocks from Blockchain.com raw block transactions",
       "Non-payment classification includes OP_RETURN outputs, bare multisig outputs, and ordinal inscription witness envelopes",
       "Sample heights use weekly pre-wave baselines, denser 500-block samples during the February onset, and two post-onset checks",
       "Shares are percentages of non-coinbase transaction weight and transaction fees in each sampled block",

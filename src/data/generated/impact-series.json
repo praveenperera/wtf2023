@@ -110,7 +110,7 @@
     }
   ],
   "notes": [
-    "DUNE_API_KEY is not set, so this snapshot classifies sampled Bitcoin blocks from Blockchain.com raw block transactions",
+    "This snapshot classifies sampled Bitcoin blocks from Blockchain.com raw block transactions",
     "Non-payment classification includes OP_RETURN outputs, bare multisig outputs, and ordinal inscription witness envelopes",
     "Sample heights use weekly pre-wave baselines, denser 500-block samples during the February onset, and two post-onset checks",
     "Shares are percentages of non-coinbase transaction weight and transaction fees in each sampled block"

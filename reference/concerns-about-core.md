@@ -64,9 +64,7 @@ What happened: this site has not yet reduced those allegations to a complete pri
 
 Why it matters: moderation can be legitimate, but process legitimacy matters when policy defaults decide who bears network costs.
 
-Primary sources:
-
-- Open question pending primary records.
+Primary source status: no complete primary-source timeline has been added for this concern yet.
 
 Open question: which specific GitHub, mailing-list, IRC, Delving Bitcoin, or moderation records support each allegation?
 
@@ -78,9 +76,7 @@ What happened: external investigations have raised concerns about contributor pi
 
 Why it matters: funding context can help readers understand why default-policy choices are contested, but it should not be used as a substitute for evidence about a specific code or moderation decision.
 
-Primary sources:
-
-- Open question pending funding and governance records.
+Primary source status: no complete funding and governance record map has been added for this concern yet.
 
 Open question: which concrete funding, employment, grant, maintainer, or review records connect to the spam-policy decisions discussed here?
 
