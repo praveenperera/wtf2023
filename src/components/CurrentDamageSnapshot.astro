@@ -20,7 +20,6 @@ const requiredFields = [
   "sourceUrl",
   "methodology",
   "classificationDefinition",
-  "caveat",
   "status",
 ] as const;
 
@@ -134,7 +133,6 @@ function sourceDateLabel(row: SnapshotRow) {
                   </p>
                 ) : null}
               </div>
-              <p class="current-snapshot-caveat">{row.caveat}</p>
               <a href={row.sourceUrl} rel="noreferrer" target="_blank">
                 {row.source}
                 <ArrowUpRight aria-hidden="true" size={14} strokeWidth={2.2} />
@@ -170,7 +168,10 @@ function sourceDateLabel(row: SnapshotRow) {
           <section>
             <div class="current-snapshot-support-heading">
               <h3>Sub-1000 sat pressure</h3>
-              <p>{snapshot.utxoBreakdown.caveat}</p>
+              <p>
+                Mempool Research groups these outputs by script type and value
+                at the measured block.
+              </p>
             </div>
             <div class="current-snapshot-stat-strip">
               {snapshot.utxoBreakdown.dustStats.map((item) => (

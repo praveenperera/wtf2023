@@ -753,8 +753,7 @@ a:hover {
   gap: 0.45rem;
 }
 
-.current-snapshot-claim-types p,
-.current-snapshot-caveat {
+.current-snapshot-claim-types p {
   margin: 0;
   color: var(--muted);
   font-size: 0.78rem;
@@ -769,12 +768,6 @@ a:hover {
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.current-snapshot-caveat {
-  border-left: 2px solid
-    color-mix(in srgb, var(--snapshot-color) 62%, var(--border));
-  padding-left: 0.7rem;
 }
 
 .current-snapshot-card > a,
