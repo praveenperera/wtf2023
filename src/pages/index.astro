@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlockspacePressureMap from "@/components/react/BlockspacePressureMap";
 import ChartPanel from "@/components/react/ChartPanel";
+import CurrentDamageSnapshot from "@/components/CurrentDamageSnapshot.astro";
 import GaugeMeter from "@/components/react/GaugeMeter";
 import NarrativeIndex from "@/components/react/NarrativeIndex";
 import RoleActions from "@/components/react/RoleActions";
@@ -281,7 +282,7 @@ if (!homeRoute) {
             </p>
             <p class="operations-copy">
               This site is a forensic analysis of that event, its impact, and
-              what we can do to keep Bitcoin for payments.
+              what users can still do to keep Bitcoin for payments.
             </p>
             <p class="operations-event-label">
               <span aria-hidden="true">▣</span>
@@ -371,6 +372,8 @@ if (!homeRoute) {
         </div>
       </div>
     </section>
+
+    <CurrentDamageSnapshot variant="home" />
 
     <BlockspacePressureMap client:load data={pressureMap} />
 

@@ -1,5 +1,8 @@
 ---
 import { extractResourceItems, type RouteContent } from "@/lib/content";
+import CurrentDamageSnapshot from "@/components/CurrentDamageSnapshot.astro";
+import ReceiptCard from "@/components/ReceiptCard.astro";
+import { narrativeReceipts } from "@/data/narrative-receipts";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -215,6 +218,45 @@ const nodeRunnerDocument = actionRoleDocuments.find((document) =>
 const nodeRunnerSection = nodeRunnerDocument?.sections[0];
 const actionRoleDocumentsAfterNodeRunner = actionRoleDocuments.filter(
   (document) => document !== nodeRunnerDocument,
+);
+const actionLevers = [
+  {
+    role: "Node runner",
+    action: "Run filtering policy",
+    detail: "Use Knots, BIP-110 where desired, and explicit relay settings",
+  },
+  {
+    role: "Miner",
+    action: "Choose templates",
+    detail: "Point hash rate at pools or DATUM setups matching your policy",
+  },
+  {
+    role: "Developer",
+    action: "Review defaults",
+    detail: "Work where policy, docs, and implementation choices are made",
+  },
+  {
+    role: "Pleb",
+    action: "Share receipts",
+    detail: "Ask concrete policy questions and link source-backed rebuttals",
+  },
+] as const;
+const receiptClipSlots: Array<{
+  title?: string;
+  speaker?: string;
+  exactQuote?: string;
+  timestamp?: string;
+  sourceUrl?: string;
+  whyItMatters?: string;
+}> = [];
+const completeReceiptClips = receiptClipSlots.filter(
+  (slot) =>
+    slot.title &&
+    slot.speaker &&
+    slot.exactQuote &&
+    slot.timestamp &&
+    slot.sourceUrl &&
+    slot.whyItMatters,
 );
 const nodeRunnerTutorials = [
   {
@@ -560,24 +602,18 @@ function buildCharacteristicsSections(html: string) {
           </article>
         ) : content.id === "narratives" ? (
           <article class="article-source min-w-0">
-            <div class="source-narrative-grid">
-              {sectionDocuments.map((document, documentIndex) => {
-                const firstSection = document.sections[0];
-                const panelClasses = [
-                  "source-document-panel",
-                  documentIndex === 0 ? "source-document-featured" : "",
-                ];
-
-                return firstSection ? (
-                  <a class:list={panelClasses} href={`#${firstSection.id}`}>
-                    <h2 class="source-document-title">{document.title}</h2>
-                  </a>
-                ) : (
-                  <section class:list={panelClasses}>
-                    <h2 class="source-document-title">{document.title}</h2>
-                  </section>
-                );
-              })}
+            <div class="source-narrative-intro">
+              <p class="section-label">Rebuttal index</p>
+              <h2>Claims, receipts, and short answers</h2>
+              <p>
+                Use these cards during arguments: each one separates the claim,
+                a short rebuttal, and the dated source behind it.
+              </p>
+            </div>
+            <div class="receipt-grid">
+              {narrativeReceipts.map((receipt) => (
+                <ReceiptCard receipt={receipt} />
+              ))}
             </div>
             <div class="source-section-stack source-detail-stack">
               {contentSections.map((section, index) => (
@@ -624,9 +660,22 @@ function buildCharacteristicsSections(html: string) {
                 <section class="source-action-overview">
                   <p class="source-action-eyebrow">Action playbook</p>
                   <h2 class="source-document-title">
-                    {actionOverviewDocument.title}
+                    They told you there was nothing to do. There are levers.
                   </h2>
-                  <p>{content.summary}</p>
+                  <p>
+                    Node policy, mining templates, software defaults, and public
+                    pressure all change incentives. The question is which lever
+                    you actually control.
+                  </p>
+                  <div class="source-lever-grid">
+                    {actionLevers.map((lever) => (
+                      <article>
+                        <span>{lever.role}</span>
+                        <strong>{lever.action}</strong>
+                        <p>{lever.detail}</p>
+                      </article>
+                    ))}
+                  </div>
                 </section>
               ) : null}
               <nav class="source-role-jump-list" aria-label="Action roles">
@@ -883,6 +932,20 @@ function buildCharacteristicsSections(html: string) {
                   );
                 })}
               </div>
+              {completeReceiptClips.length ? (
+                <section class="source-clip-receipts">
+                  <p class="source-action-eyebrow">Receipts to clip</p>
+                  {completeReceiptClips.map((clip) => (
+                    <article>
+                      <h3>{clip.title}</h3>
+                      <p>{clip.speaker}</p>
+                      <blockquote>{clip.exactQuote}</blockquote>
+                      <a href={clip.sourceUrl}>{clip.timestamp}</a>
+                      <p>{clip.whyItMatters}</p>
+                    </article>
+                  ))}
+                </section>
+              ) : null}
             </div>
             {sourceVisuals.length ? (
               <section
@@ -937,6 +1000,35 @@ function buildCharacteristicsSections(html: string) {
           </article>
         ) : (
           <article class="article-source min-w-0">
+            {content.id === "impact" ? (
+              <>
+                <CurrentDamageSnapshot variant="impact" />
+                <section class="impact-then-now">
+                  <article>
+                    <p class="section-label">Then: Feb 2023 onset</p>
+                    <h2>The sampled charts show the break from baseline.</h2>
+                    <p>
+                      The February sample shows non-payment data jumping from
+                      negligible levels into a material share of blockspace
+                      within days.
+                    </p>
+                  </article>
+                  <article>
+                    <p class="section-label">Now: permanent pressure</p>
+                    <h2>
+                      The current problem is not just fees. It is permanent
+                      state and storage.
+                    </h2>
+                    <p>
+                      Recent spam analysis shows non-financial data still taking
+                      a large share of blockspace. UTXO analysis shows millions
+                      of low-value outputs remain in the set every validating
+                      node must track.
+                    </p>
+                  </article>
+                </section>
+              </>
+            ) : null}
             {sourceVisuals.length &&
             ["impact", "core", "history"].includes(content.id) ? (
               <section

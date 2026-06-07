@@ -1,46 +1,94 @@
-# Concerns about Core
+# Bitcoin Core concerns
 
 Source: https://wtfhappenedinfeb2023.com/concerns-about-core
 
-Concerns about Bitcoin Core
+## What this page is and is not
 
-Placeholder points for "Concerns about Bitcoin Core"
+This page is not a claim that every contributor acts in bad faith. It is an evidence map of concerns around defaults, review power, moderation, funding, and whose costs are considered when policy changes are made.
 
-Bitcoin Core cabinet rejects major fixes, downplays important work, pushes changes against decentralisation, doesn't listen to participants, silences opponents, locks/shuts down discussions, changes direction of development, pushes false narratives biased towards miners at the expense of others, tamper with the mission of Bitcoin Core and Bitcoin.
+The standard for this page is simple: each issue should point to primary records when those records are available. External investigations and commentary can add context, but they should not replace GitHub, mailing-list, IRC, funding, or moderation records when those records can be checked directly.
 
-Proof is in GitHub repository.
+## Issue map
 
-- Nefarious funding by Shitcoin companies
+### Documentation narrowed `-datacarriersize`
 
-- Mining interests are what matter
+Concern: documentation changed after inscriptions exposed a gap between user expectations and policy behavior.
 
-- [AJ Towns censoring on delving Bitcoin to cover Bitcoin backdoors?](https://x.com/MartyBent/status/1762564282514899372)
+What happened: local source material documents a change from language about the maximum size of data in data-carrier transactions to language scoped to data-carrying raw scriptPubKeys.
 
-- [“Dear Bitcoin community, there is something very fishy happening in the Bitcoin Core development process right now…”](https://x.com/__overflow_/status/1762551300829393321)
+Why it matters: changing docs instead of behavior can redefine a policy limit after users notice the implementation did not cover newer data paths.
 
-- [I already had no doubt about Core's malice, but here is another confirmation.](https://x.com/leo_haf/status/1762535069778837834)
+Primary sources:
 
-As a reminder:
+- [Bitcoin Core PR 27832](https://github.com/bitcoin/bitcoin/pull/27832)
+- [Fixing a bug through documentation change](https://wtfhappenedinfeb2023.com/fixing-a-bug-through-documentation-change)
 
-- They have stopped protecting Bitcoin from spam
+Open question: was the change intended as a clarification, or as justification for leaving witness data paths outside the policy limit?
 
-- They keep secret groups
+### PR 29187 and witness data paths
 
-- They ignore the comments of the contributors
+Concern: PR 29187 asked whether `-datacarriersize` should apply to witness-script data paths that inscriptions used to bypass older data-carrier expectations.
 
-- They are having fun with the situation
+What happened: Luke Dashjr opened a Bitcoin Core issue arguing that witness scripts were being abused to bypass the data-carrier-size limit.
 
-- [Economic illiteracy amongst devs](https://x.com/achow101/status/1762897085479690378)
+Why it matters: the dispute exposed a policy boundary between consensus validity, relay defaults, mining templates, and what costs node runners are expected to absorb.
 
-## Media
+Primary sources:
 
-- [Video](https://youtu.be/9JKpA7gqbW0?si=em41HtcNYW-gSYe-)
-- [Video](https://youtu.be/w6G3DDyccdA?si=BT00aBPYo6KwHWTc)
-- [Video](https://youtu.be/iK5eny26vVk?si=1QcPZ3GG34uwZxis)
-- [Video](https://youtu.be/zXccoOlmtMY?si=Kvhe9S6RxDnmcyL4)
-- [Video](https://youtu.be/ZwSN5lKeNEY?si=gmScDF6-0zco5ktR)
-- [Video](https://youtu.be/HzTNk_0MC24?si=NgGgZ2bEgd4Tu27q)
-- [Video](https://youtu.be/wdGQ2T7J7XI?si=n85juuahEVj8rGQx)
-- [Video](https://youtu.be/aH5gVEpVZAg?si=PrlCEfWZ2FCm6rA3)
-- [Video](https://youtu.be/1hUEORYzgLQ?si=Q-H1cMn611xIVTvs)
-- [Video](https://youtu.be/bCJR7v73r3Q?si=mB9EcrmfaQKk4arI)
+- [Bitcoin Core issue 29187](https://github.com/bitcoin/bitcoin/issues/29187)
+- [PR 29187: trying to fix datacarriersize](https://wtfhappenedinfeb2023.com/pr-29187-trying-to-fix-datacarriersize)
+
+Open question: should relay policy defend only against resource exhaustion narrowly defined by existing code paths, or also against new arbitrary-data paths that create the same user-facing cost?
+
+### Review power and default policy
+
+Concern: Bitcoin Core defaults strongly influence the network even though they are not consensus rules.
+
+What happened: most users keep defaults, miners and relay nodes often inherit defaults, and proposed changes to defaults can shape what transactions propagate before block inclusion.
+
+Why it matters: when defaults favor arbitrary-data relay, the cost is not only carried by the users who choose that policy. Payment users compete in the same blockspace market, and node runners carry the resulting storage and UTXO pressure.
+
+Primary sources:
+
+- [Bitcoin Core issue 29187](https://github.com/bitcoin/bitcoin/issues/29187)
+- [Mempool Research OP_RETURN Report](https://research.mempool.space/opreturn-report/)
+- [Bitcoin Block Space Weekly Issue #3](https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam)
+
+Open question: how should default-policy decisions weigh miner convenience, relay predictability, payment usability, and node resource costs?
+
+### Moderation and process concerns
+
+Concern: participants have alleged that some public technical discussions were narrowed, shut down, or moderated in ways that shaped the policy debate.
+
+What happened: this site has not yet reduced those allegations to a complete primary-source timeline.
+
+Why it matters: moderation can be legitimate, but process legitimacy matters when policy defaults decide who bears network costs.
+
+Primary sources:
+
+- Open question pending primary records.
+
+Open question: which specific GitHub, mailing-list, IRC, Delving Bitcoin, or moderation records support each allegation?
+
+### Funding and governance concerns
+
+Concern: external funding, institutional incentives, and informal influence can affect what work is prioritized or treated as out of scope.
+
+What happened: external investigations have raised concerns about contributor pipelines, institutional relationships, and social pressure around independent contributors.
+
+Why it matters: funding context can help readers understand why default-policy choices are contested, but it should not be used as a substitute for evidence about a specific code or moderation decision.
+
+Primary sources:
+
+- Open question pending funding and governance records.
+
+Open question: which concrete funding, employment, grant, maintainer, or review records connect to the spam-policy decisions discussed here?
+
+## External investigation: The Capture
+
+Hodlonaut's "The Capture" articles can be used as external investigation context.
+
+- [The Capture: The Network](https://www.citadel21.com/the-network) documents claims about informal power, funding, recruitment, and maintainer paths.
+- [The Capture: The Lever](https://www.citadel21.com/the-lever) documents claims about social and institutional pressure affecting independent contributors.
+
+These articles should be presented as sourced external investigations with named sources and right-of-reply notes, not as a substitute for primary GitHub, IRC, mailing-list, funding, and moderation records.
