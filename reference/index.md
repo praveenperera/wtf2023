@@ -20,7 +20,7 @@ This incident had far-reaching consequences:
 
 - **Increases the rate Bitcoin's blockchain grows:** Excessive spam accelerated blockchain growth, leading to increased storage requirements for nodes.
 
-- **Abuses other resources of Bitcoin users:** These activities wasted computational and financial resources of legitimate Bitcoin users.
+- **Abuses other resources of Bitcoin users:** These activities wasted computational and economic resources of legitimate Bitcoin users.
 
 - **Dissuades future upgrades to Bitcoin:** Persistent flaws and network abuse discourage necessary improvements and innovation within the Bitcoin protocol.
 

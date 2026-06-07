@@ -75,7 +75,7 @@ export default function BlockspacePressureMap({
               id="pressure-map-title"
               className="mt-3 max-w-md text-3xl font-semibold leading-tight md:text-5xl"
             >
-              Spam competes for the same scarce blockspace payments use
+              Spam competes for the same scarce blockspace monetary use needs
             </h2>
             <p className="mt-4 text-base leading-7 text-muted">
               The important relationship is not just transaction count. Activity

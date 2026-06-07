@@ -16,12 +16,12 @@ import utxoSet from "@/data/generated/utxo-set.json";
 
 const fastAnswers = [
   {
-    title: "Non-payment data crowded blockspace",
-    body: "The February 2023 wave tied together inscriptions, bare multisig, OP_RETURN, and other non-payment uses",
+    title: "Non-monetary data crowded blockspace",
+    body: "The February 2023 wave tied together inscriptions, bare multisig, OP_RETURN, and other non-monetary uses",
   },
   {
-    title: "Payments still paid most fees",
-    body: "Payment users were forced to bid harder even while spam used a large blockspace share",
+    title: "Monetary transactions still paid most fees",
+    body: "Monetary transactions had to bid harder even while spam used a large blockspace share",
   },
   {
     title: "Node resource pressure rose",
@@ -124,7 +124,7 @@ const chartPanels = [
     title: "Fee-rate pressure",
     subtitle: "Mined block fee-rate percentiles, November 2022 to June 2024",
     interpretation:
-      "When demand for blockspace jumps, payment users must clear a higher fee market to get confirmed",
+      "When demand for blockspace jumps, users making monetary transactions must clear a higher fee market to get confirmed",
     source: feeRates.source,
     snapshotDate: feeRates.fetchedAt,
     href: "/stats-about-spam/",
@@ -141,7 +141,7 @@ const chartPanels = [
     title: "Blockspace split",
     subtitle: "Sampled block weight by classified use",
     interpretation:
-      "Sampled blocks show when observable non-payment data began taking a larger share of mined block weight",
+      "Sampled blocks show when observable non-monetary data began taking a larger share of mined block weight",
     source: impactSeries.source,
     snapshotDate: impactSeries.fetchedAt,
     href: "/stats-about-spam/",
@@ -149,15 +149,15 @@ const chartPanels = [
     xKey: "date",
     type: "area",
     series: [
-      { key: "payments", label: "Payments", color: "var(--payment)" },
-      { key: "nonPayments", label: "Non-payments", color: "var(--accent)" },
+      { key: "payments", label: "Monetary", color: "var(--payment)" },
+      { key: "nonPayments", label: "Non-monetary", color: "var(--accent)" },
     ],
   },
   {
     title: "Fees by use",
     subtitle: "Sampled block fee share by classified use",
     interpretation:
-      "Payments still paid most fees while non-payments occupied a large share of blockspace",
+      "Monetary transactions still paid most fees while non-monetary transactions occupied a large share of blockspace",
     source: impactSeries.source,
     snapshotDate: impactSeries.fetchedAt,
     href: "/stats-about-spam/",
@@ -165,10 +165,10 @@ const chartPanels = [
     xKey: "date",
     type: "line",
     series: [
-      { key: "paymentFees", label: "Payment fees", color: "var(--payment)" },
+      { key: "paymentFees", label: "Monetary fees", color: "var(--payment)" },
       {
         key: "nonPaymentFees",
-        label: "Non-payment fees",
+        label: "Non-monetary fees",
         color: "var(--accent)",
       },
     ],
@@ -212,13 +212,13 @@ const blockspaceSplitPanel = {
 
 const operationsMetrics = [
   {
-    label: "Peak non-payment share",
+    label: "Peak non-monetary share",
     value: `${peakNonPaymentValue.toFixed(1)}%`,
     detail: peakNonPaymentDate,
     tone: "text-accent",
   },
   {
-    label: "Payments at peak",
+    label: "Monetary at peak",
     value: peakNonPaymentRow
       ? `${peakNonPaymentRow.payments.toFixed(1)}%`
       : "n/a",
@@ -226,7 +226,7 @@ const operationsMetrics = [
     tone: "text-payment",
   },
   {
-    label: "Non-payment fees",
+    label: "Non-monetary fees",
     value: peakNonPaymentRow
       ? `${peakNonPaymentRow.nonPaymentFees.toFixed(1)}%`
       : "n/a",
@@ -240,13 +240,13 @@ const duneEvidencePanels = [
     title: "Blockspace split",
     label: "Sampled source unavailable locally",
     value: "~50%",
-    body: "Non-payment transactions occupied about half of available blockspace soon after the February 2023 wave began, excluding bare multisig data storage from that chart",
+    body: "Non-monetary transactions occupied about half of available blockspace soon after the February 2023 wave began, excluding bare multisig data storage from that chart",
   },
   {
     title: "Fees by use",
     label: "Fee pressure",
-    value: "payments paid most fees",
-    body: "Non-payment transactions displaced payment transactions even though payment users still paid the majority of fees in each block",
+    value: "monetary transactions paid most fees",
+    body: "Non-monetary transactions displaced monetary transactions even though users making monetary transactions still paid the majority of fees in each block",
   },
 ] as const;
 
@@ -276,13 +276,13 @@ if (!homeRoute) {
             </p>
             <p class="operations-copy">
               Starting in early February 2023, an unprecedented wave of spam and
-              scam activity flooded the Bitcoin mempool. Non-payment
+              scam activity flooded the Bitcoin mempool. Non-monetary
               transactions competed for limited block space, driving fees up and
-              crowding out real payments.
+              crowding out monetary use.
             </p>
             <p class="operations-copy">
               This site is a forensic analysis of that event, its impact, and
-              what users can still do to keep Bitcoin for payments.
+              what users can still do to keep Bitcoin monetary.
             </p>
             <p class="operations-event-label">
               <span aria-hidden="true">▣</span>
@@ -392,7 +392,7 @@ if (!homeRoute) {
             </h2>
             <p class="mt-4 text-base leading-7 text-muted">
               These panels separate observable fee pressure, sampled
-              payment-versus-data use, and Statoshi resource pressure without
+              monetary-versus-data use, and Statoshi resource pressure without
               filling gaps with fake precision.
             </p>
           </div>
@@ -479,7 +479,7 @@ if (!homeRoute) {
                 Wasteful shared-resource use
               </h3>
               <p class="mt-3 text-sm leading-6 text-muted">
-                Large or repeated non-payment data consumes blockspace,
+                Large or repeated non-monetary data consumes blockspace,
                 bandwidth, storage, and UTXO set resources that every validating
                 user helps carry.
               </p>

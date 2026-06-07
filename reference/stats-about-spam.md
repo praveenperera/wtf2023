@@ -6,10 +6,10 @@ Source: https://wtfhappenedinfeb2023.com/stats-about-spam
 
 The current verified snapshot separates two kinds of evidence:
 
-- The February 2023 sampled series shows the onset: non-payment data moved from negligible levels into a material share of blockspace within days.
-- Later external reports show the continuing damage: non-financial blockspace share, chain data growth, low-value UTXOs, Taproot UTXO composition, and inscription-related UTXO attribution.
+- The February 2023 sampled series shows the onset: non-monetary data moved from negligible levels into a material share of blockspace within days.
+- Later external reports show the continuing damage: non-monetary blockspace share, chain data growth, low-value UTXOs, Taproot UTXO composition, and inscription-related UTXO attribution.
 
-For this page, "dust-like" means under 1000 sats, matching the Mempool Research UTXO Set Report. "Non-financial" and "inscription-related" are source-defined classifications. Aggregate UTXO database growth is not attribution by itself; attribution comes from source analysis that identifies inscription-related UTXOs.
+For this page, "dust-like" means under 1000 sats, matching the Mempool Research UTXO Set Report. "Non-monetary" and "inscription-related" are source-defined classifications. Aggregate UTXO database growth is not attribution by itself; attribution comes from source analysis that identifies inscription-related UTXOs.
 
 Mempool.space's transactions by fee rate since 2020
 
@@ -27,13 +27,13 @@ This mempool does not contain this kind of spam:
 
 - *OP_RETURN*
 
-Space occupied by non-payments VS payments on the timechain since January 2023
+Space occupied by non-monetary VS monetary use on the timechain since January 2023
 
-*Soon after the beginning of the 2023 spam wave, non-financial transactions have been occupying about 50% of the available blockspace, except during short breaks. This chart does not consider data storage transactions that use bare multisig.* [*BTC spam analysis*](https://dune.com/piratebiscuit/btc-spam-analysis)
+*Soon after the beginning of the 2023 spam wave, non-monetary transactions have been occupying about 50% of the available blockspace, except during short breaks. This chart does not consider data storage transactions that use bare multisig.* [*BTC spam analysis*](https://dune.com/piratebiscuit/btc-spam-analysis)
 
-Fees paid by non-payments VS payments on the timechain since January 2023
+Fees paid by non-monetary VS monetary use on the timechain since January 2023
 
-*Although non-payment related transactions occupy about 50% of each block, the majority of the fees paid in each block are still coming from payments. This data shows how non-payment transactions (spam) are displacing payment transactions, this is forcing payment transactions to pay a much higher fee to be included in blocks.* [*BTC spam analysis*](https://dune.com/piratebiscuit/btc-spam-analysis)
+*Although non-monetary transactions occupy about 50% of each block, the majority of the fees paid in each block are still coming from monetary transactions. This data shows how non-monetary transactions (spam) are displacing monetary transactions, forcing monetary transactions to pay a much higher fee to be included in blocks.* [*BTC spam analysis*](https://dune.com/piratebiscuit/btc-spam-analysis)
 
 Size of UTXO since January 2023
 

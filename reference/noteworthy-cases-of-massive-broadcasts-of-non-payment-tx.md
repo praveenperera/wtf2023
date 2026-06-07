@@ -2,7 +2,7 @@
 
 Source: https://wtfhappenedinfeb2023.com/noteworthy-cases-of-massive-broadcasts-of-non-payment-tx
 
-## Noteworthy cases of massive broadcasts of non-payment TXs
+## Noteworthy cases of massive broadcasts of non-monetary TXs
 
 ### BitDNS
 

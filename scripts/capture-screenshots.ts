@@ -106,7 +106,7 @@ async function assertHomepage(page: Page) {
   for (const text of [
     "WTF Happened in Feb 2023?",
     "Bitcoin is money, not a message board",
-    "Non-payment data crowded blockspace",
+    "Non-monetary data crowded blockspace",
     "Fee-rate pressure",
     "Blockspace pressure map",
     "Snapshot now",

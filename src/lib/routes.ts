@@ -31,11 +31,11 @@ export const siteRoutes: SiteRoute[] = [
     sourcePaths: ["reference/index.md"],
     summary: "Orientation layer for the February 2023 spam wave",
     metaDescription:
-      "Learn how the February 2023 Bitcoin spam wave crowded blockspace, pushed payment users into higher fees, and made relay policy choices visible.",
+      "Learn how the February 2023 Bitcoin spam wave crowded blockspace, pushed users making monetary transactions into higher fees, and made relay policy choices visible.",
     ogImage: "/og/home.png",
     ogImageAlt: "WTF Happened in Feb 2023 home overview",
     takeaway:
-      "The wave made shared blockspace harder to use by pushing non-payment data into the same scarce resource payments need",
+      "The wave made shared blockspace harder to use by pushing non-monetary data into the same scarce resource monetary use needs",
     order: 0,
   },
   {
@@ -44,13 +44,13 @@ export const siteRoutes: SiteRoute[] = [
     title: "Impact | WTF Happened in Feb 2023?",
     route: "/stats-about-spam/",
     sourcePaths: ["reference/stats-about-spam.md"],
-    summary: "Fee pressure, payment displacement, and UTXO growth",
+    summary: "Fee pressure, monetary displacement, and UTXO growth",
     metaDescription:
-      "See how non-payment data competed with payments for blockspace, shifted fee pressure onto users, and expanded the long-term cost of validation.",
+      "See how non-monetary data competed with monetary use for blockspace, shifted fee pressure onto users, and expanded the long-term cost of validation.",
     ogImage: "/og/impact.png",
     ogImageAlt: "Impact of Bitcoin spam on blockspace and fee pressure",
     takeaway:
-      "Non-payment activity took a large share of blockspace while payments still carried most fee pressure",
+      "Non-monetary activity took a large share of blockspace while monetary transactions still carried most fee pressure",
     order: 1,
   },
   {
@@ -61,7 +61,7 @@ export const siteRoutes: SiteRoute[] = [
     sourcePaths: ["reference/characteristics-of-spam.md"],
     summary: "A two-part model for recognizing spam",
     metaDescription:
-      "Use a practical two-part test for Bitcoin spam: wasteful shared-resource use plus misuse of transaction features for non-payment data.",
+      "Use a practical two-part test for Bitcoin spam: wasteful shared-resource use plus misuse of transaction features for non-monetary data.",
     ogImage: "/og/characteristics.png",
     ogImageAlt: "Characteristics of Bitcoin spam",
     takeaway:
@@ -112,9 +112,9 @@ export const siteRoutes: SiteRoute[] = [
     summary:
       "Role-based action paths for node runners, miners, developers, and plebs",
     metaDescription:
-      "Choose concrete actions for node runners, miners, developers, and everyday users who want Bitcoin blockspace preserved for payments.",
+      "Choose concrete actions for node runners, miners, developers, and everyday users who want Bitcoin blockspace preserved for monetary use.",
     ogImage: "/og/actions.png",
-    ogImageAlt: "Actions to preserve Bitcoin blockspace for payments",
+    ogImageAlt: "Actions to preserve Bitcoin blockspace for monetary use",
     takeaway:
       "Users can change relay policy, mining template choices, software defaults, and public discussion",
     order: 4,
@@ -151,11 +151,11 @@ export const siteRoutes: SiteRoute[] = [
     ],
     summary: "Relay policy, private submission paths, and earlier abuse cases",
     metaDescription:
-      "Trace earlier free-relay, private-submission, and non-payment transaction episodes that shaped Bitcoin's spam and policy debates.",
+      "Trace earlier free-relay, private-submission, and non-monetary transaction episodes that shaped Bitcoin's spam and policy debates.",
     ogImage: "/og/history.png",
     ogImageAlt: "History of Bitcoin spam and relay policy debates",
     takeaway:
-      "The February 2023 wave fits a longer pattern of free relay and non-payment transaction pressure",
+      "The February 2023 wave fits a longer pattern of free relay and non-monetary transaction pressure",
     order: 6,
   },
   {

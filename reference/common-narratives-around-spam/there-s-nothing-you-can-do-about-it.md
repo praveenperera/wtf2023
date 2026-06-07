@@ -4,7 +4,7 @@ Source: https://wtfhappenedinfeb2023.com/common-narratives-around-spam/there-s-n
 
 ## There's nothing you can do about it
 
-A common argument presented by spammers and spam enablers is that spam should be forgotten about because nothing can be done about it. This argument is simply wrong. In the past, [spam has been stopped using filters and through the participation of miners](https://wtfhappenedinfeb2023.com/noteworthy-cases-of-massive-broadcasts-of-non-payment-tx). The arguments presented to argue that you shouldn't try to stop spam are divided into two categories:
+A common argument presented by spammers and spam enablers is that spam should be forgotten about because nothing can be done about it. This argument is simply wrong. In the past, [spam has been stopped using filters and through the participation of miners](https://wtfhappenedinfeb2023.com/history/). The arguments presented to argue that you shouldn't try to stop spam are divided into two categories:
 
 1. They can **simply change a technical detail of the data injection method and circumvent filters,** if filters are the method chosen to fight spam
 
@@ -20,7 +20,7 @@ There is no other way to fight spam other than through **a cat & mouse game** an
 
 If spammers eventually make spam so efficient that it becomes **indistinguishable from Bitcoin currency transactions**, so much so that it **cannot be identified anymore**, it most likely won't be considered as spam anymore because of its efficiency. Until then, it is hard to imagine any path or solution other than continuously repelling spam.
 
-Interestingly, spammers also propose that financial transactions should be updated to *"improve the incentives and infrastructure for the transactions you DO want to see"*, namely Bitcoin currency transactions. **This obviously contradicts the narrative discussed here**, as it means that **something can be done**, as long as it is what the spammers want you to do. It is the only way to solve this issue according to them. The changes hinted at by spammers are significant as they would require a soft or hard-fork in order to make the native currency, bitcoins, of the network better compete with spam (which is a nonsense as Bitcoin currency transactions are much more efficient). At the same time, spammers insist that nothing can be done and that a kind of significant update is necessary.
+Interestingly, spammers also propose that monetary transactions should be updated to *"improve the incentives and infrastructure for the transactions you DO want to see"*, namely Bitcoin currency transactions. **This obviously contradicts the narrative discussed here**, as it means that **something can be done**, as long as it is what the spammers want you to do. It is the only way to solve this issue according to them. The changes hinted at by spammers are significant as they would require a soft or hard-fork in order to make the native currency, bitcoins, of the network better compete with spam (which is a nonsense as Bitcoin currency transactions are much more efficient). At the same time, spammers insist that nothing can be done and that a kind of significant update is necessary.
 
 Watch @[LukeDashjr](https://twitter.com/LukeDashjr)'s interview during which he explains why although spam filters won't definitely stop spam in one day they are a necessary first step in the social consensus to eventually do so:
 

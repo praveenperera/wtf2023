@@ -71,14 +71,15 @@ const sourceVisualsByRoute: Partial<
   impact: [
     {
       label: "Blockspace",
-      title: "Payments and non-payments compete in one block auction",
+      title: "Monetary and non-monetary uses compete in one block auction",
       body: "Use the committed chart panels and pressure map on the overview for source-backed values",
       value: "shared market",
       tone: "accent",
     },
     {
       label: "Fees",
-      title: "Payment users still had to clear higher fee pressure",
+      title:
+        "Users making monetary transactions still had to clear higher fee pressure",
       body: "The local snapshots keep the data visible without embedding copied screenshots",
       value: "local data",
       tone: "payment",
@@ -95,7 +96,7 @@ const sourceVisualsByRoute: Partial<
     {
       label: "Resource use",
       title: "Wasteful shared-resource demand",
-      body: "Consumes scarce shared blockspace with little or no corresponding payment value",
+      body: "Consumes scarce shared blockspace with little or no corresponding monetary value",
       value: "signal 1",
       tone: "accent",
     },
@@ -180,7 +181,7 @@ const sourceVisualsByRoute: Partial<
   history: [
     {
       label: "Relay",
-      title: "Free relay has repeatedly created room for non-payment pressure",
+      title: "Free relay has repeatedly created room for non-monetary pressure",
       body: "Timeline context is represented in structured text instead of copied images",
       value: "recurring",
       tone: "accent",
@@ -206,7 +207,7 @@ const sourceVisuals = sourceVisualsByRoute[content.id] ?? [];
 const historyTimelineDates: Record<string, string> = {
   "Free relays > Whitelists > Free relays": "Early Bitcoin relay policy",
   "The rise of out-of-band transactions": "February 22, 2024",
-  "Noteworthy cases of massive broadcasts of non-payment TXs": "2010-2019",
+  "Noteworthy cases of massive broadcasts of non-monetary TXs": "2010-2019",
 };
 const characteristicsSections =
   content.id === "characteristics" && contentSections[0]
@@ -1008,7 +1009,7 @@ function buildCharacteristicsSections(html: string) {
                     <p class="section-label">Then: Feb 2023 onset</p>
                     <h2>The sampled charts show the break from baseline.</h2>
                     <p>
-                      The February sample shows non-payment data jumping from
+                      The February sample shows non-monetary data jumping from
                       negligible levels into a material share of blockspace
                       within days.
                     </p>
@@ -1020,7 +1021,7 @@ function buildCharacteristicsSections(html: string) {
                       state and storage.
                     </h2>
                     <p>
-                      Recent spam analysis shows non-financial data still taking
+                      Recent spam analysis shows non-monetary data still taking
                       a large share of blockspace. UTXO analysis shows millions
                       of low-value outputs remain in the set every validating
                       node must track.

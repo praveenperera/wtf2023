@@ -46,7 +46,7 @@ Concern: Bitcoin Core defaults strongly influence the network even though they a
 
 What happened: most users keep defaults, miners and relay nodes often inherit defaults, and proposed changes to defaults can shape what transactions propagate before block inclusion.
 
-Why it matters: when defaults favor arbitrary-data relay, the cost is not only carried by the users who choose that policy. Payment users compete in the same blockspace market, and node runners carry the resulting storage and UTXO pressure.
+Why it matters: when defaults favor arbitrary-data relay, the cost is not only carried by the users who choose that policy. Monetary transactions compete in the same blockspace market, and node runners carry the resulting storage and UTXO pressure.
 
 Primary sources:
 
@@ -54,7 +54,7 @@ Primary sources:
 - [Mempool Research OP_RETURN Report](https://research.mempool.space/opreturn-report/)
 - [Bitcoin Block Space Weekly Issue #3](https://blockspaceweekly.substack.com/p/issue-3-three-years-of-spam)
 
-Open question: how should default-policy decisions weigh miner convenience, relay predictability, payment usability, and node resource costs?
+Open question: how should default-policy decisions weigh miner convenience, relay predictability, monetary usability, and node resource costs?
 
 ### Moderation and process concerns
 

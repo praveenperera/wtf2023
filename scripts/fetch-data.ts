@@ -247,7 +247,7 @@ async function fetchSampledImpact(): Promise<Snapshot> {
     rows,
     notes: [
       "This snapshot classifies sampled Bitcoin blocks from Blockchain.com raw block transactions",
-      "Non-payment classification includes OP_RETURN outputs, bare multisig outputs, and ordinal inscription witness envelopes",
+      "Non-monetary classification includes OP_RETURN outputs, bare multisig outputs, and ordinal inscription witness envelopes",
       "Sample heights use weekly pre-wave baselines, denser 500-block samples during the February onset, and two post-onset checks",
       "Shares are percentages of non-coinbase transaction weight and transaction fees in each sampled block",
     ],
@@ -323,10 +323,10 @@ function makePressureMapSnapshot() {
     columns: ["label", "kind", "share", "note"],
     categories: [
       {
-        label: "Payments",
+        label: "Monetary use",
         kind: "payments",
         share: 50,
-        note: "Payment transactions still compete for confirmation against non-payment data",
+        note: "Monetary transactions still compete for confirmation against non-monetary data",
       },
       {
         label: "Inscriptions",
@@ -350,7 +350,7 @@ function makePressureMapSnapshot() {
         label: "Other",
         kind: "other",
         share: 3,
-        note: "Remainder bucket for non-payment and unknown transaction categories",
+        note: "Remainder bucket for non-monetary and unknown transaction categories",
       },
       {
         label: "Direct-to-miner submissions",

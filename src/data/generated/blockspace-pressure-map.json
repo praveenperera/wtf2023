@@ -6,10 +6,10 @@
   "columns": ["label", "kind", "share", "note"],
   "categories": [
     {
-      "label": "Payments",
+      "label": "Monetary use",
       "kind": "payments",
       "share": 50,
-      "note": "Payment transactions still compete for confirmation against non-payment data"
+      "note": "Monetary transactions still compete for confirmation against non-monetary data"
     },
     {
       "label": "Inscriptions",
@@ -33,7 +33,7 @@
       "label": "Other",
       "kind": "other",
       "share": 3,
-      "note": "Remainder bucket for non-payment and unknown transaction categories"
+      "note": "Remainder bucket for non-monetary and unknown transaction categories"
     },
     {
       "label": "Direct-to-miner submissions",
