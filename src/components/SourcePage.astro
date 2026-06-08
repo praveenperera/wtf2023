@@ -4,7 +4,6 @@ import CurrentDamageSnapshot from "@/components/CurrentDamageSnapshot.astro";
 import ReceiptCard from "@/components/ReceiptCard.astro";
 import { narrativeReceipts } from "@/data/narrative-receipts";
 import {
-  ArrowDown,
   ArrowUpRight,
   Check,
   CheckCircle2,
@@ -224,24 +223,28 @@ const actionLevers = [
   {
     role: "Node runner",
     action: "Run filtering policy",
-    detail: "Use Knots, BIP-110 where desired, and explicit relay settings",
+    detail: "Use Knots and explicit relay settings instead of passive defaults",
   },
   {
     role: "Miner",
     action: "Choose templates",
-    detail: "Point hash rate at pools or DATUM setups matching your policy",
+    detail:
+      "Point hash rate at OCEAN, DATUM, or templates matching your policy",
   },
   {
     role: "Developer",
     action: "Review defaults",
-    detail: "Work where policy, docs, and implementation choices are made",
+    detail:
+      "Contribute where policy, docs, and implementation choices are made",
   },
   {
     role: "Pleb",
     action: "Share receipts",
-    detail: "Ask concrete policy questions and link source-backed rebuttals",
+    detail:
+      "Frame this as mitigation and rate limiting, not perfect prevention",
   },
 ] as const;
+const strictRelayConfig = "permitbaremultisig=0\ndatacarrier=0";
 const receiptClipSlots: Array<{
   title?: string;
   speaker?: string;
@@ -259,7 +262,26 @@ const completeReceiptClips = receiptClipSlots.filter(
     slot.sourceUrl &&
     slot.whyItMatters,
 );
-const nodeRunnerTutorials = [
+
+type NodeRunnerTutorial = {
+  id: string;
+  title: string;
+  summary: string;
+  source: string;
+  note?: string;
+  steps?: Array<{
+    label: string;
+    code?: string;
+    note?: string;
+  }>;
+  commands?: string[];
+  links?: Array<{
+    label: string;
+    href: string;
+  }>;
+};
+
+const nodeRunnerTutorials: NodeRunnerTutorial[] = [
   {
     id: "apt-on-debian-gnu-linux",
     title: "APT on Debian GNU/Linux",
@@ -285,10 +307,19 @@ const nodeRunnerTutorials = [
     title: "Ubuntu",
     summary: "Use the Bitcoin Knots PPA",
     source: "https://launchpad.net/~luke-jr/+archive/ubuntu/bitcoinknots",
-    commands: [
-      "sudo add-apt-repository ppa:luke-jr/bitcoinknots",
-      "sudo apt update",
-      "sudo apt install bitcoind",
+    steps: [
+      {
+        label: "Add the Bitcoin Knots PPA",
+        code: "sudo add-apt-repository ppa:luke-jr/bitcoinknots",
+      },
+      {
+        label: "Update apt",
+        code: "sudo apt update",
+      },
+      {
+        label: "Install either the daemon or the GUI",
+        code: "sudo apt install bitcoind\nsudo apt install bitcoin-qt",
+      },
     ],
   },
   {
@@ -297,7 +328,29 @@ const nodeRunnerTutorials = [
     summary: "Sideload the package, configure Bitcoin Knots, then start",
     source:
       "https://github.com/Retropex/ordisrespector-startos/releases/tag/v26.1.knots20240513",
-    commands: ["Download .s9pk package", "Configure Bitcoin Knots"],
+    steps: [
+      {
+        label: "Download the .s9pk package from the release page",
+      },
+      {
+        label: "Open StartOS system, sideload a service, then browse",
+      },
+      {
+        label: "Select the .s9pk file",
+      },
+      {
+        label: "Upload and install it",
+      },
+      {
+        label: "Open Bitcoin Knots, configure, save, then start",
+      },
+    ],
+    links: [
+      {
+        label: "Video walkthrough",
+        href: "https://www.youtube.com/watch?v=UxhSelzMcAs",
+      },
+    ],
   },
   {
     id: "mynode",
@@ -305,14 +358,46 @@ const nodeRunnerTutorials = [
     summary: "Install the custom Bitcoin version from Settings",
     source:
       "https://github.com/mynodebtc/mynode/blob/264aa430b20c0b430d4349f0dc62666ff50adeed/CHANGELOG#L3",
-    commands: ["Settings -> Custom Bitcoin Version", "Install"],
+    note: "MyNode supports Knots v26.1.knots20240513 since v0.3.29 and Ordisrespector since v0.3.10.",
+    steps: [
+      {
+        label: "Connect to your MyNode",
+      },
+      {
+        label: "Open Settings",
+      },
+      {
+        label: "Scroll to Custom Bitcoin Version",
+      },
+      {
+        label: "Select Bitcoin Knots v26.1 or Ordisrespector v24.0.1",
+      },
+      {
+        label: "Click Install",
+      },
+    ],
+    links: [
+      {
+        label: "Ordisrespector changelog",
+        href: "https://github.com/mynodebtc/mynode/blob/776ccb35d1939b76de429dd129247425cd911f17/CHANGELOG#L4",
+      },
+    ],
   },
   {
     id: "homebrew",
     title: "Homebrew",
     summary: "Compile and install Bitcoin Knots with Homebrew",
     source: "https://github.com/retropex/homebrew-knots",
-    commands: ["brew tap retropex/knots", "brew install knots"],
+    steps: [
+      {
+        label: "Install the daemon",
+        code: "brew tap retropex/knots\nbrew install knots",
+      },
+      {
+        label: "Install the GUI instead, if needed",
+        code: "brew install knots-gui",
+      },
+    ],
   },
   {
     id: "nixpkgs",
@@ -320,17 +405,29 @@ const nodeRunnerTutorials = [
     summary: "Install Bitcoin Knots with Nix package manager",
     source:
       "https://search.nixos.org/packages?channel=24.05&show=bitcoind-knots&from=0&size=50&sort=relevance&type=packages&query=bitcoin+knots",
-    commands: ["nix-shell -p bitcoind-knots"],
+    steps: [
+      {
+        label: "Open a shell with bitcoind-knots available",
+        code: "nix-shell -p bitcoind-knots",
+      },
+    ],
   },
   {
     id: "nodl",
     title: "nodl",
     summary: "Install Knots over SSH, then restart",
     source: "http://docs.nodl.it/guides/ssh.html",
-    commands: [
-      "sudo add-apt-repository ppa:luke-jr/bitcoinknots",
-      "sudo apt update",
-      "sudo apt install bitcoind",
+    steps: [
+      {
+        label: "Log in to nodl with SSH using the nodl guide",
+      },
+      {
+        label: "Install Bitcoin Knots",
+        code: "sudo add-apt-repository ppa:luke-jr/bitcoinknots\nsudo apt update\nsudo apt install bitcoind",
+      },
+      {
+        label: "Restart the device",
+      },
     ],
   },
   {
@@ -339,31 +436,128 @@ const nodeRunnerTutorials = [
     summary: "Use a DIY guide for Core-to-Knots migration",
     source:
       "https://jesterhodl.com/raspibolt-replacing-bitcoin-core-with-knots/",
-    commands: ["RaspiBolt guide", "MicroBolt guide"],
+    links: [
+      {
+        label: "RaspiBolt Core-to-Knots guide",
+        href: "https://jesterhodl.com/raspibolt-replacing-bitcoin-core-with-knots/",
+      },
+      {
+        label: "MicroBolt guide",
+        href: "https://microbolt.guide",
+      },
+      {
+        label: "Debian / Ubuntu scratch guide",
+        href: "https://scratch-knots.orangepill.ovh/",
+      },
+    ],
   },
   {
     id: "umbrel-app-store-edition",
     title: "Umbrel App Store edition",
     summary: "Install like any other app",
     source: "https://docs.mempool.guide/page/migrationumbrel.html",
-    commands: ["Install Bitcoin Knots", "Optional migration guide"],
+    steps: [
+      {
+        label: "Open the Umbrel App Store",
+      },
+      {
+        label: "Install Bitcoin Knots like any other app",
+      },
+      {
+        label:
+          "Use the migration guide if you are replacing an existing Bitcoin Core node",
+      },
+    ],
+    links: [
+      {
+        label: "Umbrel migration guide",
+        href: "https://docs.mempool.guide/page/migrationumbrel.html",
+      },
+    ],
   },
   {
     id: "umbrel-community-edition",
     title: "Umbrel Community edition",
     summary: "Add the community app store, then install for your platform",
     source: "https://github.com/Retropex/Bitcoin-store",
-    commands: ["https://github.com/Retropex/Bitcoin-store.git"],
+    steps: [
+      {
+        label: "Install Umbrel if you do not already have a node",
+      },
+      {
+        label: "Open App Store, then the menu in the top-right corner",
+      },
+      {
+        label: "Choose Community App Stores",
+      },
+      {
+        label: "Paste the Bitcoin-store repository URL",
+        code: "https://github.com/Retropex/Bitcoin-store.git",
+      },
+      {
+        label: "Open the store and install the version for your platform",
+      },
+    ],
   },
   {
     id: "umbrel-manual-migration",
     title: "Umbrel manual migration",
     summary: "Move chain data before replacing the old node",
     source: "https://github.com/Retropex/Bitcoin-store",
-    commands: [
-      "sudo docker stop $(sudo docker ps -q)",
-      "sudo ~/umbrel/scripts/repo add https://github.com/Retropex/Bitcoin-store.git",
-      "sudo shutdown -r now",
+    note: "These steps move existing chain data so the replacement node does not need a full resync.",
+    steps: [
+      {
+        label: "Stop all containers",
+        code: "sudo docker stop $(sudo docker ps -q)",
+      },
+      {
+        label: "Create a backup folder",
+        code: "mkdir ~/umbrel/backup",
+      },
+      {
+        label: "Move all app data except Bitcoin into the backup folder",
+        code: "cp -r ~/umbrel/app-data/!(bitcoin) ~/umbrel/backup",
+      },
+      {
+        label: "Delete the original non-Bitcoin app-data files",
+        code: "sudo rm -r ~/umbrel/app-data/!(bitcoin)",
+      },
+      {
+        label:
+          "Move the Bitcoin chain data so it is not deleted with the old node",
+        code: "mv ~/umbrel/app-data/bitcoin/data/ ~/umbrel/",
+      },
+      {
+        label: "Uninstall the old Bitcoin node",
+        code: "sudo ./umbrel/scripts/app uninstall bitcoin",
+        note: "If Umbrel says Tor could not be removed, that is normal.",
+      },
+      {
+        label: "Add the Bitcoin Knots app repository",
+        code: "sudo ~/umbrel/scripts/repo add https://github.com/Retropex/Bitcoin-store.git",
+        note: "This command can take up to five minutes to become fully effective.",
+      },
+      {
+        label:
+          "Install the arm64 version, including Raspberry Pi 4 and Apple Silicon Macs",
+        code: "sudo ./umbrel/scripts/app install btc-knots",
+      },
+      {
+        label: "Or install the x86-64 version for most PCs and servers",
+        code: "sudo ./umbrel/scripts/app install btc-knotsx86",
+      },
+      {
+        label: "Stop the new node before restoring data",
+        code: "sudo docker container stop btc-knots_server_1 btc-knots_bitcoind_1 btc-knots_i2pd_daemon_1 btc-knots_tor_1 btc-knots_app_proxy_1",
+      },
+      {
+        label: "Restore chain data into the new node",
+        code: "sudo rm -r ~/umbrel/app-data/btc-knots/data/*\nmv ~/umbrel/data/ ~/umbrel/app-data/btc-knots/*",
+      },
+      {
+        label: "Restart the computer",
+        code: "sudo shutdown -r now",
+      },
     ],
   },
   {
@@ -371,7 +565,24 @@ const nodeRunnerTutorials = [
     title: "Manual Linux x86-64 migration",
     summary: "Replace binaries, update bitcoin.conf, then start",
     source: "http://bitcoinknots.org",
-    commands: ["datacarrier=0"],
+    steps: [
+      {
+        label:
+          "Log in to the Linux system and stop any running Bitcoin processes",
+      },
+      {
+        label:
+          "Copy and substitute Bitcoin Knots binaries in their default location",
+        note: "Compare checksums against bitcoinknots.org before replacing binaries.",
+      },
+      {
+        label: "Edit bitcoin.conf with the strict relay summary",
+        code: strictRelayConfig,
+      },
+      {
+        label: "Start Bitcoin Knots",
+      },
+    ],
   },
 ];
 
@@ -668,6 +879,12 @@ function buildCharacteristicsSections(html: string) {
                     pressure all change incentives. The question is which lever
                     you actually control.
                   </p>
+                  <p>
+                    This is mitigation and rate limiting, not a promise that one
+                    lever makes spam impossible. Every concrete action that
+                    raises cost or reduces relay lowers the damage to Bitcoin's
+                    use as money.
+                  </p>
                   <div class="source-lever-grid">
                     {actionLevers.map((lever) => (
                       <article>
@@ -736,6 +953,24 @@ function buildCharacteristicsSections(html: string) {
                             </span>
                           </li>
                         </ul>
+                        <div class="source-node-settings">
+                          <div>
+                            <p>Strict relay summary</p>
+                            <span>Bitcoin Knots 25.1+</span>
+                          </div>
+                          <div class="source-node-code">
+                            <div class="source-node-pre">
+                              <code>{strictRelayConfig}</code>
+                            </div>
+                            <button
+                              aria-label="Copy strict relay settings"
+                              data-copy-code={strictRelayConfig}
+                              type="button"
+                            >
+                              <Copy size={16} strokeWidth={2} />
+                            </button>
+                          </div>
+                        </div>
                       </section>
 
                       <section class="source-node-note-panel">
@@ -766,10 +1001,7 @@ function buildCharacteristicsSections(html: string) {
                         <p>Tutorials</p>
                         <div>
                           {nodeRunnerTutorials.map((tutorial, index) => (
-                            <a
-                              class:list={[index === 0 ? "is-active" : ""]}
-                              href={`#node-runner-${tutorial.id}`}
-                            >
+                            <a href={`#node-runner-${tutorial.id}`}>
                               <span>{String(index + 1).padStart(2, "0")}</span>
                               {tutorial.title}
                             </a>
@@ -787,73 +1019,23 @@ function buildCharacteristicsSections(html: string) {
                           <h3>Install and run Knots</h3>
                         </div>
 
-                        <section
-                          class="source-node-tutorial source-node-tutorial-selected"
-                          id={`node-runner-${nodeRunnerTutorials[0].id}`}
-                        >
-                          <div class="source-node-tutorial-header">
-                            <div>
-                              <p>
-                                <span>01</span>
-                                {nodeRunnerTutorials[0].title}
-                              </p>
-                              <small>{nodeRunnerTutorials[0].summary}</small>
-                            </div>
-                            <a
-                              href={nodeRunnerTutorials[0].source}
-                              rel="noreferrer"
-                              target="_blank"
-                            >
-                              Source
-                              <ExternalLink size={15} strokeWidth={2} />
-                            </a>
-                          </div>
-
-                          <ol class="source-node-steps">
-                            {nodeRunnerTutorials[0].steps?.map(
-                              (step, index) => (
-                                <li>
-                                  <p>{step.label}</p>
-                                  <div class="source-node-code">
-                                    <div class="source-node-pre">
-                                      <code>{step.code}</code>
-                                    </div>
-                                    <button
-                                      aria-label={`Copy command ${index + 1}`}
-                                      data-copy-code={step.code}
-                                      type="button"
-                                    >
-                                      <Copy size={16} strokeWidth={2} />
-                                    </button>
-                                  </div>
-                                </li>
-                              ),
-                            )}
-                          </ol>
-                        </section>
-
                         <div class="source-node-tutorial-list">
-                          {nodeRunnerTutorials
-                            .slice(1)
-                            .map((tutorial, index) => (
-                              <section
-                                class="source-node-tutorial-row"
-                                id={`node-runner-${tutorial.id}`}
-                              >
+                          {nodeRunnerTutorials.map((tutorial, index) => (
+                            <section
+                              class="source-node-tutorial"
+                              id={`node-runner-${tutorial.id}`}
+                            >
+                              <div class="source-node-tutorial-header">
                                 <div>
-                                  <span>
-                                    {String(index + 2).padStart(2, "0")}
-                                  </span>
-                                  <h4>{tutorial.title}</h4>
-                                </div>
-                                <p>{tutorial.summary}</p>
-                                <div class="source-node-command-list">
-                                  {tutorial.commands?.map((command) => (
-                                    <code>{command}</code>
-                                  ))}
+                                  <p>
+                                    <span>
+                                      {String(index + 1).padStart(2, "0")}
+                                    </span>
+                                    {tutorial.title}
+                                  </p>
+                                  <small>{tutorial.summary}</small>
                                 </div>
                                 <a
-                                  aria-label={`${tutorial.title} source`}
                                   href={tutorial.source}
                                   rel="noreferrer"
                                   target="_blank"
@@ -861,14 +1043,68 @@ function buildCharacteristicsSections(html: string) {
                                   Source
                                   <ExternalLink size={15} strokeWidth={2} />
                                 </a>
-                                <a
-                                  aria-label={`Jump to ${tutorial.title}`}
-                                  href={`#node-runner-${tutorial.id}`}
-                                >
-                                  <ArrowDown size={16} strokeWidth={2} />
-                                </a>
-                              </section>
-                            ))}
+                              </div>
+
+                              {tutorial.note ? (
+                                <p class="source-node-tutorial-note">
+                                  {tutorial.note}
+                                </p>
+                              ) : null}
+
+                              {tutorial.steps?.length ? (
+                                <ol class="source-node-steps">
+                                  {tutorial.steps.map((step, stepIndex) => (
+                                    <li>
+                                      <p>{step.label}</p>
+                                      {step.note ? (
+                                        <small>{step.note}</small>
+                                      ) : null}
+                                      {step.code ? (
+                                        <div class="source-node-code">
+                                          <div class="source-node-pre">
+                                            <code>{step.code}</code>
+                                          </div>
+                                          <button
+                                            aria-label={`Copy ${tutorial.title} command ${stepIndex + 1}`}
+                                            data-copy-code={step.code}
+                                            type="button"
+                                          >
+                                            <Copy size={16} strokeWidth={2} />
+                                          </button>
+                                        </div>
+                                      ) : null}
+                                    </li>
+                                  ))}
+                                </ol>
+                              ) : null}
+
+                              {tutorial.commands?.length ? (
+                                <div class="source-node-command-panel">
+                                  <p>Commands / choices</p>
+                                  <div class="source-node-command-list">
+                                    {tutorial.commands.map((command) => (
+                                      <code>{command}</code>
+                                    ))}
+                                  </div>
+                                </div>
+                              ) : null}
+
+                              {tutorial.links?.length ? (
+                                <div class="source-node-link-list">
+                                  {tutorial.links.map((link) => (
+                                    <a
+                                      href={link.href}
+                                      rel="noreferrer"
+                                      target="_blank"
+                                    >
+                                      {link.label}
+                                      <ExternalLink size={15} strokeWidth={2} />
+                                    </a>
+                                  ))}
+                                </div>
+                              ) : null}
+                            </section>
+                          ))}
                         </div>
                       </div>
                     </div>

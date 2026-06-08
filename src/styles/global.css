@@ -2755,6 +2755,40 @@ a:hover {
   color: var(--foreground);
 }
 
+.source-node-settings {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.05rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.source-node-settings > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.source-node-settings p {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.source-node-settings span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.source-node-settings .source-node-code {
+  grid-column: auto;
+}
+
 .source-node-policy-panel code,
 .source-node-command-list code {
   border: 1px solid var(--border);
@@ -2845,13 +2879,6 @@ a:hover {
   color: var(--foreground);
 }
 
-.source-node-tutorial-nav a.is-active {
-  border-left: 0;
-  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
-  color: var(--accent);
-  font-weight: 700;
-}
-
 .source-node-tutorial-nav span {
   color: var(--accent);
   font-family: var(--font-mono);
@@ -2886,13 +2913,14 @@ a:hover {
 }
 
 .source-node-tutorial {
+  scroll-margin-top: 6rem;
   min-width: 0;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
   padding: clamp(1rem, 2vw, 1.25rem);
 }
 
-.source-node-tutorial-selected {
+.source-node-tutorial:target {
   border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
   box-shadow: inset 0 2px 0 var(--accent);
 }
@@ -2933,7 +2961,7 @@ a:hover {
 }
 
 .source-node-tutorial-header a,
-.source-node-tutorial-row a,
+.source-node-link-list a,
 .source-node-detail-panel a {
   display: inline-flex;
   gap: 0.35rem;
@@ -2945,7 +2973,7 @@ a:hover {
 }
 
 .source-node-tutorial-header a:hover,
-.source-node-tutorial-row a:hover,
+.source-node-link-list a:hover,
 .source-node-detail-panel a:hover {
   color: var(--accent);
 }
@@ -2983,6 +3011,14 @@ a:hover {
   color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.5;
+}
+
+.source-node-steps li > small {
+  grid-column: 2;
+  margin-top: -0.45rem;
+  color: var(--dim);
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 .source-node-code {
@@ -3033,53 +3069,33 @@ a:hover {
 
 .source-node-tutorial-list {
   display: grid;
-  border-top: 1px solid var(--border);
+  gap: 0.95rem;
 }
 
-.source-node-tutorial-row {
-  display: grid;
-  grid-template-columns:
-    minmax(10rem, 0.9fr) minmax(0, 1fr) minmax(0, 1.35fr)
-    auto auto;
-  gap: 0.85rem;
-  align-items: center;
-  min-width: 0;
-  border-bottom: 1px solid var(--border);
-  padding: 0.85rem 0;
-}
-
-.source-node-tutorial-row > div:first-child {
-  display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 0.65rem;
-  align-items: baseline;
-  min-width: 0;
-}
-
-.source-node-tutorial-row span {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.source-node-tutorial-row h4,
-.source-node-tutorial-row p {
-  margin: 0;
-}
-
-.source-node-tutorial-row h4 {
-  min-width: 0;
-  color: var(--foreground);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.source-node-tutorial-row p {
+.source-node-tutorial-note {
+  margin: 0.9rem 0 0;
   color: var(--muted);
-  font-size: 0.84rem;
-  line-height: 1.45;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.source-node-command-panel {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.9rem;
+}
+
+.source-node-command-panel > p {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
 }
 
 .source-node-command-list {
@@ -3094,6 +3110,13 @@ a:hover {
   overflow: hidden;
   font-size: 0.78rem;
   text-overflow: ellipsis;
+}
+
+.source-node-link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
 }
 
 .source-node-detail-panel {
@@ -3228,16 +3251,6 @@ a:hover {
 
   .source-node-detail-panel {
     grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.45fr);
-  }
-}
-
-@media (max-width: 1023px) {
-  .source-node-tutorial-row {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .source-node-tutorial-row > a {
-    width: fit-content;
   }
 }
 

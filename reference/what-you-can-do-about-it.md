@@ -4,6 +4,10 @@ Source: https://wtfhappenedinfeb2023.com/what-you-can-do-about-it
 
 ## What can you do about it
 
+These actions are mitigation and rate limiting. They do not make spam
+impossible, but they do raise costs, reduce relay, and lower the damage to
+Bitcoin's quality as money.
+
 [As a node runner](https://wtfhappenedinfeb2023.com/what-you-can-do-about-it/as-a-noderunner)
 
 - Use [Bitcoin Knots](https://github.com/bitcoinknots/bitcoin)
@@ -26,18 +30,25 @@ It is true though that if it's a full node, it could at least help someone synch
 
 - Point your hashrate to [Ocean](https://ocean.xyz/getstarted) ("ocean" or "core+antispam" block template), or specifically "Monetary use only" ("Data free").
 
+- Do not assume FPPS is automatically more profitable. Ocean's [TIDES](https://ocean.xyz/docs/tides) model is not FPPS, so earnings have pool-luck variance, but it is designed to trend toward expected value while giving miners an auditable split of the block reward and transaction fees.
+
 - Use [Rent Some Hash](https://rentsomehash.com/) if you want to rent hashrate and point it at a DATUM/OCEAN setup.
 
 [As a developer](https://wtfhappenedinfeb2023.com/what-you-can-do-about-it/as-a-developer)
 
-- PR for changed defaults ([inscription](https://github.com/bitcoin/bitcoin/pull/28408) or [baremultisig](https://github.com/bitcoin/bitcoin/pull/28217))
+- PR for changed defaults ([inscription](https://github.com/bitcoin/bitcoin/pull/28408) or [baremultisig](https://github.com/bitcoin/bitcoin/pull/28217) or [OP_RETURN](https://github.com/bitcoin/bitcoin/pull/32406)).
 
-- Support Knots
+- Review and contribute to [Bitcoin Knots](https://github.com/bitcoinknots/bitcoin).
 
 - Encourage other nodes to adopt Knots (or patch Core).
 
 [As a pleb](https://wtfhappenedinfeb2023.com/what-you-can-do-about-it/as-a-pleb)
 
 Be vocal about your concerns, join discussions [[1](https://delvingbitcoin.org/t/bug-spammers-get-bitcoin-blockspace-at-discounted-price-lets-fix-it/327)], [[2](https://github.com/bitcoin/bitcoin/issues/29187)], [[3](https://bitcoin.stackexchange.com/questions/121734/why-cant-nodes-have-the-relay-option-to-disallow-certain-transaction-types)], ask questions, share knowledge. Remember that discussions are not always there to persuade the detractor, but to form an opinion of observers. Your voice **is** the market force.
+
+When someone says "you can't do anything about it," answer the actual claim:
+Bitcoin policy is not all-or-nothing. Node policy, mining templates, software
+defaults, and public pressure each mitigate damage even when no single lever
+solves everything.
 
 Make sure to bookmark this resource, and when you see the fallacious line of reasoning — refer to the relevant section.

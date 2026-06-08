@@ -8,6 +8,13 @@ Source: https://wtfhappenedinfeb2023.com/what-you-can-do-about-it/as-a-noderunne
 - Run a [BIP-110 node](https://bip110.org/) if you want consensus-level reduced-data enforcement
 - If you are using Knots 25.1 or later, set `-permitbaremultisig=0` and `-datacarrier=0`
 
+Strict relay summary for Bitcoin Knots 25.1+:
+
+```text
+permitbaremultisig=0
+datacarrier=0
+```
+
 A more detailed version of these instructions can be found below.
 
 Running a node on a Raspberry Pi?
