@@ -29,7 +29,7 @@ export const narrativeReceipts = [
       evidenceSummary:
         "Renaud Cuny reported 46% non-monetary blockspace over the last 90 days, up from 37% six months earlier.",
       caveat:
-        "Classification is source-defined and should not be mixed with other spam definitions without saying so.",
+        "This source uses its own non-monetary classification, so compare it with other spam estimates cautiously.",
     },
   },
   {
@@ -99,7 +99,7 @@ export const narrativeReceipts = [
       evidenceSummary:
         "The report states that non-monetary data added 76 GB+ to the blockchain over ~4 years.",
       caveat:
-        "This receipt supports storage impact; scam-market claims need separate sources.",
+        "This receipt supports storage impact. It does not substantiate separate claims about scam markets.",
     },
   },
   {

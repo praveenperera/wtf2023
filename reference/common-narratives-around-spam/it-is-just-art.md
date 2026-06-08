@@ -10,4 +10,4 @@ Calling arbitrary data "art" does not change the resource claim. When the data i
 
 Renaud Cuny reported 76 GB of non-monetary data added over 3.5 years in Bitcoin Block Space Weekly Issue #3, published 2025-12-22. Mempool Research reported that inscription-related UTXOs accounted for 29.6% of the UTXO set count at block 892385 in its UTXO Set Report, published 2025-05-18.
 
-Those sources support the storage and UTXO impact. Claims about stolen art, pump-and-dump activity, or organized market manipulation need their own sources and should not be bundled into this argument without receipts.
+The cited sources support the storage and UTXO impact. They do not substantiate separate claims about stolen art, pump-and-dump activity, or organized market manipulation.
