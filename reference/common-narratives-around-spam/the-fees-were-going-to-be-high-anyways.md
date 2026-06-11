@@ -8,7 +8,7 @@ Because Bitcoiners strongly believe that Bitcoin will be adopted by more users w
 
 A common argument presented about the fact that spam induces high fees is that we all knew that fees were always going to be high, so high fees shouldn't be an issue.
 
-This is argument is flawed for two reasons:
+This argument is flawed for two reasons:
 
 1. High fees are not the issue when it comes to spam, **the issue is about the wastefulness and abuse of the network's functions** that cause harm to the network as a whole.
 

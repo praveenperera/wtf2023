@@ -10,7 +10,7 @@ To find out more and what we can do about it, read more below.
 
 ## The impact of scams and spam
 
-Welcome to "WTF Happened in February 2023?", a comprehensive exploration of a significant event that disrupted the Bitcoin network. In early 2023, Bitcoin faced unprecedented challenges due to a surge in both spam and scams, leading to heightened transaction fees and severe network congestion. This website delves into the nature of these malicious activities, their impact on the network, and the broader implications for the Bitcoin community.
+In early 2023, Bitcoin faced a surge of spam and scams that raised fees, congested the mempool, and forced a debate over relay policy and Bitcoin's purpose as money.
 
 This incident had far-reaching consequences:
 

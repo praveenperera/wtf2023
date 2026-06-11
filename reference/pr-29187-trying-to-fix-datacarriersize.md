@@ -4,7 +4,7 @@ Source: https://wtfhappenedinfeb2023.com/pr-29187-trying-to-fix-datacarriersize
 
 ## PR 29187: trying to fix datacarriersize
 
-This section is a collaboration with @[NTeterel](https://x.com/NTeterel) and was adapted from this [article](https://www.cointribune.com/les-devs-de-bitcoin-core-soupconnes-de-corruption/) he previously wrote.
+NTeterel's reporting frames the PR 29187 dispute around data-carrier policy, relay defaults, and who pays for arbitrary data.
 
 Several developers in charge of the most popular Bitcoin client, Bitcoin Core, were being heckled for their passivity towards Inscriptions such as ordinals and other arbitrary data backed used to build ponzis. Bitcoin Core is the most used implementation of the Bitcoin protocol. It is the direct descendant of Satoshi Nakamoto's work. It is both a node and a wallet. Its code is maintained by hundreds of contributors. This is not the only available client (see Detailed installation instructions to learn more about alternatives, and mainly the Bitcoin Knots client, that are not as spam friendly as Core).
 

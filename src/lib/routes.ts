@@ -29,7 +29,7 @@ export const siteRoutes: SiteRoute[] = [
     title: "WTF Happened in Feb 2023?",
     route: "/",
     sourcePaths: ["reference/index.md"],
-    summary: "Orientation layer for the February 2023 spam wave",
+    summary: "A concise guide to the February 2023 Bitcoin spam wave",
     metaDescription:
       "Learn how the February 2023 Bitcoin spam wave crowded blockspace, pushed users making monetary transactions into higher fees, and made relay policy choices visible.",
     ogImage: "/og/home.png",

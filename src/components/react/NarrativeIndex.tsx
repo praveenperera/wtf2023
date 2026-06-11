@@ -49,7 +49,7 @@ export default function NarrativeIndex({
               className="mt-5 inline-flex items-center gap-2 rounded-md border border-accent/60 bg-surface/80 px-3.5 py-2 text-sm font-medium text-accent no-underline transition-colors hover:border-accent hover:bg-surface-2 hover:text-accent-strong"
               href={item.href}
             >
-              Read source section
+              Read full rebuttal
               <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
             </a>
           </Accordion.Panel>
