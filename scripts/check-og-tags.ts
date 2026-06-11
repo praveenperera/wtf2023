@@ -11,6 +11,7 @@ const routes = [
   "/common-narratives-around-spam/",
   "/what-you-can-do-about-it/",
   "/core-devs/",
+  "/fixing-a-bug-through-documentation-change/",
   "/history/",
   "/resources/",
 ];

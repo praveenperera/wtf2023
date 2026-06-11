@@ -85,7 +85,7 @@ export default function ChartPanel({
   xKey,
   series,
   type = "line",
-  emptyNote = "This source has no committed rows yet; the refresh script preserves the missing state instead of inventing values",
+  emptyNote = "No chart rows are available for this view yet.",
   frame = true,
   variant = "default",
   percentAxis = false,

@@ -14,7 +14,7 @@ Because of the two previous points, it is evident that miners must be **aligned 
 
 Spam being by definition wasteful and often serving malicious intents not only affects the efficiency of the Bitcoin system, which is already quite limited due to the blocksize, in addition to **affecting its main usage as an electronic cash, which is where it derives its value from.** If spam starts dominating the content of blocks, which is currently the case as of December 2023, it will displace monetary transactions outside of the network and **degrade its value as an electronic cash**. This is already the case as can be seen from the increase in transaction volume on the Liquid network or the volume increase of the Canadian Purpose ETF BTCC, which directly affects the usage from which Bitcoin derives its long term value.
 
-[Bob Burnett](https://x.com/boomer_btc) discussed this in a [Meme Factory podcast](https://www.youtube.com/live/RT3xPdSdANY) and explained this position from the point of view of a miner:
+[Bob Burnett](https://x.com/boomer_btc) discussed this in a [podcast interview](https://www.youtube.com/live/RT3xPdSdANY) and explained this position from the point of view of a miner:
 
 > So, like, I find it funny, some people have been critical saying, well, you know, if you're a miner and you're mining with Ocean and you're not getting every fricking sat in every single block that you're doing a disservice to your investors or your owners or you're not maximizing economic advantage.
 

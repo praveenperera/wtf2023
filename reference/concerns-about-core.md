@@ -12,7 +12,7 @@ This page is not a claim that every contributor acts in bad faith. It maps conce
 
 Concern: documentation changed after inscriptions exposed a gap between user expectations and policy behavior.
 
-What happened: local source material documents a change from language about the maximum size of data in data-carrier transactions to language scoped to data-carrying raw scriptPubKeys.
+What happened: the documented record shows a change from language about the maximum size of data in data-carrier transactions to language scoped to data-carrying raw scriptPubKeys.
 
 Why it matters: changing docs instead of behavior can redefine a policy limit after users notice the implementation did not cover newer data paths.
 

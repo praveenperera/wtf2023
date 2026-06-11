@@ -152,7 +152,7 @@ There is also a guide for Debian/Ubuntu, which is a bit easier than Alpine Linux
 
 Install like any other app.
 
-Optionally read the detailed instructions and video tutorial for migrating from Bitcoin Core to Bitcoin Knots: [https://docs.mempool.guide/page/migrationumbrel.html](https://docs.mempool.guide/page/migrationumbrel.html).
+Optionally read the detailed instructions and video tutorial for switching from Bitcoin Core to Bitcoin Knots: [Umbrel setup guide](https://docs.mempool.guide/page/migrationumbrel.html).
 
 ### Umbrel Community edition
 
@@ -167,7 +167,7 @@ If you don't have a node yet:
    - Click open
    - Install the version for your platform
 
-### Umbrel manual migration
+### Umbrel manual switch
 
 These steps save the data of your current node and transfer it to the new one to avoid a new long synchronization.
 
@@ -189,13 +189,13 @@ These steps save the data of your current node and transfer it to the new one to
    cp -r ~/umbrel/app-data/!(bitcoin) ~/umbrel/backup
    ```
 
-4. Delete the original files:
+4. Delete non-Bitcoin app-data files from the active app-data directory:
 
    ```sh
    sudo rm -r ~/umbrel/app-data/!(bitcoin)
    ```
 
-5. Move the chain to the root so it is not deleted when removing the old node:
+5. Move the chain to the root before removing the current node:
 
    ```sh
    mv ~/umbrel/app-data/bitcoin/data/ ~/umbrel/
@@ -231,13 +231,13 @@ The command above can take up to five minutes to be fully effective.
    sudo ./umbrel/scripts/app install btc-knotsx86
    ```
 
-9. Stop the new node so you can restore data:
+9. Stop the Knots containers before moving data:
 
    ```sh
    sudo docker container stop btc-knots_server_1 btc-knots_bitcoind_1 btc-knots_i2pd_daemon_1 btc-knots_tor_1 btc-knots_app_proxy_1
    ```
 
-10. Restore data:
+10. Move data:
 
     ```sh
     sudo rm -r ~/umbrel/app-data/btc-knots/data/*
@@ -252,7 +252,7 @@ The command above can take up to five minutes to be fully effective.
 
 And there you go, you now have Ordisrespector through Knots on your node.
 
-### Manual Linux x86-64 migration from Core to Bitcoin Knots
+### Manual Linux x86-64 switch from Core to Bitcoin Knots
 
 1. Log in to your account in a Linux system, such as remotely via SSH. If Bitcoin processes are running, terminate them.
 2. Copy and substitute binary files in their default location. You may also want to verify authenticity of the files by comparing their checksums with the ones listed at [bitcoinknots.org](http://bitcoinknots.org).

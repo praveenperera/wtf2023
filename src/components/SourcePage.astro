@@ -71,7 +71,7 @@ const sourceVisualsByRoute: Partial<
     {
       label: "Blockspace",
       title: "Monetary and non-monetary uses compete in one block auction",
-      body: "Use the committed chart panels and pressure map on the overview for source-backed values",
+      body: "Compare fee pressure, blockspace share, and UTXO pressure in the overview charts",
       value: "shared market",
       tone: "accent",
     },
@@ -79,14 +79,14 @@ const sourceVisualsByRoute: Partial<
       label: "Fees",
       title:
         "Users making monetary transactions still had to clear higher fee pressure",
-      body: "The local snapshots keep the data visible without embedding copied screenshots",
-      value: "local data",
+      body: "The charts make the fee-pressure trend visible without overstating precision",
+      value: "fee trend",
       tone: "payment",
     },
     {
       label: "Nodes",
       title: "Long-lived outputs raise validation and storage costs",
-      body: "UTXO pressure is represented with generated series data instead of copied screenshots",
+      body: "The UTXO series tracks long-lived validation and storage pressure",
       value: "UTXO set",
       tone: "utxo",
     },
@@ -111,7 +111,7 @@ const sourceVisualsByRoute: Partial<
     {
       label: "Policy",
       title: "Relay policy is local behavior, not a consensus rule",
-      body: "Narrative cards compare claims using source text rather than linked screenshots",
+      body: "Narrative cards compare claims against dated evidence",
       value: "local choice",
       tone: "utxo",
     },
@@ -141,14 +141,14 @@ const sourceVisualsByRoute: Partial<
     {
       label: "Miners",
       title: "Select templates and submission paths that match your policy",
-      body: "The page uses direct actions instead of linked screenshots of the old site",
+      body: "The page leads with direct actions and supporting context",
       value: "template",
       tone: "accent",
     },
     {
       label: "Developers",
       title: "Improve defaults, docs, and review paths where policy lives",
-      body: "Implementation details remain text-native so they can be searched and copied",
+      body: "Configuration details stay searchable and easy to apply",
       value: "defaults",
       tone: "payment",
     },
@@ -158,21 +158,21 @@ const sourceVisualsByRoute: Partial<
       label: "PR 29187",
       title:
         "The dispute centered on whether existing limits covered new data paths",
-      body: "A compact issue map replaces copied media links while preserving the page context",
+      body: "A compact issue map connects the policy gap to user costs",
       value: "policy gap",
       tone: "risk",
     },
     {
       label: "Docs",
       title: "Documentation changes can redefine how a limit is understood",
-      body: "The page keeps the claim trail in article sections rather than screenshot links",
+      body: "The page follows the claim trail through dated article sections",
       value: "meaning",
       tone: "accent",
     },
     {
       label: "Review",
       title: "The review question is about defaults, limits, and user cost",
-      body: "First-party panels summarize the same relationship without old media links",
+      body: "Summary panels keep defaults, limits, and user costs connected",
       value: "cost",
       tone: "utxo",
     },
@@ -181,14 +181,14 @@ const sourceVisualsByRoute: Partial<
     {
       label: "Relay",
       title: "Free relay has repeatedly created room for non-monetary pressure",
-      body: "Timeline context is represented in structured text instead of copied images",
+      body: "Timeline context highlights recurring relay-pressure patterns",
       value: "recurring",
       tone: "accent",
     },
     {
       label: "Private paths",
       title: "Direct-to-miner submission changes what public relay can observe",
-      body: "The page keeps the channel distinction visible without external media links",
+      body: "The page separates public relay from direct submission paths",
       value: "out of band",
       tone: "purple",
     },
@@ -196,7 +196,7 @@ const sourceVisualsByRoute: Partial<
       label: "Earlier cases",
       title:
         "Older abuse cases help separate consensus bugs from policy pressure",
-      body: "The history page stays self-contained with first-party explanation panels",
+      body: "The history page stays self-contained with concise explanation panels",
       value: "precedent",
       tone: "risk",
     },
@@ -239,7 +239,7 @@ const actionLevers = [
   },
   {
     role: "Pleb",
-    action: "Share receipts",
+    action: "Share evidence",
     detail:
       "Frame this as mitigation and rate limiting, not perfect prevention",
   },
@@ -433,7 +433,7 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
   {
     id: "diy-node",
     title: "DIY node",
-    summary: "Use a DIY guide for Core-to-Knots migration",
+    summary: "Use a DIY guide for switching from Core to Knots",
     source:
       "https://jesterhodl.com/raspibolt-replacing-bitcoin-core-with-knots/",
     links: [
@@ -465,12 +465,12 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
       },
       {
         label:
-          "Use the migration guide if you are replacing an existing Bitcoin Core node",
+          "Use the switching guide if you are replacing an existing Bitcoin Core node",
       },
     ],
     links: [
       {
-        label: "Umbrel migration guide",
+        label: "Umbrel switching guide",
         href: "https://docs.mempool.guide/page/migrationumbrel.html",
       },
     ],
@@ -501,8 +501,8 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
   },
   {
     id: "umbrel-manual-migration",
-    title: "Umbrel manual migration",
-    summary: "Move chain data before replacing the old node",
+    title: "Umbrel manual switch",
+    summary: "Move chain data before installing Knots",
     source: "https://github.com/Retropex/Bitcoin-store",
     note: "These steps move existing chain data so the replacement node does not need a full resync.",
     steps: [
@@ -519,16 +519,16 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
         code: "cp -r ~/umbrel/app-data/!(bitcoin) ~/umbrel/backup",
       },
       {
-        label: "Delete the original non-Bitcoin app-data files",
+        label: "Delete non-Bitcoin app-data files from the active app-data directory",
         code: "sudo rm -r ~/umbrel/app-data/!(bitcoin)",
       },
       {
         label:
-          "Move the Bitcoin chain data so it is not deleted with the old node",
+          "Move the Bitcoin chain data before removing the current node",
         code: "mv ~/umbrel/app-data/bitcoin/data/ ~/umbrel/",
       },
       {
-        label: "Uninstall the old Bitcoin node",
+        label: "Uninstall the current Bitcoin node",
         code: "sudo ./umbrel/scripts/app uninstall bitcoin",
         note: "If Umbrel says Tor could not be removed, that is normal.",
       },
@@ -547,11 +547,11 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
         code: "sudo ./umbrel/scripts/app install btc-knotsx86",
       },
       {
-        label: "Stop the new node before restoring data",
+        label: "Stop the Knots containers before moving data",
         code: "sudo docker container stop btc-knots_server_1 btc-knots_bitcoind_1 btc-knots_i2pd_daemon_1 btc-knots_tor_1 btc-knots_app_proxy_1",
       },
       {
-        label: "Restore chain data into the new node",
+        label: "Move chain data into the Knots app data directory",
         code: "sudo rm -r ~/umbrel/app-data/btc-knots/data/*\nmv ~/umbrel/data/ ~/umbrel/app-data/btc-knots/*",
       },
       {
@@ -562,7 +562,7 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
   },
   {
     id: "manual-linux-x86-64-migration-from-core-to-bitcoin-knots",
-    title: "Manual Linux x86-64 migration",
+    title: "Manual Linux x86-64 switch",
     summary: "Replace binaries, update bitcoin.conf, then start",
     source: "http://bitcoinknots.org",
     steps: [
@@ -816,7 +816,7 @@ function buildCharacteristicsSections(html: string) {
           <article class="article-source min-w-0">
             <div class="source-narrative-intro">
               <p class="section-label">Rebuttal index</p>
-              <h2>Claims, receipts, and short answers</h2>
+              <h2>Claims, evidence, and short answers</h2>
               <p>
                 Use these cards during arguments: each one separates the claim,
                 a short rebuttal, and the dated source behind it.
@@ -1113,8 +1113,8 @@ function buildCharacteristicsSections(html: string) {
                       <div>
                         <p class="source-action-eyebrow">Need more detail?</p>
                         <p>
-                          See the Bitcoin Knots documentation and migration
-                          guides for advanced configuration, datadir migration,
+                          See the Bitcoin Knots documentation and setup guides
+                          for advanced configuration, datadir transfer,
                           and validation steps.
                         </p>
                       </div>
@@ -1132,7 +1132,7 @@ function buildCharacteristicsSections(html: string) {
                           rel="noreferrer"
                           target="_blank"
                         >
-                          Migration guides
+                          Umbrel setup guide
                           <ExternalLink size={15} strokeWidth={2} />
                         </a>
                         <a
@@ -1171,7 +1171,7 @@ function buildCharacteristicsSections(html: string) {
               </div>
               {completeReceiptClips.length ? (
                 <section class="source-clip-receipts">
-                  <p class="source-action-eyebrow">Receipts to clip</p>
+                  <p class="source-action-eyebrow">Evidence clips</p>
                   {completeReceiptClips.map((clip) => (
                     <article>
                       <h3>{clip.title}</h3>

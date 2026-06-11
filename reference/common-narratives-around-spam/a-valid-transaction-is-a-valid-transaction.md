@@ -14,7 +14,7 @@ Discussing the **validity of the transaction is not the issue** and participants
 
 - **Can the purpose of these transactions be achieved more efficiently?**
 
-- **Are these transactions abusing some of Bitcoin's functions to circumvent limitations put in place to preserve the network's resources?**
+- **Are these transactions abusing some of Bitcoin's functions to circumvent limitations put in place to protect the network's resources?**
 
 Another important detail is that some of the spam from the current wave, mostly inscription-based spam, can be considered to not be paying a fair fee as it circumvents the fair fee market by injecting data into the segregated witness space in order to benefit from a x0.25 discount. This is not the case for bare multisig based spam or *OP_RETURN* based spam.
 

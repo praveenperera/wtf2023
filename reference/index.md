@@ -4,7 +4,7 @@ Source: https://wtfhappenedinfeb2023.com/
 
 Scams and spam on Bitcoin pose multifaceted threats to the integrity and efficiency of the network. This particular wave of spam started from a bug exploit in Feb 2023. Such abuse not only disrupts the network's primary function as a peer-to-peer electronic cash system but also compromises its long-term viability and value proposition.
 
-While spam may attempt to evade through technical manoeuvres, proactive measures, such as updating default filters, remain crucial to mitigating its impact and preserving Bitcoin's sound monetary properties. Spam has been demonstrably harmful on several metrics, most blatantly in its impact on total transaction volume:
+While spam may attempt to evade through technical manoeuvres, proactive measures, such as updating default filters, remain crucial to mitigating its impact and protecting Bitcoin's sound monetary properties. Spam has been demonstrably harmful on several metrics, most blatantly in its impact on total transaction volume:
 
 To find out more and what we can do about it, read more below.
 

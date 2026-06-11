@@ -184,17 +184,16 @@ function sourceDateLabel(row: SnapshotRow) {
             </div>
           </section>
           <section class="current-snapshot-methodology-strip">
-            <h3>Source methodology</h3>
+            <h3>Methodology</h3>
             <p>
-              The February charts use committed sampled local series. The
-              snapshot cards use later external reports and the committed
-              Statoshi UTXO series. Aggregate UTXO database growth is an
-              aggregate trend; inscription-related UTXO share is attribution
-              evidence.
+              The February charts use sampled block series. The snapshot cards
+              use later external reports and the Statoshi UTXO series.
+              Aggregate UTXO database growth is an aggregate trend;
+              inscription-related UTXO share is attribution evidence.
             </p>
             <p>
               {snapshot.chainGrowth.label}: {snapshot.chainGrowth.value}.{" "}
-              {snapshot.chainGrowth.detail}. Source:{" "}
+              {snapshot.chainGrowth.detail}. Report:{" "}
               <a
                 href={snapshot.chainGrowth.sourceUrl}
                 rel="noreferrer"

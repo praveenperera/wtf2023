@@ -90,7 +90,7 @@ export const siteRoutes: SiteRoute[] = [
     ],
     summary: "Common counterarguments and rebuttals",
     metaDescription:
-      "Review common pro-spam arguments and the source-backed rebuttals that separate consensus validity, relay policy, miner incentives, and user choice.",
+      "Review common pro-spam arguments and evidence-backed rebuttals that separate consensus validity, relay policy, miner incentives, and user choice.",
     ogImage: "/og/narratives.png",
     ogImageAlt: "Common Bitcoin spam narratives and rebuttals",
     takeaway:
@@ -112,9 +112,9 @@ export const siteRoutes: SiteRoute[] = [
     summary:
       "Role-based action paths for node runners, miners, developers, and plebs",
     metaDescription:
-      "Choose concrete actions for node runners, miners, developers, and everyday users who want Bitcoin blockspace preserved for monetary use.",
+      "Choose concrete actions for node runners, miners, developers, and everyday users who want Bitcoin blockspace kept available for monetary use.",
     ogImage: "/og/actions.png",
-    ogImageAlt: "Actions to preserve Bitcoin blockspace for monetary use",
+    ogImageAlt: "Actions to keep Bitcoin blockspace available for monetary use",
     takeaway:
       "Users can change relay policy, mining template choices, software defaults, and public discussion",
     order: 4,
@@ -129,7 +129,7 @@ export const siteRoutes: SiteRoute[] = [
       "reference/fixing-a-bug-through-documentation-change.md",
       "reference/concerns-about-core.md",
     ],
-    summary: "Source-backed issue map for defaults, process, and policy",
+    summary: "Evidence-backed issue map for defaults, process, and policy",
     metaDescription:
       "Follow the PR 29187 dispute over data-carrier limits, relay defaults, documentation changes, and who bears the cost of arbitrary data.",
     ogImage: "/og/core-devs.png",

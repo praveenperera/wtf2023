@@ -119,7 +119,7 @@ export default function RoleActions({ roles }: { roles: Role[] }) {
                     <p className={sectionLabelClass}>Full instructions</p>
                   </div>
                   <p className="max-w-3xl text-base leading-7 text-muted">
-                    Open the complete role guide and source-backed context.
+                    Open the complete role guide and supporting context.
                   </p>
                   <ArrowRight
                     aria-hidden="true"

@@ -43,7 +43,7 @@ Articles and content about the issue
 - [Descriptivists vs Prescriptivists](https://jesterhodl.com/p/c5515a25-ea04-42e1-bad2-06bd3dccea96/), by JesterHodl
 - [SPAMBUSTERS - Bitcoin Anti-Spam Initiative Hub](https://spambusters.notion.site/spambusters/SPAMBUSTERS-8f63364214204dc2b258468bd6a2a0c8), by @GhostOfPashka
 - [Stephan Livera - Bitcoin Spam (Ordinals) Red Herrings](https://stephanlivera.substack.com/p/bitcoin-spam-ordinals-red-herrings)
-- [BITCOINALLCAPS - Bitcoin Filters Work By Default, And That’s a Good Thing!](https://stacker.news/items/397842), original post here
+- [BITCOINALLCAPS - Bitcoin Filters Work By Default, And That’s a Good Thing!](https://stacker.news/items/397842), related post
 - [2024-01-01 Witness Discount (mispricing) exploit in Bitcoin explained](https://youtu.be/WtrBlQJktxg)
 - [CVE-2023-50428](https://nvd.nist.gov/vuln/detail/CVE-2023-50428)
 - [Defend Bitcoin against spam attack](https://open.spotify.com/episode/05NP0FLPvO5gylGFxCDF0J)

@@ -18,7 +18,7 @@ export const narrativeReceipts = [
     id: "there-is-nothing-you-can-do-about-it",
     claim: "There is nothing you can do about it",
     rebuttal:
-      "Filters, miner policy, software defaults, and user migration all change incentives. Non-action is a choice.",
+      "Filters, miner policy, software defaults, and users changing software all change incentives. Non-action is a choice.",
     href: "#there-s-nothing-you-can-do-about-it",
     receipt: {
       sourceTitle: "Bitcoin Block Space Weekly Issue #26",
@@ -64,7 +64,7 @@ export const narrativeReceipts = [
       evidenceSummary:
         "The report found 49.1% of all UTXOs under 1000 sats and 29.6% inscription-related UTXOs.",
       caveat:
-        "This receipt supports resource impact, not intent for every individual transaction.",
+        "This evidence supports resource impact, not intent for every individual transaction.",
     },
   },
   {
@@ -81,7 +81,7 @@ export const narrativeReceipts = [
       evidenceSummary:
         "The report separates standard and nonstandard OP_RETURN policy categories and discusses policy default changes around Bitcoin Core v30.",
       caveat:
-        "This receipt explains policy categories; it is not a general legal definition of censorship.",
+        "This evidence explains policy categories; it is not a general legal definition of censorship.",
     },
   },
   {
@@ -99,7 +99,7 @@ export const narrativeReceipts = [
       evidenceSummary:
         "The report states that non-monetary data added 76 GB+ to the blockchain over ~4 years.",
       caveat:
-        "This receipt supports storage impact. It does not substantiate separate claims about scam markets.",
+        "This evidence supports storage impact. It does not substantiate separate claims about scam markets.",
     },
   },
   {
@@ -133,7 +133,7 @@ export const narrativeReceipts = [
       evidenceSummary:
         "The report shows average block size increased from 1.11 MB before block 770,000 to 1.69 MB after.",
       caveat:
-        "This receipt supports network-resource pressure; miner intent requires separate evidence.",
+        "This evidence supports network-resource pressure; miner intent requires separate evidence.",
     },
   },
 ] satisfies NarrativeReceipt[];

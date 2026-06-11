@@ -1,7 +1,7 @@
 # WTF Happened in Feb 2023
 
 Static Astro site for explaining the February 2023 Bitcoin blockspace pressure
-incident with committed data snapshots, chart panels, and source-backed
+incident with saved data snapshots, chart panels, and evidence-focused
 reference pages.
 
 ## Development
@@ -21,7 +21,7 @@ npm run build
 
 ## Data Snapshots
 
-Normal builds do not fetch live data. The site renders charts from committed
+Normal builds do not fetch live data. The site renders charts from saved
 JSON snapshots in `src/data/generated/`, so deployments do not require Dune,
 Statoshi, mempool.space, or Blockchain.com access at page runtime.
 
@@ -39,7 +39,7 @@ Current generated files:
 | `utxo-set.json`                | Statoshi UTXO set dashboard                                   | Fetches UTXO DB size and output count through the Statoshi Graphite endpoint                                                           |
 | `impact-series.json`           | Dune when keyed, otherwise sampled Blockchain.com blocks      | Fetches Dune query results if `DUNE_API_KEY` exists; otherwise rebuilds the February 2023 sampled block classification described below |
 | `blockspace-pressure-map.json` | Dune BTC spam analysis link plus local explanatory categories | Rebuilds a static explanatory map from `scripts/fetch-data.ts`; it is approximate, not a measured category split                       |
-| `data-manifest.json`           | Local refresh manifest                                        | Records the source status and notes for the generated snapshots                                                                        |
+| `data-manifest.json`           | Data refresh manifest                                         | Records the source status and notes for the generated snapshots                                                                        |
 
 For `impact-series.json`, the refresh path is:
 

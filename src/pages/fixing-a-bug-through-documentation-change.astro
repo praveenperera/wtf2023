@@ -1,0 +1,316 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { readSourceDocument } from "@/lib/content";
+import { ArrowLeft } from "lucide-react";
+
+const article = readSourceDocument(
+  "reference/fixing-a-bug-through-documentation-change.md",
+);
+const mainSection = article.sections[0];
+const articleHtml = mainSection?.html ?? article.contentHtml;
+
+const articleImages = [
+  {
+    src: "/images/fixing-a-bug-through-documentation-change/datacarriersize-description-change.png",
+    width: 599,
+    height: 748,
+    alt: "Unhosted Marcellus post saying Bitcoin Core v26 changed the datacarriersize description",
+    title: "Datacarriersize description change",
+    caption:
+      "Unhosted Marcellus post about the Bitcoin Core v26 -datacarriersize description change.",
+  },
+  {
+    src: "/images/fixing-a-bug-through-documentation-change/raw-scriptpubkey-help-text.png",
+    width: 598,
+    height: 506,
+    alt: "Unhosted Marcellus post showing the raw scriptPubKey documentation change",
+    title: "Raw scriptPubKey help text",
+    caption:
+      "Unhosted Marcellus post about the raw scriptPubKey help text update.",
+  },
+  {
+    src: "/images/fixing-a-bug-through-documentation-change/broken-rib-photoshop.png",
+    width: 245,
+    height: 206,
+    alt: "Doctor image saying a broken rib was fixed in Photoshop",
+    title: "Broken rib Photoshop image",
+  },
+];
+---
+
+<BaseLayout
+  title={`${article.title} | WTF Happened in Feb 2023?`}
+  description="Bitcoin Core maintainers were criticized after the datacarriersize help text was changed during the inscription spam debate."
+  ogImage="/og/core-devs.png"
+  ogImageAlt="Bitcoin Core developer concerns and documentation-change context"
+>
+  <main class="article-page">
+    <section class="article-hero">
+      <div class="article-shell article-hero-grid">
+        <div class="article-heading">
+          <a class="article-back-link" href="/core-devs/">
+            <ArrowLeft size={16} strokeWidth={2} aria-hidden="true" />
+            Core developer concerns
+          </a>
+          <p class="article-kicker">Bitcoin Core documentation change</p>
+          <h1>{article.title}</h1>
+          <p>
+            Bitcoin Core maintainers were criticized after the datacarriersize
+            help text was changed during the inscription spam debate.
+          </p>
+        </div>
+        <figure class="article-hero-image">
+          <img
+            src={articleImages[2].src}
+            width={articleImages[2].width}
+            height={articleImages[2].height}
+            alt={articleImages[2].alt}
+            decoding="async"
+          />
+          {
+            articleImages[2].caption && (
+              <figcaption>{articleImages[2].caption}</figcaption>
+            )
+          }
+        </figure>
+      </div>
+    </section>
+
+    <section class="article-body">
+      <div class="article-shell article-body-grid">
+        <article class="prose-source prose-article article-prose">
+          {mainSection && <h2>{mainSection.title}</h2>}
+          <div set:html={articleHtml} />
+        </article>
+
+        <aside class="article-images" aria-label="Images">
+          <div class="article-images-heading">
+            <p class="article-kicker">Images</p>
+            <h2>Article images</h2>
+          </div>
+          {
+            articleImages.map((media, index) => (
+              <figure
+                class:list={[
+                  "article-image-item",
+                  index === 2 && "article-image-item-small",
+                ]}
+              >
+                <img
+                  src={media.src}
+                  width={media.width}
+                  height={media.height}
+                  alt={media.alt}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+                <figcaption>
+                  <strong>{media.title}</strong>
+                  {media.caption && <span>{media.caption}</span>}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </aside>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .article-page {
+    min-width: 0;
+  }
+
+  .article-shell {
+    width: min(100% - 2rem, 94rem);
+    margin-inline: auto;
+  }
+
+  .article-hero {
+    border-bottom: 1px solid var(--border);
+    padding-block: clamp(2rem, 4vw, 4rem);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    gap: clamp(1.6rem, 4vw, 4rem);
+    align-items: end;
+  }
+
+  .article-heading {
+    max-width: 58rem;
+  }
+
+  .article-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .article-back-link:hover {
+    color: var(--accent-strong);
+  }
+
+  .article-kicker {
+    margin: 1.5rem 0 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .article-heading h1 {
+    max-width: 17ch;
+    margin: 0.8rem 0 0;
+    color: var(--foreground);
+    font-size: clamp(2.35rem, 5vw, 4rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .article-heading > p:last-child {
+    max-width: 46rem;
+    margin: 1.25rem 0 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.4vw, 1.12rem);
+    line-height: 1.7;
+  }
+
+  .article-hero-image {
+    display: grid;
+    gap: 0.8rem;
+    justify-items: start;
+    margin: 0;
+  }
+
+  .article-hero-image img {
+    width: min(16rem, 100%);
+    height: auto;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .article-hero-image figcaption {
+    max-width: 26rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .article-body {
+    padding-block: clamp(1.6rem, 3vw, 3rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .article-body-grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .article-prose {
+    max-width: 76ch;
+  }
+
+  .article-prose h2 {
+    max-width: 20ch;
+    margin-top: 0;
+    color: var(--foreground);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+
+  .article-images {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .article-images-heading {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.9rem;
+  }
+
+  .article-images-heading .article-kicker {
+    margin-top: 0;
+  }
+
+  .article-images-heading h2 {
+    margin: 0.35rem 0 0;
+    color: var(--foreground);
+    font-size: clamp(1.4rem, 2vw, 1.9rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  .article-image-item {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 74%, transparent);
+    padding: clamp(0.75rem, 1.5vw, 1rem);
+  }
+
+  .article-image-item img {
+    width: 100%;
+    height: auto;
+    background: #000;
+  }
+
+  .article-image-item-small img {
+    width: min(15rem, 100%);
+    justify-self: center;
+    background: var(--surface);
+  }
+
+  .article-image-item figcaption {
+    display: grid;
+    gap: 0.25rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .article-image-item strong {
+    color: var(--foreground);
+    font-size: 0.95rem;
+    font-weight: 650;
+  }
+
+  @media (min-width: 860px) {
+    .article-hero-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.34fr);
+    }
+
+    .article-body-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.56fr);
+    }
+
+    .article-images {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .article-shell {
+      width: min(100% - 1.25rem, 94rem);
+    }
+
+    .article-heading h1 {
+      font-size: clamp(2.05rem, 12vw, 2.85rem);
+    }
+  }
+</style>

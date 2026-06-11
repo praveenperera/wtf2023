@@ -14,7 +14,11 @@ to
 
 AJ Towns and Gibbs ACKed the redefinition ([https://github.com/bitcoin/bitcoin/pull/27832](https://github.com/bitcoin/bitcoin/pull/27832)).
 
-> For non-technical plebs: Bitcoin Core v26 vandalized the description -datacarriersize so that it leaves out the spam, instead of fixing the eklaFocraM%40.gub made the change, @ajtowns and @theinstagibbs gave their ekauqnaf%40.SKCA merged it. @achow101 defends the change.
+> For non-technical plebs: Bitcoin Core v26 vandalized the description -datacarriersize so that it leaves out the spam, instead of fixing the bug.
+>
+> @MarcoFalke made the change, @ajtowns and @theinstagibbs gave their ACKs.
+>
+> @fanquake merged it. @achow101 defends the change.
 
 — Unhosted Marcellus 🚫👻 (@oomahq) January 3, 2024
 
@@ -22,7 +26,7 @@ This was around the same time Luke proposed to extend the applicability of **dat
 
 In other words, **it was realized quite early on that the Bitcoin Core code did not behave according to the description in the documentation but instead of fixing the code, maintainers chose to change the documentation.** Several noderunners have accused maintainers of insidiously reducing the scope of **-Datacarriersize this way.** The aim was to justify inaction on new techniques of data injection into transactions. After the discovery of this stealth change, maintainer Achow made the claim that changing the documentation was somehow a way of eliminating the bug...
 
-> This help text only started specifying "raw scriptP*ubKey" in v26, while the exploit has been known since January.
+> This help text only started specifying "raw scriptPubKey" in v26, while the exploit has been known since January.
 
 > Honestly, it's pretty disingenuous to change the description months after the fact to avoid admitting there is a bug. pic.twitter.com/XhH6w4p034
 
