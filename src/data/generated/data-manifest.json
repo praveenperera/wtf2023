@@ -1,5 +1,5 @@
 {
-  "source": "local refresh manifest",
+  "source": "data refresh manifest",
   "sourceUrl": "scripts/fetch-data.ts",
   "fetchedAt": "2026-05-11T18:51:06.691Z",
   "range": "mixed",
@@ -16,7 +16,7 @@
       "file": "utxo-set.json",
       "status": "fresh",
       "notes": [
-        "Fetched from the Statoshi Graphite render endpoint for the committed generated snapshot"
+        "Fetched from the Statoshi Graphite render endpoint for the generated snapshot"
       ]
     },
     {
@@ -31,7 +31,7 @@
     },
     {
       "file": "blockspace-pressure-map.json",
-      "status": "source-text-approximation",
+      "status": "text-approximation",
       "notes": [
         "This is an explanatory map using approximate ranges, not a measured category split",
         "Direct-to-miner submission is represented as a path rather than a percentage"
@@ -39,8 +39,8 @@
     }
   ],
   "notes": [
-    "Normal builds use committed JSON snapshots only",
+    "Normal builds use saved JSON snapshots only",
     "Dune snapshots are used when available; otherwise sampled Blockchain.com block classification is used",
-    "Statoshi snapshots are included from the committed generated data"
+    "Statoshi snapshots are included from the generated data"
   ]
 }

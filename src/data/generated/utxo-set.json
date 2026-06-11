@@ -907,6 +907,6 @@
     }
   ],
   "notes": [
-    "Fetched from the Statoshi Graphite render endpoint for the committed generated snapshot"
+    "Fetched from the Statoshi Graphite render endpoint for the generated snapshot"
   ]
 }

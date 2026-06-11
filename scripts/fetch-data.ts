@@ -76,7 +76,7 @@ async function main() {
   );
   statuses.push({
     file: "blockspace-pressure-map.json",
-    status: "source-text-approximation",
+    status: "text-approximation",
     notes: pressure.notes,
   });
 
@@ -84,16 +84,16 @@ async function main() {
     join(outDir, "data-manifest.json"),
     `${JSON.stringify(
       {
-        source: "local refresh manifest",
+        source: "data refresh manifest",
         sourceUrl: "scripts/fetch-data.ts",
         fetchedAt,
         range: "mixed",
         columns: ["file", "status", "notes"],
         rows: statuses,
         notes: [
-          "Normal builds use committed JSON snapshots only",
+          "Normal builds use saved JSON snapshots only",
           "Dune snapshots are used when available; otherwise sampled Blockchain.com block classification is used",
-          "Statoshi snapshots are included from the committed generated data",
+          "Statoshi snapshots are included from the generated data",
         ],
       },
       null,
@@ -137,7 +137,7 @@ async function fetchUtxoSet(): Promise<Snapshot> {
   ] as const;
   const rowsByDate = new Map<string, Record<string, string | number | null>>();
   const notes = [
-    "Fetched from the Statoshi Graphite render endpoint for the committed generated snapshot",
+    "Fetched from the Statoshi Graphite render endpoint for the generated snapshot",
   ];
 
   for (const [column, target] of targets) {

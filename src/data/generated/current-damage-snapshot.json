@@ -1,5 +1,5 @@
 {
-  "source": "curated source-backed current damage snapshot",
+  "source": "current damage snapshot",
   "sourceUrl": "https://wtfhappenedinfeb2023.com/stats-about-spam/",
   "fetchedAt": "2026-06-07T00:00:00.000Z",
   "curatedAt": "2026-06-07T00:00:00.000Z",
@@ -33,8 +33,8 @@
       "rangeStart": null,
       "rangeEnd": "2026-05-26",
       "blockHeight": null,
-      "methodology": "Source classification of monetary and non-monetary blockspace",
-      "classificationDefinition": "Non-monetary per source methodology",
+      "methodology": "The report classifies monetary and non-monetary blockspace",
+      "classificationDefinition": "Non-monetary classification from the cited report",
       "status": "verified",
       "tone": "accent",
       "home": true
@@ -51,8 +51,8 @@
       "rangeStart": "2022-07-01",
       "rangeEnd": "2026-06-07",
       "blockHeight": null,
-      "methodology": "Source blockchain analytics pipeline classifying monetary use, Ordinals, OP_RETURN, and other data",
-      "classificationDefinition": "Non-monetary per source methodology",
+      "methodology": "The report's blockchain analytics pipeline classifies monetary use, Ordinals, OP_RETURN, and other data",
+      "classificationDefinition": "Non-monetary classification from the cited report",
       "status": "verified",
       "tone": "risk",
       "home": true
@@ -62,14 +62,14 @@
       "label": "UTXO set growth",
       "value": "4.7 GB -> 10.6 GB",
       "detail": "Jan 2023 to May 2026 Statoshi snapshot",
-      "source": "Local committed Statoshi UTXO set snapshot",
+      "source": "Statoshi UTXO set dashboard",
       "sourceUrl": "https://statoshi.info:3000/d/000000009/unspent-transaction-output-set",
       "publicationDate": null,
       "measuredAt": null,
       "rangeStart": "2023-01-01",
       "rangeEnd": "2026-05-04",
       "blockHeight": null,
-      "methodology": "Committed Statoshi UTXO database size series",
+      "methodology": "Statoshi UTXO database size series",
       "classificationDefinition": "Aggregate UTXO database size, not attribution by itself",
       "status": "verified",
       "tone": "utxo",
@@ -137,7 +137,7 @@
         "value": "34.2%",
         "detail": "largest UTXO type by count"
       },
-      { "label": "p2pkh", "value": "28.8%", "detail": "legacy address type" },
+      { "label": "p2pkh", "value": "28.8%", "detail": "pre-SegWit address type" },
       { "label": "p2wpkh", "value": "26.5%", "detail": "SegWit address type" },
       { "label": "p2sh", "value": "7.9%", "detail": "script hash outputs" }
     ],
@@ -175,7 +175,7 @@
   },
   "notes": [
     "Different sources classify non-monetary activity differently",
-    "Generated data is a committed snapshot curated for this page",
+    "Generated data is a snapshot curated for this page",
     "Aggregate UTXO growth is not the same claim as inscription-related UTXO attribution"
   ]
 }
