@@ -6,11 +6,11 @@ Source: https://wtfhappenedinfeb2023.com/fixing-a-bug-through-documentation-chan
 
 Bitcoin needs a large number of nodes to be decentralized. It is therefore vital to contain the growth of the blockchain and the UTXO set as much as possible. A blockchain cannot be a parking lot for arbitrary data. Unfortunately, Bitcoin Core's maintainers refused to send a strong message by updating the filters. Maintainers Andrew Chow, Gloria Zhao and Marco Falke have been criticized since noderunner [Unhosted Marcellus](https://x.com/oomahq) discovered a **stealth modification to Bitcoin Core's documentation**. Marcellus realized that maintainer Marco Falke rewrote the documentation about **-Datacarriersize just after** the Inscription craze began to redefine its definition from:
 
-> « Maximum size of **data in data carrier transactions** we relay and mine. »
+> Maximum size of **data in data carrier transactions** we relay and mine.
 
 to
 
-> « Relay and mine transactions whose data-carrying **raw scriptPubKey** is of this size or less (80 bytes). »
+> Relay and mine transactions whose data-carrying **raw scriptPubKey** is of this size or less (80 bytes).
 
 AJ Towns and Gibbs ACKed the redefinition ([https://github.com/bitcoin/bitcoin/pull/27832](https://github.com/bitcoin/bitcoin/pull/27832)).
 
@@ -27,7 +27,7 @@ This was around the same time Luke proposed to extend the applicability of **dat
 In other words, **it was realized quite early on that the Bitcoin Core code did not behave according to the description in the documentation but instead of fixing the code, maintainers chose to change the documentation.** Several noderunners have accused maintainers of insidiously reducing the scope of **-Datacarriersize this way.** The aim was to justify inaction on new techniques of data injection into transactions. After the discovery of this stealth change, maintainer Achow made the claim that changing the documentation was somehow a way of eliminating the bug...
 
 > This help text only started specifying "raw scriptPubKey" in v26, while the exploit has been known since January.
-
+>
 > Honestly, it's pretty disingenuous to change the description months after the fact to avoid admitting there is a bug. pic.twitter.com/XhH6w4p034
 
 This contortionism aimed at protecting the inscriptions’ circus is worrying. Faced with this *Commedia dell'arte*, Luke has taken the lead by developing the "ordirespector" patch. Head to the [Install page](https://wtfhappenedinfeb2023.com/what-you-can-do-about-it/as-a-noderunner) to learn more about running this patch or even running an alternative Bitcoin Core client, Bitcoin Knots, that does not relay spammy transactions.
