@@ -37,7 +37,7 @@ export type RouteContent = SiteRoute & {
   documents: SourceDocument[];
 };
 
-const repoRoot = resolve(import.meta.dirname, "../..");
+const repoRoot = process.cwd();
 const inlineStepArrow = renderToStaticMarkup(
   createElement(ChevronRight, {
     "aria-hidden": "true",
