@@ -1,0 +1,42 @@
+---
+type GaugeTone = "accent" | "payment" | "risk";
+
+type Props = {
+  value: number;
+  max: number;
+  label: string;
+  detail: string;
+  source: string;
+  tone?: GaugeTone;
+};
+
+const { value, max, label, detail, source, tone = "accent" } = Astro.props;
+const safeMax = max > 0 ? max : 100;
+const percentage = Math.min(Math.max((value / safeMax) * 100, 0), 100);
+const formattedValue = new Intl.NumberFormat("en", {
+  maximumFractionDigits: 1,
+  minimumFractionDigits: 1,
+}).format(value);
+const toneClassNames: Record<GaugeTone, string> = {
+  accent: "text-accent",
+  payment: "text-payment",
+  risk: "text-risk",
+};
+---
+
+<div
+  aria-label={`${label}: ${formattedValue}% of ${safeMax}% maximum. ${detail}. Source: ${source}`}
+  class="gauge-meter"
+  role="img"
+>
+  <p class="gauge-label">{label}</p>
+  <div class="static-meter" aria-hidden="true">
+    <span style={`width: ${percentage}%;`} class={`static-meter-fill-${tone}`}
+    ></span>
+  </div>
+  <div class="gauge-reading">
+    <span class={toneClassNames[tone]}>{formattedValue}%</span>
+    <small>{detail}</small>
+  </div>
+  <p class="gauge-source">{source}</p>
+</div>

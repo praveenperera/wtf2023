@@ -1,0 +1,43 @@
+---
+type Narrative = {
+  title: string;
+  summary: string;
+  href: string;
+};
+
+type Props = {
+  narratives: Narrative[];
+};
+
+const { narratives } = Astro.props;
+---
+
+<div
+  class="grid overflow-hidden rounded-lg border border-border bg-surface/75 shadow-[0_18px_70px_rgba(0,0,0,0.18)]"
+>
+  {
+    narratives.map((item, index) => (
+      <article class="border-b border-border/80 bg-surface/45 last:border-b-0">
+        <div class="grid grid-cols-[3rem_minmax(0,1fr)] items-start gap-4 px-5 py-5">
+          <span class="font-mono text-base text-accent">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <h3 class="text-lg font-semibold leading-6 text-foreground">
+              {item.title}
+            </h3>
+            <p class="mt-4 max-w-3xl text-base leading-7 text-muted">
+              {item.summary}
+            </p>
+            <a
+              class="mt-5 inline-flex items-center gap-2 rounded-md border border-accent/60 bg-surface/80 px-3.5 py-2 text-sm font-medium text-accent no-underline transition-colors hover:border-accent hover:bg-surface-2 hover:text-accent-strong"
+              href={item.href}
+            >
+              Read full rebuttal
+            </a>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>

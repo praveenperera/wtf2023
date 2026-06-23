@@ -6,6 +6,10 @@ import CurrentDamageSnapshot from "@/components/CurrentDamageSnapshot.astro";
 import GaugeMeter from "@/components/react/GaugeMeter";
 import NarrativeIndex from "@/components/react/NarrativeIndex";
 import RoleActions from "@/components/react/RoleActions";
+import StaticChartPanel from "@/components/StaticChartPanel.astro";
+import StaticGaugeMeter from "@/components/StaticGaugeMeter.astro";
+import StaticNarrativeIndex from "@/components/StaticNarrativeIndex.astro";
+import StaticRoleActions from "@/components/StaticRoleActions.astro";
 import { extractPlainText, readSourceDocument } from "@/lib/content";
 import { navRoutes, siteRoutes } from "@/lib/routes";
 import { ChevronRight } from "lucide-react";
@@ -281,8 +285,8 @@ if (!homeRoute) {
               crowding out monetary use.
             </p>
             <p class="operations-copy">
-              The evidence shows what broke, who paid the cost, and which
-              levers users still have.
+              The evidence shows what broke, who paid the cost, and which levers
+              users still have.
             </p>
             <p class="operations-event-label">
               <span aria-hidden="true">▣</span>
@@ -292,39 +296,70 @@ if (!homeRoute) {
 
           <div class="operations-console">
             <div class="operations-chart-shell">
-              {
-                heroUsesImpactSeries ? (
-                  <ChartPanel
-                    client:only="react"
-                    {...blockspaceSplitPanel}
-                    annotation={{
-                      x: "2023-02-14",
-                      label: "Peak sampled share",
-                    }}
-                    frame={false}
-                    percentAxis
-                    type="stackedArea"
-                    variant="operations"
-                  />
-                ) : (
-                  <ChartPanel
-                    client:only="react"
-                    {...chartPanels[0]}
-                    frame={false}
-                    variant="operations"
-                  />
-                )
-              }
+              <div data-js-only>
+                {
+                  heroUsesImpactSeries ? (
+                    <ChartPanel
+                      client:only="react"
+                      {...blockspaceSplitPanel}
+                      annotation={{
+                        x: "2023-02-14",
+                        label: "Peak sampled share",
+                      }}
+                      frame={false}
+                      percentAxis
+                      type="stackedArea"
+                      variant="operations"
+                    />
+                  ) : (
+                    <ChartPanel
+                      client:only="react"
+                      {...chartPanels[0]}
+                      frame={false}
+                      variant="operations"
+                    />
+                  )
+                }
+              </div>
+              <div data-no-js>
+                {
+                  heroUsesImpactSeries ? (
+                    <StaticChartPanel
+                      {...blockspaceSplitPanel}
+                      frame={false}
+                      percentAxis
+                      variant="operations"
+                    />
+                  ) : (
+                    <StaticChartPanel
+                      {...chartPanels[0]}
+                      frame={false}
+                      variant="operations"
+                    />
+                  )
+                }
+              </div>
             </div>
             <aside class="operations-rail" aria-label="Key sampled metrics">
-              <GaugeMeter
-                client:only="react"
-                detail={`Peak sampled share on ${peakNonPaymentDate}`}
-                label="Blockspace occupancy"
-                max={100}
-                source={impactSeries.source}
-                value={peakNonPaymentValue}
-              />
+              <div data-js-only>
+                <GaugeMeter
+                  client:only="react"
+                  detail={`Peak sampled share on ${peakNonPaymentDate}`}
+                  label="Blockspace occupancy"
+                  max={100}
+                  source={impactSeries.source}
+                  value={peakNonPaymentValue}
+                />
+              </div>
+              <div data-no-js>
+                <StaticGaugeMeter
+                  detail={`Peak sampled share on ${peakNonPaymentDate}`}
+                  label="Blockspace occupancy"
+                  max={100}
+                  source={impactSeries.source}
+                  value={peakNonPaymentValue}
+                />
+              </div>
               {
                 operationsMetrics.map((metric) => (
                   <div class="operations-metric-row">
@@ -391,18 +426,33 @@ if (!homeRoute) {
               Four ways to read the pressure
             </h2>
             <p class="mt-4 text-base leading-7 text-muted">
-              The evidence separates fee pressure, monetary-versus-data use,
-              and Statoshi resource pressure without overstating the data.
+              The evidence separates fee pressure, monetary-versus-data use, and
+              Statoshi resource pressure without overstating the data.
             </p>
           </div>
           <div class="md:col-span-2 lg:col-span-2">
-            <ChartPanel client:only="react" {...chartPanels[0]} />
+            <div data-js-only>
+              <ChartPanel client:only="react" {...chartPanels[0]} />
+            </div>
+            <div data-no-js>
+              <StaticChartPanel {...chartPanels[0]} />
+            </div>
           </div>
           {
             impactSeries.rows.length > 0 ? (
               <>
-                <ChartPanel client:only="react" {...blockspaceSplitPanel} />
-                <ChartPanel client:only="react" {...chartPanels[2]} />
+                <div data-js-only>
+                  <ChartPanel client:only="react" {...blockspaceSplitPanel} />
+                </div>
+                <div data-no-js>
+                  <StaticChartPanel {...blockspaceSplitPanel} />
+                </div>
+                <div data-js-only>
+                  <ChartPanel client:only="react" {...chartPanels[2]} />
+                </div>
+                <div data-no-js>
+                  <StaticChartPanel {...chartPanels[2]} />
+                </div>
               </>
             ) : (
               <>
@@ -443,7 +493,12 @@ if (!homeRoute) {
               </>
             )
           }
-          <ChartPanel client:only="react" {...chartPanels[3]} />
+          <div data-js-only>
+            <ChartPanel client:only="react" {...chartPanels[3]} />
+          </div>
+          <div data-no-js>
+            <StaticChartPanel {...chartPanels[3]} />
+          </div>
         </div>
       </div>
     </section>
@@ -528,11 +583,16 @@ if (!homeRoute) {
             Evidence-based rebuttals
           </h2>
           <p class="mt-4 text-base leading-7 text-muted">
-            Each entry opens the full rebuttal with the claim, short answer,
-            and dated evidence in one place.
+            Each entry opens the full rebuttal with the claim, short answer, and
+            dated evidence in one place.
           </p>
         </div>
-        <NarrativeIndex client:load narratives={narratives} />
+        <div data-js-only>
+          <NarrativeIndex client:load narratives={narratives} />
+        </div>
+        <div data-no-js>
+          <StaticNarrativeIndex narratives={narratives} />
+        </div>
       </div>
     </section>
 
@@ -562,7 +622,12 @@ if (!homeRoute) {
             </p>
           </div>
         </div>
-        <RoleActions client:load roles={roles} />
+        <div data-js-only>
+          <RoleActions client:load roles={roles} />
+        </div>
+        <div data-no-js>
+          <StaticRoleActions roles={roles} />
+        </div>
       </div>
     </section>
 
