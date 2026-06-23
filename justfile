@@ -1,6 +1,6 @@
 # development server
 dev:
-    npm run dev -- --open
+    npm run dev -- --host --open
 
 # build the site
 build: install
