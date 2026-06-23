@@ -234,12 +234,9 @@ const validateSocialImage = async (
   await requireFileExists(page, label, imagePath);
 
   const { width, height } = await readPngDimensions(imagePath);
-  const isExpectedSize =
-    (width === 2400 && height === 1260) || (width === 1200 && height === 630);
-
-  if (!isExpectedSize) {
+  if (width !== 1200 || height !== 630) {
     throw new Error(
-      `${page.route} ${label} PNG must be 2400x1260 or 1200x630, got ${width}x${height}`,
+      `${page.route} ${label} PNG must be 1200x630, got ${width}x${height}`,
     );
   }
 };

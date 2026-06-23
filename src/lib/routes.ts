@@ -26,12 +26,12 @@ export const siteRoutes: SiteRoute[] = [
   {
     id: "home",
     label: "Home",
-    title: "WTF Happened in Feb 2023?",
+    title: "Bitcoin Spam and Blockspace in Feb 2023 | WTF Happened",
     route: "/",
     sourcePaths: ["reference/index.md"],
     summary: "A concise guide to the February 2023 Bitcoin spam wave",
     metaDescription:
-      "Learn how the February 2023 Bitcoin spam wave crowded blockspace, pushed users making monetary transactions into higher fees, and made relay policy choices visible.",
+      "How February 2023 Bitcoin spam crowded blockspace, raised fees, and exposed relay policy choices.",
     ogImage: "/og/home.png",
     ogImageAlt: "WTF Happened in Feb 2023 home overview",
     takeaway:
