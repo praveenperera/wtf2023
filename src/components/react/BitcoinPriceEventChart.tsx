@@ -12,11 +12,8 @@ import {
 } from "recharts";
 
 const CORE_V30_RELEASE_DATE = "2025-10-10";
-const CORE_V30_RELEASE_TIME = Date.UTC(2025, 9, 10);
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-const PRICE_CHART_LEAD_IN_DAYS = 30;
-const PRICE_CHART_START_TIME =
-  CORE_V30_RELEASE_TIME - PRICE_CHART_LEAD_IN_DAYS * ONE_DAY_MS;
+const PRICE_CHART_START_TIME = Date.UTC(2025, 8, 1);
 const MARKET_CHART_URL =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range";
 const CURRENT_PRICE_URL = "https://api.coingecko.com/api/v3/simple/price";
