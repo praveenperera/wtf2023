@@ -13,7 +13,7 @@ import {
 
 const CORE_V30_RELEASE_DATE = "2025-10-10";
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-const PRICE_CHART_START_TIME = Date.UTC(2025, 8, 1);
+const PRICE_CHART_START_TIME = Date.UTC(2025, 7, 1);
 const MARKET_CHART_URL =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range";
 const CURRENT_PRICE_URL = "https://api.coingecko.com/api/v3/simple/price";
@@ -478,9 +478,9 @@ export default function BitcoinPriceEventChart() {
             </h3>
           </div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            We can say with apodictic certainty that Bitcoin Core v30.0 reduced
-            Bitcoin&apos;s quality as money. A monetary asset that becomes worse
-            as money earns a worse market price.
+            Bitcoin Core v30.0 reduced Bitcoin&apos;s quality as money. A
+            monetary asset that becomes worse as money earns a worse market
+            price.
           </p>
         </div>
         <div className="min-w-[11rem] lg:text-right">
