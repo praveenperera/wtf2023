@@ -93,8 +93,7 @@ const roles = [
   {
     id: "developer",
     label: "Developer",
-    summary:
-      "Support better defaults, documentation, and implementation choices",
+    summary: "Support better defaults, documentation, and relay policy choices",
     actions: [
       "Review policy PRs",
       "Support Knots or patched clients",
@@ -418,11 +417,13 @@ if (!homeRoute) {
         <div class="section-rail">
           <p class="section-label">Market reaction</p>
           <h2 class="mt-3 text-3xl font-semibold leading-tight md:text-5xl">
-            Core v30 landed with the OP_RETURN policy change.
+            What happens when Bitcoin is made worse as money?
           </h2>
           <p class="mt-4 text-base leading-7 text-muted">
-            The BTC/USD chart marks the Bitcoin Core 30.0 publication date and
-            compares today&apos;s price with that release-day level.
+            Bitcoin Core v30.0 reduced Bitcoin&apos;s quality as money by
+            expanding default relay tolerance for arbitrary data. This is what
+            follows when a monetary network weakens the properties that make it
+            money: the market reprices the asset.
           </p>
         </div>
         <div class="min-w-0" data-js-only>
@@ -433,8 +434,9 @@ if (!homeRoute) {
             BTC/USD since Bitcoin Core v30.0
           </h3>
           <p class="mt-2 text-sm leading-6 text-muted">
-            Bitcoin Core v30.0 was published on October 10, 2025, with the
-            OP_RETURN relay policy change in the release notes.
+            We can say with apodictic certainty that Bitcoin Core v30.0 reduced
+            Bitcoin&apos;s quality as money. A monetary asset that becomes worse
+            as money earns a worse market price.
           </p>
           <dl class="mt-5 border-y border-border py-4">
             <div>
@@ -477,27 +479,27 @@ if (!homeRoute) {
               Statoshi resource pressure without overstating the data.
             </p>
           </div>
-          <div class="md:col-span-2 lg:col-span-2">
-            <div data-js-only>
+          <div class="min-w-0 md:col-span-2 lg:col-span-2">
+            <div class="min-w-0" data-js-only>
               <ChartPanel client:only="react" {...chartPanels[0]} />
             </div>
-            <div data-no-js>
+            <div class="min-w-0" data-no-js>
               <StaticChartPanel {...chartPanels[0]} />
             </div>
           </div>
           {
             impactSeries.rows.length > 0 ? (
               <>
-                <div data-js-only>
+                <div class="min-w-0" data-js-only>
                   <ChartPanel client:only="react" {...blockspaceSplitPanel} />
                 </div>
-                <div data-no-js>
+                <div class="min-w-0" data-no-js>
                   <StaticChartPanel {...blockspaceSplitPanel} />
                 </div>
-                <div data-js-only>
+                <div class="min-w-0" data-js-only>
                   <ChartPanel client:only="react" {...chartPanels[2]} />
                 </div>
-                <div data-no-js>
+                <div class="min-w-0" data-no-js>
                   <StaticChartPanel {...chartPanels[2]} />
                 </div>
               </>
@@ -540,10 +542,10 @@ if (!homeRoute) {
               </>
             )
           }
-          <div data-js-only>
+          <div class="min-w-0" data-js-only>
             <ChartPanel client:only="react" {...chartPanels[3]} />
           </div>
-          <div data-no-js>
+          <div class="min-w-0" data-no-js>
             <StaticChartPanel {...chartPanels[3]} />
           </div>
         </div>

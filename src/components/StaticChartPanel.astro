@@ -153,13 +153,13 @@ function barHeight(value: string | number | null | undefined) {
     }
   </div>
 
-  <figure class="mt-5 min-w-0">
+  <figure class="mt-5 min-w-0 overflow-x-auto overscroll-x-contain pb-2">
     {
       rows.length > 0 ? (
         <div
           aria-label={`${title}: ${subtitle}`}
           class:list={[
-            "static-chart-bars min-w-0 rounded-md border border-border bg-background/45 p-3",
+            "static-chart-bars min-w-[42rem] rounded-md border border-border bg-background/45 p-3 sm:min-w-0",
             isOperations
               ? "h-[20rem] min-h-[20rem] md:h-[22rem] md:min-h-[22rem]"
               : "h-64 min-h-64",

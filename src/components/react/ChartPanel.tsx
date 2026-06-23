@@ -246,13 +246,13 @@ export default function ChartPanel({
         ))}
       </div>
 
-      <figure className="mt-5 min-w-0">
+      <figure className="mt-5 min-w-0 overflow-x-auto overscroll-x-contain pb-2">
         <div
           aria-label={`${title}: ${subtitle}`}
           className={
             isOperations
-              ? "h-[20rem] min-h-[20rem] min-w-0 rounded-md border border-border bg-background/35 p-2 md:h-[22rem] md:min-h-[22rem]"
-              : "h-64 min-h-64 min-w-0 rounded-md border border-border bg-background/45 p-2"
+              ? "h-[20rem] min-h-[20rem] min-w-[42rem] rounded-md border border-border bg-background/35 p-2 sm:min-w-0 md:h-[22rem] md:min-h-[22rem]"
+              : "h-64 min-h-64 min-w-[42rem] rounded-md border border-border bg-background/45 p-2 sm:min-w-0"
           }
           ref={chartRef}
           role="img"

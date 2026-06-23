@@ -478,8 +478,9 @@ export default function BitcoinPriceEventChart() {
             </h3>
           </div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Bitcoin Core v30.0 was published on October 10, 2025, with the
-            OP_RETURN relay policy change in the release notes.
+            We can say with apodictic certainty that Bitcoin Core v30.0 reduced
+            Bitcoin&apos;s quality as money. A monetary asset that becomes worse
+            as money earns a worse market price.
           </p>
         </div>
         <div className="min-w-[11rem] lg:text-right">
@@ -531,14 +532,14 @@ export default function BitcoinPriceEventChart() {
         </div>
       </dl>
 
-      <figure className="mt-5 min-w-0">
+      <figure className="mt-5 min-w-0 overflow-x-auto overscroll-x-contain pb-2">
         <div
           aria-label={`BTC/USD since Bitcoin Core v30.0. Current price ${formatUsd(
             summary.latestRow.price,
           )}; current decline ${formatPercent(
             summary.declinePercent,
           )} from the release-day price.`}
-          className="h-[22rem] min-h-[22rem] min-w-0 rounded-md border border-border bg-background/45 p-2"
+          className="h-[22rem] min-h-[22rem] min-w-[48rem] rounded-md border border-border bg-background/45 p-2 sm:min-w-0"
           ref={chartRef}
           role="img"
         >
