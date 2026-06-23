@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
         primaryNavRoutes.map((route) => (
           <a
             class:list={[
-              "site-nav-link rounded-md px-3 py-2 text-xs font-medium text-muted no-underline transition hover:bg-surface-2 hover:text-foreground",
+              "site-nav-link whitespace-nowrap rounded-md px-2 py-2 text-xs font-medium text-muted no-underline transition hover:bg-surface-2 hover:text-foreground",
               currentPath === route.route ? "site-nav-link-active" : "",
             ]}
             href={route.route}

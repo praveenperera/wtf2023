@@ -121,19 +121,21 @@ export const siteRoutes: SiteRoute[] = [
   },
   {
     id: "core",
-    label: "Core concerns",
-    title: "Core concerns | WTF Happened in Feb 2023?",
+    label: "Bitcoin Core misconduct",
+    title: "Bitcoin Core misconduct | WTF Happened in Feb 2023?",
     route: "/core-devs/",
     sourcePaths: [
       "reference/pr-29187-trying-to-fix-datacarriersize.md",
       "reference/fixing-a-bug-through-documentation-change.md",
       "reference/concerns-about-core.md",
     ],
-    summary: "Evidence-backed issue map for defaults, process, and policy",
+    summary:
+      "Evidence-backed issue map for Bitcoin Core defaults, process, and policy",
     metaDescription:
-      "Follow the PR 29187 dispute over data-carrier limits, relay defaults, documentation changes, and who bears the cost of arbitrary data.",
+      "Follow Bitcoin Core misconduct around PR 29187, data-carrier limits, relay defaults, documentation changes, and who bears the cost of arbitrary data.",
     ogImage: "/og/core-devs.png",
-    ogImageAlt: "Core dev dispute over data-carrier limits and relay policy",
+    ogImageAlt:
+      "Bitcoin Core misconduct dispute over data-carrier limits and relay policy",
     takeaway:
       "The defensible concern is about defaults, review power, moderation, funding, and whose costs are considered",
     order: 5,

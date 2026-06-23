@@ -1,10 +1,10 @@
-# Bitcoin Core concerns
+# Bitcoin Core misconduct
 
 Source: https://wtfhappenedinfeb2023.com/concerns-about-core
 
-## What this page is and is not
+## What this claim is and is not
 
-This page is not a claim that every contributor acts in bad faith. It maps concerns around defaults, review power, funding, and whose costs are considered when policy changes are made.
+This is not a claim that every contributor acts in bad faith. It maps concerns around defaults, review power, funding, and whose costs are considered when policy changes are made.
 
 ## Issue map
 
