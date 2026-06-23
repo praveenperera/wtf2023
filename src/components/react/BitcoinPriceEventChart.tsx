@@ -13,6 +13,10 @@ import {
 
 const CORE_V30_RELEASE_DATE = "2025-10-10";
 const CORE_V30_RELEASE_TIME = Date.UTC(2025, 9, 10);
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const PRICE_CHART_LEAD_IN_DAYS = 30;
+const PRICE_CHART_START_TIME =
+  CORE_V30_RELEASE_TIME - PRICE_CHART_LEAD_IN_DAYS * ONE_DAY_MS;
 const MARKET_CHART_URL =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range";
 const CURRENT_PRICE_URL = "https://api.coingecko.com/api/v3/simple/price";
@@ -20,7 +24,6 @@ const COINBASE_CANDLES_URL =
   "https://api.exchange.coinbase.com/products/BTC-USD/candles";
 const COINBASE_TICKER_URL =
   "https://api.exchange.coinbase.com/products/BTC-USD/ticker";
-const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const COINBASE_DAILY_CANDLE_LIMIT = 250;
 
 type PriceRow = {
@@ -128,7 +131,7 @@ function parseHistoryRows(input: unknown) {
       price,
       timestamp,
     }))
-    .filter((row) => row.timestamp >= CORE_V30_RELEASE_TIME);
+    .filter((row) => row.timestamp >= PRICE_CHART_START_TIME);
 }
 
 function parseCurrentPriceRow(input: unknown) {
@@ -178,7 +181,7 @@ function parseCoinbaseHistoryRows(input: unknown) {
         timestamp,
       };
     })
-    .filter((row) => row.timestamp >= CORE_V30_RELEASE_TIME);
+    .filter((row) => row.timestamp >= PRICE_CHART_START_TIME);
 }
 
 function parseCoinbaseCurrentPriceRow(input: unknown) {
@@ -247,7 +250,7 @@ async function fetchJson(url: URL | string, signal: AbortSignal) {
 
 function buildCoinbaseCandleUrls() {
   const urls: URL[] = [];
-  let startTime = CORE_V30_RELEASE_TIME;
+  let startTime = PRICE_CHART_START_TIME;
   const now = Date.now();
   const chunkMs = COINBASE_DAILY_CANDLE_LIMIT * ONE_DAY_MS;
 
@@ -287,7 +290,7 @@ async function fetchCoinGeckoPriceRows(signal: AbortSignal) {
   historyUrl.searchParams.set("vs_currency", "usd");
   historyUrl.searchParams.set(
     "from",
-    String(Math.floor(CORE_V30_RELEASE_TIME / 1000)),
+    String(Math.floor(PRICE_CHART_START_TIME / 1000)),
   );
   historyUrl.searchParams.set("to", String(Math.floor(Date.now() / 1000)));
 
@@ -415,7 +418,7 @@ export default function BitcoinPriceEventChart() {
         <Activity aria-hidden="true" className="mx-auto size-6 text-accent" />
         <div>
           <h3 className="text-lg font-semibold text-foreground">
-            BTC/USD since Bitcoin Core v30.0
+            BTC/USD before and after Bitcoin Core v30.0
           </h3>
           <p className="mt-2 text-sm leading-6 text-muted">
             Fetching the current market chart.
@@ -431,7 +434,7 @@ export default function BitcoinPriceEventChart() {
         <TrendingDown aria-hidden="true" className="mx-auto size-6 text-risk" />
         <div>
           <h3 className="text-lg font-semibold text-foreground">
-            BTC/USD since Bitcoin Core v30.0
+            BTC/USD before and after Bitcoin Core v30.0
           </h3>
           <p className="mt-2 text-sm leading-6 text-muted">{state.message}</p>
         </div>
@@ -445,7 +448,7 @@ export default function BitcoinPriceEventChart() {
         <TrendingDown aria-hidden="true" className="mx-auto size-6 text-risk" />
         <div>
           <h3 className="text-lg font-semibold text-foreground">
-            BTC/USD since Bitcoin Core v30.0
+            BTC/USD before and after Bitcoin Core v30.0
           </h3>
           <p className="mt-2 text-sm leading-6 text-muted">
             BTC/USD market data is unavailable right now.
@@ -474,7 +477,7 @@ export default function BitcoinPriceEventChart() {
               strokeWidth={2.2}
             />
             <h3 className="text-base font-semibold text-foreground">
-              BTC/USD since Bitcoin Core v30.0
+              BTC/USD before and after Bitcoin Core v30.0
             </h3>
           </div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
@@ -534,7 +537,7 @@ export default function BitcoinPriceEventChart() {
 
       <figure className="mt-5 min-w-0 overflow-x-auto overscroll-x-contain pb-2">
         <div
-          aria-label={`BTC/USD since Bitcoin Core v30.0. Current price ${formatUsd(
+          aria-label={`BTC/USD before and after Bitcoin Core v30.0. Current price ${formatUsd(
             summary.latestRow.price,
           )}; current decline ${formatPercent(
             summary.declinePercent,
