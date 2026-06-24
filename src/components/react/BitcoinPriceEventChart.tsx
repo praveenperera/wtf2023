@@ -478,9 +478,9 @@ export default function BitcoinPriceEventChart() {
             </h3>
           </div>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-            Bitcoin Core v30.0 reduced Bitcoin&apos;s quality as money. A
-            monetary asset that becomes worse as money earns a worse market
-            price.
+            Whilst we cannot precisely quantify how much the negative impact is
+            solely because of v30 reducing Bitcoin&apos;s quality as money, that
+            it did is apodictically certain.
           </p>
         </div>
         <div className="min-w-[11rem] lg:text-right">
