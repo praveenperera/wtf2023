@@ -12,7 +12,7 @@ Bitcoin's quality as money.
 
 - Use [Bitcoin Knots](https://github.com/bitcoinknots/bitcoin)
 
-- Run a [BIP-110 node](https://bip110.org/) if you want consensus-level reduced-data enforcement.
+- Run a [BIP-110 node](https://bip110.org/howto) if you want consensus-level reduced-data enforcement.
 
 - Set the following configuration options: *-permitbaremultisig=0, -datacarrier=0* (if you are using knots 25.1 or later)
 

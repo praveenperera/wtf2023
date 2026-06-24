@@ -5,7 +5,7 @@ Source: https://wtfhappenedinfeb2023.com/what-you-can-do-about-it/as-a-noderunne
 ## As a node runner
 
 - Run [Bitcoin Knots](https://github.com/bitcoinknots/bitcoin) so your node can use stricter relay policy
-- Run a [BIP-110 node](https://bip110.org/) if you want consensus-level reduced-data enforcement
+- Run a [BIP-110 node](https://bip110.org/howto) if you want consensus-level reduced-data enforcement
 - If you are using Knots 25.1 or later, set `-permitbaremultisig=0` and `-datacarrier=0`
 
 Strict relay summary for Bitcoin Knots 25.1+:
