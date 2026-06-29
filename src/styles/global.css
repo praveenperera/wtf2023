@@ -1545,25 +1545,25 @@ a:hover {
 }
 
 @media (min-width: 900px) {
-  .source-page-core .source-section-featured .source-section-title {
+  .source-page-core .source-section-title {
     max-width: 30ch;
   }
 }
 
 @media (min-width: 1200px) {
-  .source-page-core .source-section-featured .prose-article {
+  .source-page-core .source-section .prose-article {
     max-width: none;
     column-count: 2;
     column-gap: clamp(2.2rem, 4vw, 4.8rem);
   }
 
-  .source-page-core .source-section-featured .prose-article h2,
-  .source-page-core .source-section-featured .prose-article h3,
-  .source-page-core .source-section-featured .prose-article p,
-  .source-page-core .source-section-featured .prose-article ul,
-  .source-page-core .source-section-featured .prose-article ol,
-  .source-page-core .source-section-featured .prose-article blockquote,
-  .source-page-core .source-section-featured .prose-article pre {
+  .source-page-core .source-section .prose-article h2,
+  .source-page-core .source-section .prose-article h3,
+  .source-page-core .source-section .prose-article p,
+  .source-page-core .source-section .prose-article ul,
+  .source-page-core .source-section .prose-article ol,
+  .source-page-core .source-section .prose-article blockquote,
+  .source-page-core .source-section .prose-article pre {
     break-inside: avoid;
   }
 }
