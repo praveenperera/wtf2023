@@ -157,23 +157,23 @@ const sourceVisualsByRoute: Partial<
     {
       label: "PR 29187",
       title:
-        "The dispute centered on whether existing limits covered new data paths",
-      body: "A compact issue map connects the policy gap to user costs",
+        "The dispute began with whether existing limits covered new data paths",
+      body: "The policy gap pushed data-storage costs onto node runners",
       value: "policy gap",
       tone: "risk",
     },
     {
       label: "Docs",
-      title: "Documentation changes can redefine how a limit is understood",
-      body: "The page follows the claim trail through dated article sections",
-      value: "meaning",
+      title: "The documentation change made the refusal harder to ignore",
+      body: "The wording change narrowed the limit after the abuse became visible",
+      value: "scope",
       tone: "accent",
     },
     {
-      label: "Review",
-      title: "The review question is about defaults, limits, and user cost",
-      body: "Summary panels keep defaults, limits, and user costs connected",
-      value: "cost",
+      label: "BIP-110",
+      title: "The response moves the worst data-storage abuse to consensus",
+      body: "Temporary limits answer the miner-bypass problem relay policy cannot",
+      value: "soft fork",
       tone: "utxo",
     },
   ],
@@ -203,6 +203,49 @@ const sourceVisualsByRoute: Partial<
   ],
 };
 const sourceVisuals = sourceVisualsByRoute[content.id] ?? [];
+const coreProposalRoadmap = [
+  {
+    label: "Activation",
+    title: "How BIP-110 locks in",
+    body: "Bit 4 signaling, 55% early lock-in, mandatory signaling, two-week grace, one-year expiry.",
+    href: "#bip-110-temporary-soft-fork-activation-mechanics",
+    icon: GitBranch,
+  },
+  {
+    label: "Economics",
+    title: "Who carries the cost",
+    body: "Miners collect once. Node runners carry storage, bandwidth, validation, and legal risk forever.",
+    href: "#bip-110-temporary-soft-fork-economics-and-game-theory",
+    icon: Server,
+  },
+  {
+    label: "Legal exposure",
+    title: "Involuntary carriage",
+    body: "Arbitrary data turns node operation into hosting unknown third-party content.",
+    href: "#bip-110-temporary-soft-fork-legal-exposure",
+    icon: Info,
+  },
+  {
+    label: "Objections",
+    title: "The FUD does not hold",
+    body: "Existing UTXOs, Lightning, normal multisig, and monetary use are not the target.",
+    href: "#bip-110-temporary-soft-fork-the-objections-are-not-principled-objections",
+    icon: CheckCircle2,
+  },
+] as const;
+const coreSectionMediaByDocumentTitle = new Map([
+  [
+    "Bitcoin Core devs: fixing a bug by updating the documentation",
+    {
+      src: "/images/fixing-a-bug-through-documentation-change/broken-rib-photoshop.png",
+      width: 245,
+      height: 206,
+      alt: "Doctor saying a broken rib was fixed in Photoshop",
+      caption:
+        "A changed description still leaves the underlying problem intact.",
+    },
+  ],
+]);
 const historyTimelineDates: Record<string, string> = {
   "Free relays > Whitelists > Free relays": "Early Bitcoin relay policy",
   "The rise of out-of-band transactions": "February 22, 2024",
@@ -519,12 +562,12 @@ const nodeRunnerTutorials: NodeRunnerTutorial[] = [
         code: "cp -r ~/umbrel/app-data/!(bitcoin) ~/umbrel/backup",
       },
       {
-        label: "Delete non-Bitcoin app-data files from the active app-data directory",
+        label:
+          "Delete non-Bitcoin app-data files from the active app-data directory",
         code: "sudo rm -r ~/umbrel/app-data/!(bitcoin)",
       },
       {
-        label:
-          "Move the Bitcoin chain data before removing the current node",
+        label: "Move the Bitcoin chain data before removing the current node",
         code: "mv ~/umbrel/app-data/bitcoin/data/ ~/umbrel/",
       },
       {
@@ -1295,59 +1338,127 @@ function buildCharacteristicsSections(html: string) {
                 ))}
               </section>
             ) : null}
+            {content.id === "core" ? (
+              <section
+                class="source-core-proposal"
+                aria-labelledby="source-core-proposal-title"
+              >
+                <div class="source-core-proposal-heading">
+                  <div>
+                    <p class="section-label">BIP-110 response</p>
+                    <h2 id="source-core-proposal-title">
+                      BIP-110 is the concrete answer to the relay-policy
+                      failure.
+                    </h2>
+                  </div>
+                  <a
+                    class="source-core-proposal-link"
+                    href="https://bip110.org"
+                  >
+                    Read BIP-110
+                    <ExternalLink size={16} strokeWidth={2} />
+                  </a>
+                </div>
+                <div class="source-core-roadmap">
+                  {coreProposalRoadmap.map((item, index) => {
+                    const Icon = item.icon;
+
+                    return (
+                      <a class="source-core-roadmap-item" href={item.href}>
+                        <span class="source-core-roadmap-index">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span
+                          class="source-core-roadmap-icon"
+                          aria-hidden="true"
+                        >
+                          <Icon size={18} strokeWidth={2.2} />
+                        </span>
+                        <span class="source-core-roadmap-copy">
+                          <span>{item.label}</span>
+                          <strong>{item.title}</strong>
+                          <small>{item.body}</small>
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
             <div class="source-section-stack">
-              {contentSections.map((section, index) => (
-                <section
-                  class:list={[
-                    "source-section",
-                    index === 0 ? "source-section-featured" : "",
-                  ]}
-                  id={section.id}
-                >
-                  {content.id !== "characteristics" ? (
-                    <>
-                      <div class="source-section-meta">
-                        <span>{content.label}</span>
-                        {content.documents.length > 1 ? (
-                          <span>{section.documentTitle}</span>
-                        ) : null}
-                      </div>
-                      <h2 class="source-section-title">
-                        {content.id === "core" ? (
-                          <a
-                            class="source-section-title-link"
-                            href={`#${section.id}`}
-                          >
-                            <span>
-                              {index + 1}. {section.title}
+              {contentSections.map((section, index) => {
+                const sectionMedia =
+                  content.id === "core"
+                    ? coreSectionMediaByDocumentTitle.get(section.documentTitle)
+                    : undefined;
+
+                return (
+                  <section
+                    class:list={[
+                      "source-section",
+                      index === 0 ? "source-section-featured" : "",
+                      sectionMedia ? "source-section-with-media" : "",
+                    ]}
+                    id={section.id}
+                  >
+                    {content.id !== "characteristics" ? (
+                      <>
+                        <div class="source-section-meta">
+                          <span>{content.label}</span>
+                          {content.documents.length > 1 ? (
+                            <span>{section.documentTitle}</span>
+                          ) : null}
+                        </div>
+                        <h2 class="source-section-title">
+                          {content.id === "core" ? (
+                            <a
+                              class="source-section-title-link"
+                              href={`#${section.id}`}
+                            >
+                              <span>
+                                {index + 1}. {section.title}
+                              </span>
+                              <LinkIcon
+                                className="source-section-title-link-icon"
+                                size={22}
+                                strokeWidth={2.2}
+                                aria-hidden="true"
+                              />
+                            </a>
+                          ) : content.id === "history" ? (
+                            <span class="source-timeline-title">
+                              <span class="source-timeline-date">
+                                {historyTimelineDates[section.title] ??
+                                  "Historical context"}
+                              </span>
+                              <span>{section.title}</span>
                             </span>
-                            <LinkIcon
-                              className="source-section-title-link-icon"
-                              size={22}
-                              strokeWidth={2.2}
-                              aria-hidden="true"
+                          ) : (
+                            `${index + 1}. ${section.title}`
+                          )}
+                        </h2>
+                        {sectionMedia ? (
+                          <figure class="source-section-media">
+                            <img
+                              src={sectionMedia.src}
+                              width={sectionMedia.width}
+                              height={sectionMedia.height}
+                              alt={sectionMedia.alt}
+                              loading="lazy"
+                              decoding="async"
                             />
-                          </a>
-                        ) : content.id === "history" ? (
-                          <span class="source-timeline-title">
-                            <span class="source-timeline-date">
-                              {historyTimelineDates[section.title] ??
-                                "Historical context"}
-                            </span>
-                            <span>{section.title}</span>
-                          </span>
-                        ) : (
-                          `${index + 1}. ${section.title}`
-                        )}
-                      </h2>
-                    </>
-                  ) : null}
-                  <div
-                    class="prose-source prose-article mt-5"
-                    set:html={section.html}
-                  />
-                </section>
-              ))}
+                            <figcaption>{sectionMedia.caption}</figcaption>
+                          </figure>
+                        ) : null}
+                      </>
+                    ) : null}
+                    <div
+                      class="prose-source prose-article mt-5"
+                      set:html={section.html}
+                    />
+                  </section>
+                );
+              })}
             </div>
             {sourceVisuals.length ? (
               <section
