@@ -2746,6 +2746,167 @@ a:hover {
   line-height: 1.76;
 }
 
+.source-core-proposal {
+  display: grid;
+  gap: clamp(0.95rem, 2vw, 1.25rem);
+  margin-bottom: clamp(1.8rem, 3vw, 2.6rem);
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+  border-radius: 8px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 8%, transparent),
+      transparent 34rem
+    ),
+    color-mix(in srgb, var(--surface) 78%, transparent);
+  padding: clamp(1rem, 2.3vw, 1.45rem);
+}
+
+.source-core-proposal-heading {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+
+.source-core-proposal-heading h2 {
+  max-width: 22ch;
+  margin: 0.35rem 0 0;
+  color: var(--foreground);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.source-core-proposal-link {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.45rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.7rem 0.85rem;
+  text-decoration: none;
+}
+
+.source-core-proposal-link:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.source-core-roadmap {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.source-core-roadmap-item {
+  display: grid;
+  grid-template-columns: 2.2rem 2.2rem minmax(0, 1fr);
+  gap: 0.75rem;
+  min-height: 8.75rem;
+  align-items: start;
+  border-right: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: inherit;
+  padding: clamp(0.85rem, 1.8vw, 1.05rem);
+  text-decoration: none;
+}
+
+.source-core-roadmap-item:nth-child(2n) {
+  border-right: 0;
+}
+
+.source-core-roadmap-item:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.source-core-roadmap-item:hover {
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+
+.source-core-roadmap-index {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.source-core-roadmap-icon {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border));
+  border-radius: 6px;
+  color: var(--accent);
+}
+
+.source-core-roadmap-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.source-core-roadmap-copy > span {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.source-core-roadmap-copy strong {
+  color: var(--foreground);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.source-core-roadmap-copy small {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 760px) {
+  .source-core-proposal-heading {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .source-core-proposal-link {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 760px) {
+  .source-core-roadmap {
+    grid-template-columns: 1fr;
+  }
+
+  .source-core-roadmap-item,
+  .source-core-roadmap-item:nth-child(2n),
+  .source-core-roadmap-item:nth-last-child(-n + 2) {
+    border-right: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  }
+
+  .source-core-roadmap-item:last-child {
+    border-bottom: 0;
+  }
+}
+
 .source-node-runner {
   display: grid;
   gap: clamp(1.2rem, 2.4vw, 1.7rem);
@@ -3389,7 +3550,7 @@ a:hover {
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   color: var(--accent);
-  content: "Review timeline (discussion flow)";
+  content: "Context before BIP-110";
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.08em;

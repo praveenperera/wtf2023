@@ -128,16 +128,17 @@ export const siteRoutes: SiteRoute[] = [
       "reference/pr-29187-trying-to-fix-datacarriersize.md",
       "reference/fixing-a-bug-through-documentation-change.md",
       "reference/concerns-about-core.md",
+      "reference/bip110-temporary-soft-fork.md",
     ],
     summary:
-      "Evidence-backed issue map for Bitcoin Core defaults, process, and policy",
+      "Bitcoin Core misconduct, failed relay-policy fixes, and the BIP-110 response",
     metaDescription:
-      "Follow Bitcoin Core misconduct around PR 29187, data-carrier limits, relay defaults, documentation changes, and who bears the cost of arbitrary data.",
+      "Follow Bitcoin Core misconduct around PR 29187, data-carrier limits, relay defaults, documentation changes, and why BIP-110 proposes temporary consensus limits on arbitrary data.",
     ogImage: "/og/core-devs.png",
     ogImageAlt:
       "Bitcoin Core misconduct dispute over data-carrier limits and relay policy",
     takeaway:
-      "The defensible concern is about defaults, review power, moderation, funding, and whose costs are considered",
+      "BIP-110 makes the dispute explicit: policy failed, so temporary consensus limits price and reject the worst data-storage abuse",
     order: 5,
   },
   {
