@@ -233,6 +233,19 @@ const coreProposalRoadmap = [
     icon: CheckCircle2,
   },
 ] as const;
+const coreSectionMediaByDocumentTitle = new Map([
+  [
+    "Bitcoin Core devs: fixing a bug by updating the documentation",
+    {
+      src: "/images/fixing-a-bug-through-documentation-change/broken-rib-photoshop.png",
+      width: 245,
+      height: 206,
+      alt: "Doctor saying a broken rib was fixed in Photoshop",
+      caption:
+        "A changed description still leaves the underlying problem intact.",
+    },
+  ],
+]);
 const historyTimelineDates: Record<string, string> = {
   "Free relays > Whitelists > Free relays": "Early Bitcoin relay policy",
   "The rise of out-of-band transactions": "February 22, 2024",
@@ -1373,58 +1386,79 @@ function buildCharacteristicsSections(html: string) {
               </section>
             ) : null}
             <div class="source-section-stack">
-              {contentSections.map((section, index) => (
-                <section
-                  class:list={[
-                    "source-section",
-                    index === 0 ? "source-section-featured" : "",
-                  ]}
-                  id={section.id}
-                >
-                  {content.id !== "characteristics" ? (
-                    <>
-                      <div class="source-section-meta">
-                        <span>{content.label}</span>
-                        {content.documents.length > 1 ? (
-                          <span>{section.documentTitle}</span>
-                        ) : null}
-                      </div>
-                      <h2 class="source-section-title">
-                        {content.id === "core" ? (
-                          <a
-                            class="source-section-title-link"
-                            href={`#${section.id}`}
-                          >
-                            <span>
-                              {index + 1}. {section.title}
+              {contentSections.map((section, index) => {
+                const sectionMedia =
+                  content.id === "core"
+                    ? coreSectionMediaByDocumentTitle.get(section.documentTitle)
+                    : undefined;
+
+                return (
+                  <section
+                    class:list={[
+                      "source-section",
+                      index === 0 ? "source-section-featured" : "",
+                      sectionMedia ? "source-section-with-media" : "",
+                    ]}
+                    id={section.id}
+                  >
+                    {content.id !== "characteristics" ? (
+                      <>
+                        <div class="source-section-meta">
+                          <span>{content.label}</span>
+                          {content.documents.length > 1 ? (
+                            <span>{section.documentTitle}</span>
+                          ) : null}
+                        </div>
+                        <h2 class="source-section-title">
+                          {content.id === "core" ? (
+                            <a
+                              class="source-section-title-link"
+                              href={`#${section.id}`}
+                            >
+                              <span>
+                                {index + 1}. {section.title}
+                              </span>
+                              <LinkIcon
+                                className="source-section-title-link-icon"
+                                size={22}
+                                strokeWidth={2.2}
+                                aria-hidden="true"
+                              />
+                            </a>
+                          ) : content.id === "history" ? (
+                            <span class="source-timeline-title">
+                              <span class="source-timeline-date">
+                                {historyTimelineDates[section.title] ??
+                                  "Historical context"}
+                              </span>
+                              <span>{section.title}</span>
                             </span>
-                            <LinkIcon
-                              className="source-section-title-link-icon"
-                              size={22}
-                              strokeWidth={2.2}
-                              aria-hidden="true"
+                          ) : (
+                            `${index + 1}. ${section.title}`
+                          )}
+                        </h2>
+                        {sectionMedia ? (
+                          <figure class="source-section-media">
+                            <img
+                              src={sectionMedia.src}
+                              width={sectionMedia.width}
+                              height={sectionMedia.height}
+                              alt={sectionMedia.alt}
+                              loading="lazy"
+                              decoding="async"
                             />
-                          </a>
-                        ) : content.id === "history" ? (
-                          <span class="source-timeline-title">
-                            <span class="source-timeline-date">
-                              {historyTimelineDates[section.title] ??
-                                "Historical context"}
-                            </span>
-                            <span>{section.title}</span>
-                          </span>
-                        ) : (
-                          `${index + 1}. ${section.title}`
-                        )}
-                      </h2>
-                    </>
-                  ) : null}
-                  <div
-                    class="prose-source prose-article mt-5"
-                    set:html={section.html}
-                  />
-                </section>
-              ))}
+                            <figcaption>{sectionMedia.caption}</figcaption>
+                          </figure>
+                        ) : null}
+                      </>
+                    ) : null}
+                    <div
+                      class="prose-source prose-article mt-5"
+                      set:html={section.html}
+                    />
+                  </section>
+                );
+              })}
             </div>
             {sourceVisuals.length ? (
               <section
