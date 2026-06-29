@@ -3550,7 +3550,7 @@ a:hover {
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 72%, transparent);
   color: var(--accent);
-  content: "Context before BIP-110";
+  content: "Why BIP-110 entered the fight";
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.08em;

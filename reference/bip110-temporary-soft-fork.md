@@ -2,9 +2,9 @@
 
 Source: https://bip110.org
 
-## BIP-110: the proposal itself
+## BIP-110 is the proposed answer
 
-The Core dispute does not end at PR 29187 or the `-datacarriersize` wording fight. That was the setup. The proposal itself is [BIP-110](https://bip110.org): a temporary consensus soft fork that says Bitcoin is money, not a subsidized data warehouse.
+The Core dispute does not end at PR 29187 or the `-datacarriersize` wording fight. It points directly at [BIP-110](https://bip110.org): a temporary consensus soft fork that says Bitcoin is money, not a subsidized data warehouse.
 
 BIP-110 is the line Core refused to draw at relay policy. It temporarily limits the worst arbitrary-data surfaces at consensus level, so miners cannot bypass public relay policy by placing oversized data directly into blocks.
 
