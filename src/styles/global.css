@@ -1634,6 +1634,35 @@ a:hover {
   line-height: 1.05;
 }
 
+.source-section-title-link {
+  display: inline-grid;
+  grid-template-columns: minmax(0, auto) auto;
+  gap: 0.55rem;
+  align-items: baseline;
+  color: inherit;
+  text-decoration: none;
+}
+
+.source-section-title-link-icon {
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(0.1em);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.source-section-title-link:hover,
+.source-section-title-link:focus-visible {
+  color: var(--foreground);
+}
+
+.source-section-title-link:hover .source-section-title-link-icon,
+.source-section-title-link:focus-visible .source-section-title-link-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .prose-article {
   max-width: 74ch;
   color: var(--muted);

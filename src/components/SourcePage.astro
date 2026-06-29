@@ -1313,7 +1313,22 @@ function buildCharacteristicsSections(html: string) {
                         ) : null}
                       </div>
                       <h2 class="source-section-title">
-                        {content.id === "history" ? (
+                        {content.id === "core" ? (
+                          <a
+                            class="source-section-title-link"
+                            href={`#${section.id}`}
+                          >
+                            <span>
+                              {index + 1}. {section.title}
+                            </span>
+                            <LinkIcon
+                              className="source-section-title-link-icon"
+                              size={22}
+                              strokeWidth={2.2}
+                              aria-hidden="true"
+                            />
+                          </a>
+                        ) : content.id === "history" ? (
                           <span class="source-timeline-title">
                             <span class="source-timeline-date">
                               {historyTimelineDates[section.title] ??
